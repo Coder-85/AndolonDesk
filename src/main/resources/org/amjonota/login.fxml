@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1;">
+         <children>
+            <VBox alignment="CENTER" minWidth="100.0" prefHeight="200.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="369.0" fitWidth="369.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/login.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox minWidth="100.0" prefHeight="200.0" prefWidth="450.0" style="-fx-padding: 20px;" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20;" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox maxHeight="120.0" minHeight="120.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20;" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label style="-fx-font-weight: 700;" text="Login to">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <Label style="-fx-font-weight: 800;" text="AndolonDesk" textFill="#3700ff">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox minHeight="150.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets left="25.0" right="25.0" top="40.0" />
+                           </padding>
+                           <children>
+                              <Button maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" style="-fx-effect: dropshadow(        gaussian,      /* type of shadow */        rgba(0,0,0,0.5), /* color (semi-transparent black) */        10,            /* radius */        0,             /* spread (0 = default) */        0,             /* offset-x */        0              /* offset-y */    ); -fx-background-color: white; -fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" text="Login with Google">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" style="-fx-effect: dropshadow(        gaussian,      /* type of shadow */        rgba(0,0,0,0.5), /* color (semi-transparent black) */        10,            /* radius */        0,             /* spread (0 = default) */        0,             /* offset-x */        0              /* offset-y */    ); -fx-background-color: white; -fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" text="Login with Facebook">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="or" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ececec; -fx-background-radius: 5;">
+                                 <children>
+                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                       <children>
+                                          <Label text="icon" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
+                                             <children>
+                                                <Label text="Email" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" />
+                                             </padding>
+                                             <children>
+                                                <TextField HBox.hgrow="ALWAYS" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="35.0" layoutY="167.0" maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ececec; -fx-background-radius: 5;">
+                                 <children>
+                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
+                                       <children>
+                                          <Label text="icon" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
+                                             <children>
+                                                <Label text="Password" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" />
+                                             </padding>
+                                             <children>
+                                                <PasswordField HBox.hgrow="ALWAYS" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="30.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false" text="Remember Me">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="Forgot Password?" textFill="#6358dc" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="35.0" layoutY="247.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ececec; -fx-background-radius: 5;">
+                                 <children>
+                                    <Button maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" style="-fx-background-color: #6358DC; -fx-border-color: #6358DC; -fx-background-radius: 5; -fx-border-radius: 5; -fx-font-weight: 700;" text="Login" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20;" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets left="25.0" right="25.0" />
+                           </padding>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Don't have any account?" />
+                                    <Label text=" Create one" textFill="#6358dc" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" right="20.0" top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</StackPane>
