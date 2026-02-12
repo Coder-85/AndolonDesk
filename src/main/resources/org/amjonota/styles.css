@@ -1,0 +1,91 @@
+.text-field,
+.password-field {
+    -fx-background-color: #f7f7fb;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-border-width: 1.5;
+    -fx-padding: 4 8 4 8;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-background-insets: 0;
+}
+
+.text-field:focused,
+.password-field:focused {
+    -fx-background-color: white;
+    -fx-border-color: #6358DC;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, rgba(99, 88, 220, 0.2), 8, 0, 0, 0);
+}
+
+.text-field:hover,
+.password-field:hover {
+    -fx-background-color: #f0eef9;
+    -fx-border-color: #c5c0ef;
+}
+
+.date-picker {
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: #d0d0d0;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+}
+
+.date-picker:focused {
+    -fx-border-color: #6358DC;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, rgba(99, 88, 220, 0.25), 6, 0, 0, 0);
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: none;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #ececec;
+    -fx-background-radius: 0 5 5 0;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #6358DC;
+}
+
+.check-box {
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #d0d0d0;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #6358DC;
+    -fx-border-color: #6358DC;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.input-row {
+    -fx-background-color: #eeedf7;
+    -fx-background-radius: 5;
+}
+
+.input-row:hover {
+    -fx-background-color: #e8e5f5;
+}
+
+.input-field-row .label {
+    -fx-text-fill: #555555;
+    -fx-font-size: 11px;
+}
