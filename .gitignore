@@ -1,5 +1,8 @@
 target/**
 .vscode/**
+.classpath
+.project
+.settings/**
 
 # IntelliJ IDEA
 .idea/
