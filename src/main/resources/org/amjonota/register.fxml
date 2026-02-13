@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,274 +17,280 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e1e1e1;">
-         <children>
-            <VBox alignment="CENTER" minWidth="100.0" prefHeight="200.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="window-body">
                <children>
-                  <HBox alignment="CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="100.0" prefWidth="200.0">
+                  <VBox alignment="CENTER" minWidth="100.0" prefHeight="200.0" prefWidth="450.0" style="-fx-padding: 20px;" HBox.hgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="369.0" fitWidth="369.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/register.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox minWidth="100.0" prefHeight="200.0" prefWidth="450.0" style="-fx-padding: 20px;" HBox.hgrow="ALWAYS">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20;" VBox.vgrow="ALWAYS">
-                     <children>
-                        <VBox maxHeight="120.0" minHeight="120.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20;" VBox.vgrow="ALWAYS">
+                        <VBox maxHeight="800.0" maxWidth="600.0" minHeight="595.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20;" VBox.vgrow="ALWAYS">
                            <children>
-                              <Label style="-fx-font-weight: 700;" text="Register to">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label style="-fx-font-weight: 800;" text="AndolonDesk" textFill="#3700ff">
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets left="25.0" right="25.0" top="10.0" />
-                           </padding>
-                        </VBox>
-                        <VBox minHeight="150.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                           <padding>
-                              <Insets left="25.0" right="25.0" top="20.0" />
-                           </padding>
-                           <children>
-                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
+                              <VBox alignment="CENTER_LEFT" maxHeight="120.0" minHeight="120.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
-                                       <children>
-                                          <Label text="icon" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
-                                             <children>
-                                                <Label text="Name" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
-                                             </padding>
-                                             <children>
-                                                <TextField HBox.hgrow="ALWAYS" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
-                                 <children>
-                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
-                                       <children>
-                                          <Label text="icon" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
-                                             <children>
-                                                <Label text="Email" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
-                                             </padding>
-                                             <children>
-                                                <TextField HBox.hgrow="ALWAYS" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
-                                 <children>
-                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
-                                       <children>
-                                          <Label text="icon" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
-                                             <children>
-                                                <Label text="Present Address" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
-                                             </padding>
-                                             <children>
-                                                <TextField HBox.hgrow="ALWAYS" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
-                                 <children>
-                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
-                                       <children>
-                                          <Label text="icon" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
-                                             <children>
-                                                <Label text="Date of Birth" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
-                                             </padding>
-                                             <children>
-                                                <DatePicker maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
-                                 <children>
-                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
-                                       <children>
-                                          <Label text="icon" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
-                                             <children>
-                                                <Label text="Password" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
-                                             </padding>
-                                             <children>
-                                                <PasswordField HBox.hgrow="ALWAYS" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
-                                 <children>
-                                    <VBox alignment="CENTER" maxWidth="60.0" minWidth="60.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
-                                       <children>
-                                          <Label text="icon" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;">
-                                             <children>
-                                                <Label text="Confirm Password" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="10.0" />
-                                             </padding>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
-                                             </padding>
-                                             <children>
-                                                <PasswordField HBox.hgrow="ALWAYS" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row">
-                                 <children>
-                                    <Button maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" style="-fx-background-color: #6358DC; -fx-border-color: #6358DC; -fx-background-radius: 5; -fx-border-radius: 5; -fx-font-weight: 700;" text="Register" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: 700;" styleClass="login-form-title" text="Register to">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="30.0" />
                                        </font>
-                                    </Button>
+                                    </Label>
+                                    <Label style="-fx-font-weight: 800;" styleClass="login-form-title" text="AndolonDesk" textFill="#3700ff">
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
                                  </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20;" VBox.vgrow="ALWAYS">
-                           <padding>
-                              <Insets left="25.0" right="25.0" />
-                           </padding>
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <padding>
+                                    <Insets left="25.0" right="25.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="CENTER" minHeight="150.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <padding>
+                                    <Insets left="25.0" right="25.0" top="20.0" />
+                                 </padding>
                                  <children>
-                                    <Label text="Already have an account?" />
-                                    <Label text=" Login" textFill="#6358dc" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                         <children>
+                                                            <Label text="icon" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                               <children>
+                                                                  <Label text="Name" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox">
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                               </padding>
+                                                               <children>
+                                                                  <TextField promptText="John Doe" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                         <children>
+                                                            <Label text="icon" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                               <children>
+                                                                  <Label text="Email" />
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox">
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                               </padding>
+                                                               <children>
+                                                                  <TextField promptText="example@gmail.com" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                         <children>
+                                                            <Label text="icon" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                               <children>
+                                                                  <Label text="Date of Birth" />
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0">
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                               </padding>
+                                                               <children>
+                                                                  <DatePicker maxWidth="1.7976931348623157E308" promptText="01/01/2000" style="-fx-border-color: none;" HBox.hgrow="ALWAYS">
+                                                                     <HBox.margin>
+                                                                        <Insets left="1.0" />
+                                                                     </HBox.margin>
+                                                                     <styleClass>
+                                                                        <String fx:value="input-field-text" />
+                                                                        <String fx:value="input-field-date" />
+                                                                     </styleClass>
+                                                                  </DatePicker>
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="input-text-hbox" />
+                                                                  <String fx:value="input-date-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
+                                                   <children>
+                                                      <Label text="icon" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                         <children>
+                                                            <Label text="Password" />
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <PasswordField promptText="**********" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
+                                                   <children>
+                                                      <Label text="icon" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                         <children>
+                                                            <Label text="Confirm Password" />
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <PasswordField promptText="**********" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Button maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" text="Register" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="btn-primary" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </VBox>
+                              <VBox alignment="CENTER" maxHeight="70.0" minHeight="50.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20;" VBox.vgrow="ALWAYS">
+                                 <padding>
+                                    <Insets left="25.0" right="25.0" />
+                                 </padding>
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Label text="Already have an account?" />
+                                          <Label text=" Login" textFill="#6358dc" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" right="20.0" top="10.0" />
+                           </VBox.margin>
                         </VBox>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" right="20.0" top="10.0" />
-                     </VBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" minWidth="100.0" prefHeight="200.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="397.0" fitWidth="403.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/register.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
                   </VBox>
                </children>
-            </VBox>
-         </children>
-      </HBox>
+            </HBox>
+         </content>
+      </ScrollPane>
    </children>
 </StackPane>

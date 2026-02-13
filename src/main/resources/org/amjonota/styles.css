@@ -1,3 +1,10 @@
+.window-body{
+    -fx-background-color:  #f4f4f4;
+}
+
+.login-form-title{
+    -fx-font-size: 30px;
+}
 .text-field,
 .password-field {
     -fx-background-color: #f7f7fb;
@@ -11,19 +18,7 @@
     -fx-background-insets: 0;
 }
 
-.text-field:focused,
-.password-field:focused {
-    -fx-background-color: white;
-    -fx-border-color: #6358DC;
-    -fx-border-width: 1.5;
-    -fx-effect: dropshadow(gaussian, rgba(99, 88, 220, 0.2), 8, 0, 0, 0);
-}
 
-.text-field:hover,
-.password-field:hover {
-    -fx-background-color: #f0eef9;
-    -fx-border-color: #c5c0ef;
-}
 
 .date-picker {
     -fx-background-color: white;
@@ -77,15 +72,53 @@
 }
 
 .input-row {
-    -fx-background-color: #eeedf7;
+    -fx-background-color: #ececec;
     -fx-background-radius: 5;
+    -fx-font-weight: 700;
 }
 
-.input-row:hover {
-    -fx-background-color: #e8e5f5;
-}
+
 
 .input-field-row .label {
     -fx-text-fill: #555555;
     -fx-font-size: 11px;
+}
+
+.input-field-text{
+    -fx-background-color: #ececec;
+}
+
+.input-title{
+    -fx-background-radius: 5;
+    -fx-padding: 5 0 0 10;
+}
+
+.input-text-hbox{
+    -fx-padding: 0 10 10 0;
+}
+
+.btn{
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: white;
+    -fx-border-color: white;
+}
+
+.btn:hover{
+    -fx-cursor: hand;
+}
+
+.btn-primary{
+    -fx-background-color:  #6358DC;
+    -fx-border-color:  #6358DC;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.btn-primary:hover{
+    -fx-background-color: #4b43af;
+}
+
+.input-field-date{
+    -fx-start-margin: 10;
 }
