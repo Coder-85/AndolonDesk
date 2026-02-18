@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class loginController {
+import java.io.IOException;
+
+public class LoginController {
 
     @FXML
     private ImageView loginImg;
@@ -33,5 +35,10 @@ public class loginController {
     @FXML
     public void loginBtnFacebook(){
 
+    }
+
+    @FXML
+    public void setSceneRegister() throws IOException {
+        App.setRoot("register");
     }
 }
