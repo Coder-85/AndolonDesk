@@ -23,8 +23,8 @@ public class LoginController {
     }
 
     @FXML
-    public void loginBtn(){
-
+    public void loginBtn() throws IOException {
+        App.setRoot("feed");
     }
 
     @FXML

@@ -4,151 +4,161 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane prefHeight="675.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.amjonota.LoginController">
+<StackPane prefHeight="675.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ScrollPane fitToWidth="true" prefHeight="675.0" prefWidth="900.0">
-            <content>
-                <HBox minHeight="670.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: red;" styleClass="window-body">
+      <ScrollPane prefHeight="200.0" prefWidth="200.0">
+        <content>
+          <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="70.0" style="-fx-background-color: blue;">
-                     <children>
-                        <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
-                        <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="400.0" prefWidth="100.0" style="-fx-background-color: green;" VBox.vgrow="ALWAYS">
+                    <HBox minHeight="670.0" prefHeight="675.0" prefWidth="900.0" style="-fx-background-color: red;" styleClass="window-body">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="70.0" style="-fx-background-color: blue;">
                                  <children>
-                                    <Label text="Feed" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label text="Search" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label text="Saved" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="msg" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="Notification" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label text="Profile" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
-                        <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="70.0" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-                  <VBox maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="828.0" style="-fx-background-color: green;">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Andolons" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*1 *2 *3" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                        <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" HBox.hgrow="ALWAYS" />
-                              <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: yellow;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                    <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                                    <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="400.0" prefWidth="100.0" style="-fx-background-color: green;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <ComboBox prefWidth="150.0" promptText="Sort By Time" />
+                                                <Label text="Feed" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="Search" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="Saved" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="msg" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Notification" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="Profile" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="70.0" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
+                              <VBox maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="828.0" style="-fx-background-color: green;">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Andolons" />
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ComboBox prefWidth="150.0" promptText="Sort By Property" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*1 *2 *3" />
                                              </children>
                                           </HBox>
                                        </children>
                                     </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
-                                          <VBox prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: green;" HBox.hgrow="ALWAYS">
-                                             <padding>
-                                                <Insets top="50.0" />
-                                             </padding>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" HBox.hgrow="ALWAYS" />
+                                          <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: yellow;" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <HBox prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                   <VBox.margin>
-                                                      <Insets bottom="50.0" />
-                                                   </VBox.margin>
+                                                <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: red;">
                                                    <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ComboBox prefWidth="150.0" promptText="Sort By Time" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ComboBox prefWidth="150.0" promptText="Sort By Property" />
+                                                         </children>
+                                                      </HBox>
                                                    </children>
                                                 </HBox>
-                                                <HBox layoutX="10.0" layoutY="60.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                   <VBox.margin>
-                                                      <Insets bottom="50.0" />
-                                                   </VBox.margin>
+                                                <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                    <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox layoutX="10.0" layoutY="211.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                   <VBox.margin>
-                                                      <Insets bottom="50.0" />
-                                                   </VBox.margin>
-                                                   <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox layoutX="10.0" layoutY="361.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                   <VBox.margin>
-                                                      <Insets bottom="50.0" />
-                                                   </VBox.margin>
-                                                   <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox layoutX="10.0" layoutY="337.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                   <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                      <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                                                      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                                         <content>
+                                                            <VBox prefWidth="500.0" style="-fx-background-color: green;">
+                                                         <padding>
+                                                            <Insets top="50.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <HBox prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="50.0" />
+                                                               </VBox.margin>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox layoutX="10.0" layoutY="60.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="50.0" />
+                                                               </VBox.margin>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox layoutX="10.0" layoutY="211.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="50.0" />
+                                                               </VBox.margin>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox layoutX="10.0" layoutY="361.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="50.0" />
+                                                               </VBox.margin>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox layoutX="10.0" layoutY="337.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                      <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
                                                    </children>
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                                          <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" HBox.hgrow="ALWAYS" />
                            </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children></HBox>
-            </content>
-        </ScrollPane>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
     </children>
 </StackPane>
