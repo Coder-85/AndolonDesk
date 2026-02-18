@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * JavaFX App
@@ -33,6 +36,14 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:AndolonDesk.db");
+            System.out.println("Connected to AndolonDesk.db: " + conn.getMetaData().getURL());
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("Connection failed: " + e.getMessage());
+        }
+
         launch();
     }
 
