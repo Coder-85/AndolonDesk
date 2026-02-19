@@ -1,5 +1,36 @@
 .window-body{
     -fx-background-color:  #f4f4f4;
+    -fx-font-family: Roboto;
+}
+
+.hand{
+    -fx-cursor: hand;
+}
+
+#currentPage{
+    -fx-background-color: #dddddd;
+    -fx-border-color: none;
+}
+
+.scroll-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.hyperlink:hover{
+    -fx-underline: none;
+}
+
+.icon{
+    -fx-fill: #404040;
+    -fx-scale-x: 0.05;
+    -fx-scale-y: 0.05;
+    -fx-cursor: hand;
 }
 
 .login-form-title{
@@ -121,4 +152,55 @@
 
 .input-field-date{
     -fx-start-margin: 10;
+}
+
+.feedTitle{
+    -fx-font-size: 35px;
+}
+
+.feedTitleBar{
+    -fx-background-color: #dddddd;
+}
+
+.combo-box{
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+}
+
+.postBox{
+    -fx-background-radius: 5px;
+    -fx-background-color: white;
+    /*-fx-border-color: gray;
+    -fx-border-radius: 5px;
+    -fx-border-width: 0.5;*/
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 0);
+}
+
+.bottom-border {
+    -fx-border-color: transparent transparent gray transparent; /* top right bottom left */
+    -fx-border-width: 0 0 0.5 0; /* top right bottom left */
+}
+
+.btn-outline-primary{
+    -fx-border-color:  #6358DC;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.btn-outline-primary:hover{
+    -fx-background-color: #6358DC;
+    -fx-text-fill: white;
+}
+
+.postBoxTitle{
+    -fx-font-size: 18px;
+}
+
+.statusCircle{
+    -fx-fill: red;
+    -fx-stroke: none;
+}
+
+.navigationItem:hover{
+    -fx-background-color: #dddddd;
 }

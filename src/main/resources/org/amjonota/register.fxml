@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.amjonota.RegisterController">
@@ -57,9 +58,9 @@
                                              <children>
                                                 <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                      <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
                                                          <children>
-                                                            <Label text="icon" />
+                                                            <SVGPath content="M320 312C386.3 312 440 258.3 440 192C440 125.7 386.3 72 320 72C253.7 72 200 125.7 200 192C200 258.3 253.7 312 320 312zM290.3 368C191.8 368 112 447.8 112 546.3C112 562.7 125.3 576 141.7 576L498.3 576C514.7 576 528 562.7 528 546.3C528 447.8 448.2 368 349.7 368L290.3 368z" fill="#404040" scaleX="0.05" scaleY="0.05" scaleZ="0.05" />
                                                          </children>
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -91,9 +92,9 @@
                                              <children>
                                                 <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                      <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
                                                          <children>
-                                                            <Label text="icon" />
+                                                            <SVGPath content="M112 128C85.5 128 64 149.5 64 176C64 191.1 71.1 205.3 83.2 214.4L291.2 370.4C308.3 383.2 331.7 383.2 348.8 370.4L556.8 214.4C568.9 205.3 576 191.1 576 176C576 149.5 554.5 128 528 128L112 128zM64 260L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 260L377.6 408.8C343.5 434.4 296.5 434.4 262.4 408.8L64 260z" fill="#404040" scaleX="0.05" scaleY="0.05" scaleZ="0.05" />
                                                          </children>
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -128,9 +129,9 @@
                                              <children>
                                                 <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                      <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
                                                          <children>
-                                                            <Label text="icon" />
+                                                            <SVGPath content="M182.4 53.5L157.8 95.6C154 102.1 152 109.6 152 117.2L152 120C152 142.1 169.9 160 192 160C214.1 160 232 142.1 232 120L232 117.2C232 109.6 230 102.2 226.2 95.6L201.6 53.5C199.6 50.1 195.9 48 192 48C188.1 48 184.4 50.1 182.4 53.5zM310.4 53.5L285.8 95.6C282 102.1 280 109.6 280 117.2L280 120C280 142.1 297.9 160 320 160C342.1 160 360 142.1 360 120L360 117.2C360 109.6 358 102.2 354.2 95.6L329.6 53.5C327.6 50.1 323.9 48 320 48C316.1 48 312.4 50.1 310.4 53.5zM413.8 95.6C410 102.1 408 109.6 408 117.2L408 120C408 142.1 425.9 160 448 160C470.1 160 488 142.1 488 120L488 117.2C488 109.6 486 102.2 482.2 95.6L457.6 53.5C455.6 50.1 451.9 48 448 48C444.1 48 440.4 50.1 438.4 53.5L413.8 95.6zM224 224C224 206.3 209.7 192 192 192C174.3 192 160 206.3 160 224L160 277.5C122.7 290.6 96 326.2 96 368L96 388.8C116.9 390.1 137.6 396.1 156.3 406.8L163.4 410.9C189.7 425.9 222.3 424.3 247 406.7C290.7 375.5 349.3 375.5 393 406.7C417.6 424.3 450.3 426 476.6 410.9L483.7 406.8C502.4 396.1 523 390.1 544 388.8L544 368C544 326.2 517.3 290.6 480 277.5L480 224C480 206.3 465.7 192 448 192C430.3 192 416 206.3 416 224L416 272L352 272L352 224C352 206.3 337.7 192 320 192C302.3 192 288 206.3 288 224L288 272L224 272L224 224zM544 437C531.3 438.2 518.9 442 507.5 448.5L500.4 452.6C457.8 476.9 405 474.3 365.1 445.8C338.1 426.5 301.9 426.5 274.9 445.8C235 474.3 182.2 477 139.6 452.6L132.5 448.5C121.1 442 108.7 438.1 96 437L96 512C96 547.3 124.7 576 160 576L480 576C515.3 576 544 547.3 544 512L544 437z" fill="#404040" scaleX="0.05" scaleY="0.05" />
                                                          </children>
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -175,9 +176,9 @@
                                        <children>
                                           <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
+                                                <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 5;">
                                                    <children>
-                                                      <Label text="icon" />
+                                                      <SVGPath content="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z" fill="#404040" scaleX="0.05" scaleY="0.05" />
                                                    </children>
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -208,9 +209,9 @@
                                        <children>
                                           <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <VBox alignment="CENTER" maxWidth="45.0" minWidth="45.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 5;">
+                                                <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 5;">
                                                    <children>
-                                                      <Label text="icon" />
+                                                      <SVGPath content="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z" fill="#404040" scaleX="0.05" scaleY="0.05" />
                                                    </children>
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">

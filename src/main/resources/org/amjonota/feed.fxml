@@ -1,164 +1,466 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="675.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="675.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.amjonota.FeedController">
     <children>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0">
-        <content>
-          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <HBox minHeight="670.0" prefHeight="675.0" prefWidth="900.0" styleClass="window-body">
                <children>
-                    <HBox minHeight="670.0" prefHeight="675.0" prefWidth="900.0" style="-fx-background-color: red;" styleClass="window-body">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="70.0" style="-fx-background-color: white;">
+                     <children>
+                        <VBox minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                        <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="350.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="70.0" style="-fx-background-color: blue;">
+                              <VBox id="currentPage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="70.0" style="-fx-cursor: hand;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
-                                    <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="400.0" prefWidth="100.0" style="-fx-background-color: green;" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <Label text="Feed" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <Label text="Search" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <Label text="Saved" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <Label text="msg" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <Label text="Notification" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <Label text="Profile" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                    <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="70.0" VBox.vgrow="ALWAYS" />
+                                    <SVGPath content="M341.8 72.6C329.5 61.2 310.5 61.2 298.3 72.6L74.3 280.6C64.7 289.6 61.5 303.5 66.3 315.7C71.1 327.9 82.8 336 96 336L112 336L112 512C112 547.3 140.7 576 176 576L464 576C499.3 576 528 547.3 528 512L528 336L544 336C557.2 336 569 327.9 573.8 315.7C578.6 303.5 575.4 289.5 565.8 280.6L341.8 72.6zM304 384L336 384C362.5 384 384 405.5 384 432L384 528L256 528L256 432C256 405.5 277.5 384 304 384z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="navigationItem" />
+                                    <String fx:value="bottom-border" />
+                                 </styleClass>
+                              </VBox>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="70.0" style="-fx-cursor: hand;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <SVGPath content="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="navigationItem" />
+                                    <String fx:value="bottom-border" />
+                                 </styleClass>
+                              </VBox>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="70.0" style="-fx-cursor: hand;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <SVGPath content="M192 64C156.7 64 128 92.7 128 128L128 544C128 555.5 134.2 566.2 144.2 571.8C154.2 577.4 166.5 577.3 176.4 571.4L320 485.3L463.5 571.4C473.4 577.3 485.7 577.5 495.7 571.8C505.7 566.1 512 555.5 512 544L512 128C512 92.7 483.3 64 448 64L192 64z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="navigationItem" />
+                                    <String fx:value="bottom-border" />
+                                 </styleClass>
+                              </VBox>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="70.0" style="-fx-cursor: hand;">
+                                 <children>
+                                    <SVGPath content="M568.4 37.7C578.2 34.2 589 36.7 596.4 44C603.8 51.3 606.2 62.2 602.7 72L424.7 568.9C419.7 582.8 406.6 592 391.9 592C377.7 592 364.9 583.4 359.6 570.3L295.4 412.3C290.9 401.3 292.9 388.7 300.6 379.7L395.1 267.3C400.2 261.2 399.8 252.3 394.2 246.7C388.6 241.1 379.6 240.7 373.6 245.8L261.2 340.1C252.1 347.7 239.6 349.7 228.6 345.3L70.1 280.8C57 275.5 48.4 262.7 48.4 248.5C48.4 233.8 57.6 220.7 71.5 215.7L568.4 37.7z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="navigationItem" />
+                                    <String fx:value="bottom-border" />
+                                 </styleClass>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="70.0" style="-fx-cursor: hand;">
+                                 <children>
+                                    <SVGPath content="M320 64C302.3 64 288 78.3 288 96L288 99.2C215 114 160 178.6 160 256L160 277.7C160 325.8 143.6 372.5 113.6 410.1L103.8 422.3C98.7 428.6 96 436.4 96 444.5C96 464.1 111.9 480 131.5 480L508.4 480C528 480 543.9 464.1 543.9 444.5C543.9 436.4 541.2 428.6 536.1 422.3L526.3 410.1C496.4 372.5 480 325.8 480 277.7L480 256C480 178.6 425 114 352 99.2L352 96C352 78.3 337.7 64 320 64zM258 528C265.1 555.6 290.2 576 320 576C349.8 576 374.9 555.6 382 528L258 528z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="navigationItem" />
+                                    <String fx:value="bottom-border" />
+                                 </styleClass>
+                              </VBox>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="70.0" style="-fx-cursor: hand;" styleClass="navigationItem" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <SVGPath content="M320 312C386.3 312 440 258.3 440 192C440 125.7 386.3 72 320 72C253.7 72 200 125.7 200 192C200 258.3 253.7 312 320 312zM290.3 368C191.8 368 112 447.8 112 546.3C112 562.7 125.3 576 141.7 576L498.3 576C514.7 576 528 562.7 528 546.3C528 447.8 448.2 368 349.7 368L290.3 368z" scaleX="0.05" scaleY="0.05" styleClass="icon" />
                                  </children>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           </children>
+                        </VBox>
+                        <VBox minHeight="-Infinity" prefHeight="100.0" prefWidth="70.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="828.0" styleClass="feedTitleBar">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="828.0" style="-fx-background-color: green;">
+                                    <Label styleClass="feedTitle" text="Upcoming">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0">
+                                       <padding>
+                                          <Insets right="50.0" />
+                                       </padding>
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                          <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #25c025;" styleClass="statusCircle">
+                                             <HBox.margin>
+                                                <Insets right="1.0" />
+                                             </HBox.margin>
+                                          </Circle>
+                                          <Label text="15">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Circle fill="DODGERBLUE" layoutX="71.0" layoutY="40.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: orange;" styleClass="statusCircle">
+                                             <HBox.margin>
+                                                <Insets right="1.0" />
+                                             </HBox.margin>
+                                          </Circle>
+                                          <Label layoutX="76.0" layoutY="32.0" text="10">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Circle fill="DODGERBLUE" layoutX="100.0" layoutY="40.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="statusCircle">
+                                             <HBox.margin>
+                                                <Insets right="1.0" />
+                                             </HBox.margin>
+                                          </Circle>
+                                          <Label layoutX="60.0" layoutY="32.0" text="75" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="icon" HBox.hgrow="ALWAYS" />
+                              <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Andolons" />
+                                                <ComboBox prefHeight="30.0" prefWidth="150.0" promptText="Sort By Time" />
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*1 *2 *3" />
+                                                <ComboBox prefHeight="30.0" prefWidth="150.0" promptText="Sort By Property" />
                                              </children>
                                           </HBox>
                                        </children>
                                     </HBox>
                                     <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" HBox.hgrow="ALWAYS" />
-                                          <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: yellow;" HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: red;">
+                                          <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                                          <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+                                             <content>
+                                                <VBox prefWidth="500.0">
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" top="50.0" />
+                                                   </padding>
                                                    <children>
-                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                      <VBox prefHeight="350.0" prefWidth="100.0" styleClass="postBox">
                                                          <children>
-                                                            <ComboBox prefWidth="150.0" promptText="Sort By Time" />
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" styleClass="bottom-border">
+                                                               <children>
+                                                                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
+                                                                     <children>
+                                                                        <Label styleClass="postBoxTitle" text="Sifat Al Islam">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label text="12/01/2025" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="50.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                               <children>
+                                                                  <ImageView fitHeight="271.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <children>
+                                                                        <HBox minHeight="-Infinity" prefHeight="95.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Label styleClass="postBoxTitle" text="This is the title of the post. this is the title of the post. this is the title of the post" wrapText="true" HBox.hgrow="ALWAYS">
+                                                                                 <padding>
+                                                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                 </padding>
+                                                                                 <font>
+                                                                                    <Font size="16.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets left="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="Date: 12/12/1222" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox minHeight="-Infinity" prefHeight="100.0" prefWidth="268.0" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="This is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolon" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Hyperlink onAction="#viewDetailsBtn" text="View Details" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
                                                          </children>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="50.0" />
+                                                         </VBox.margin>
+                                                      </VBox>
+                                                      <VBox layoutX="10.0" layoutY="60.0" prefHeight="350.0" prefWidth="100.0" styleClass="postBox">
                                                          <children>
-                                                            <ComboBox prefWidth="150.0" promptText="Sort By Property" />
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" styleClass="bottom-border">
+                                                               <children>
+                                                                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
+                                                                     <children>
+                                                                        <Label styleClass="postBoxTitle" text="Sifat Al Islam">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label text="12/01/2025" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="50.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                               <children>
+                                                                  <ImageView fitHeight="271.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <children>
+                                                                        <HBox minHeight="-Infinity" prefHeight="95.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Label styleClass="postBoxTitle" text="This is the title of the post. this is the title of the post. this is the title of the post" wrapText="true" HBox.hgrow="ALWAYS">
+                                                                                 <padding>
+                                                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                 </padding>
+                                                                                 <font>
+                                                                                    <Font size="16.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets left="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="Date: 12/12/1222" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox minHeight="-Infinity" prefHeight="100.0" prefWidth="268.0" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="This is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolon" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Hyperlink onAction="#viewDetailsBtn" text="View Details" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
                                                          </children>
-                                                      </HBox>
+                                                         <VBox.margin>
+                                                            <Insets bottom="50.0" />
+                                                         </VBox.margin>
+                                                      </VBox>
+                                                      <VBox layoutX="10.0" layoutY="462.0" prefHeight="350.0" prefWidth="100.0" styleClass="postBox">
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" styleClass="bottom-border">
+                                                               <children>
+                                                                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
+                                                                     <children>
+                                                                        <Label styleClass="postBoxTitle" text="Sifat Al Islam">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label text="12/01/2025" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="50.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                               <children>
+                                                                  <ImageView fitHeight="271.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <children>
+                                                                        <HBox minHeight="-Infinity" prefHeight="95.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Label styleClass="postBoxTitle" text="This is the title of the post. this is the title of the post. this is the title of the post" wrapText="true" HBox.hgrow="ALWAYS">
+                                                                                 <padding>
+                                                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                 </padding>
+                                                                                 <font>
+                                                                                    <Font size="16.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets left="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="Date: 12/12/1222" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox minHeight="-Infinity" prefHeight="100.0" prefWidth="268.0" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="This is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolon" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Hyperlink onAction="#viewDetailsBtn" text="View Details" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="50.0" />
+                                                         </VBox.margin>
+                                                      </VBox>
+                                                      <VBox layoutX="10.0" layoutY="813.0" prefHeight="350.0" prefWidth="100.0" styleClass="postBox">
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" styleClass="bottom-border">
+                                                               <children>
+                                                                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
+                                                                     <children>
+                                                                        <Label styleClass="postBoxTitle" text="Sifat Al Islam">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label text="12/01/2025" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="50.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                               <children>
+                                                                  <ImageView fitHeight="271.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                                     <children>
+                                                                        <HBox minHeight="-Infinity" prefHeight="95.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Label styleClass="postBoxTitle" text="This is the title of the post. this is the title of the post. this is the title of the post" wrapText="true" HBox.hgrow="ALWAYS">
+                                                                                 <padding>
+                                                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                 </padding>
+                                                                                 <font>
+                                                                                    <Font size="16.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="268.0" styleClass="bottom-border" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets left="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="Date: 12/12/1222" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox minHeight="-Infinity" prefHeight="100.0" prefWidth="268.0" VBox.vgrow="ALWAYS">
+                                                                           <padding>
+                                                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                           </padding>
+                                                                           <children>
+                                                                              <Label text="This is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolonThis is the description of the andolon" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                                           <children>
+                                                                              <Hyperlink onAction="#viewDetailsBtn" text="View Details" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="50.0" />
+                                                         </VBox.margin>
+                                                      </VBox>
                                                    </children>
-                                                </HBox>
-                                                <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                   <children>
-                                                      <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
-                                                      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS">
-                                                         <content>
-                                                            <VBox prefWidth="500.0" style="-fx-background-color: green;">
-                                                         <padding>
-                                                            <Insets top="50.0" />
-                                                         </padding>
-                                                         <children>
-                                                            <HBox prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="50.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox layoutX="10.0" layoutY="60.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="50.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox layoutX="10.0" layoutY="211.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="50.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox layoutX="10.0" layoutY="361.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="50.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox layoutX="10.0" layoutY="337.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: red;">
-                                                               <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Box" />
-                                                               </children>
-                                                            </HBox>
-                                                         </children>
-                                                            </VBox>
-                                                         </content>
-                                                      </ScrollPane>
-                                                      <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" HBox.hgrow="ALWAYS" />
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                          <VBox maxWidth="100.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>
                               </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                            </children>
-                  </HBox>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-            </AnchorPane>
-        </content>
+            </HBox>
+         </content>
       </ScrollPane>
     </children>
 </StackPane>
