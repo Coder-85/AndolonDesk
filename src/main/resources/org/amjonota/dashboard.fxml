@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="675.0" prefWidth="900.0" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+
+    <left>
+        <VBox prefWidth="232.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="25" left="18" right="18" top="25" />
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <StackPane styleClass="logo-icon">
+                    <Label text="A" />
+                </StackPane>
+                <Label styleClass="logo-text" text="AndolonDesk" />
+            </HBox>
+
+            <VBox spacing="6" styleClass="menu-container">
+                <HBox spacing="12" styleClass="menu-item active">
+                    <Label text="🏠" />
+                    <Label text="Home" />
+                </HBox>
+
+                <HBox spacing="12" styleClass="menu-item">
+                    <Label text="🔍" />
+                    <Label text="Search" />
+                </HBox>
+
+                <HBox spacing="12" styleClass="menu-item">
+                    <Label text="🔖" />
+                    <Label text="Bookmarked" />
+                </HBox>
+
+                <HBox spacing="12" styleClass="menu-item">
+                    <Label text="✉" />
+                    <Label text="Direct Message" />
+                </HBox>
+
+                <HBox spacing="12" styleClass="menu-item">
+                    <Label text="👤" />
+                    <Label text="Profile" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22" styleClass="main-area">
+            <padding>
+                <Insets bottom="30" left="40" right="40" top="30" />
+            </padding>
+         <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0" styleClass="top-nav" VBox.vgrow="ALWAYS">
+            <children>
+               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label style="-fx-font-weight: 700;" styleClass="top-nav-title" text="Upcoming" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="242.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <TextField prefHeight="35.0" prefWidth="190.0" promptText="   Search Andolon..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="search-field" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_RIGHT" prefHeight="70.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label text="notific btn">
+                        <HBox.margin>
+                           <Insets right="10.0" />
+                        </HBox.margin>
+                     </Label>
+                     <Label text="logout btn" />
+                  </children>
+               </HBox>
+            </children>
+            <padding>
+               <Insets left="20.0" right="20.0" />
+            </padding>
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin>
+         </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="25">
+                <VBox alignment="CENTER" style="-fx-background-color: rgb(232, 247, 239);" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="stat-number" text="18" />
+                    <Label text="Attended" />
+                </VBox>
+
+                <VBox alignment="CENTER" style="-fx-background-color: rgb(236, 235, 255);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="stat-number" text="12" />
+                    <Label text="Upcoming" />
+                </VBox>
+
+                <VBox alignment="CENTER" style="-fx-background-color: rgb(255, 244, 229);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="stat-number" text="3" />
+                    <Label text="Ongoing" />
+                </VBox>
+
+                <VBox alignment="CENTER" style="-fx-background-color: rgb(255, 236, 236);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="stat-number" text="7" />
+                    <Label text="Missed" />
+                </VBox>
+            <padding>
+               <Insets left="10.0" />
+            </padding>
+            </HBox>
+
+            <HBox spacing="15">
+                <ComboBox promptText="Sort by Time" styleClass="sort-box" />
+                <ComboBox promptText="Sort by Category" styleClass="sort-box" />
+            <padding>
+               <Insets left="10.0" />
+            </padding>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="feed-scroll">
+                <VBox maxWidth="-Infinity" prefWidth="500.0" spacing="18.0" styleClass="feed-container">
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+      
+                          <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="497.0" styleClass="post-card">
+                              <Label styleClass="author" text="Sifat Al Islam" />
+                              <Label styleClass="date" text="Posted: 12 Jan 2025">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                              <Label styleClass="title" text="Student Protest for Education Reform" wrapText="true" />
+                              <Label styleClass="event" text="Event Date: 20 Feb 2025">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Peaceful protest demanding improvements in education policy and campus facilities." wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                              <Label styleClass="link" text="View Details" />
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets bottom="20.0" />
+                        </HBox.margin>
+                          </VBox>
+                  </children>
+               </HBox>
+               <HBox layoutX="15.0" layoutY="15.0" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="497.0" styleClass="post-card">
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets bottom="20.0" />
+                        </HBox.margin>
+                        <children>
+                           <Label styleClass="author" text="Sifat Al Islam" />
+                           <Label styleClass="date" text="Posted: 12 Jan 2025">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Label styleClass="title" text="Student Protest for Education Reform" wrapText="true" />
+                           <Label styleClass="event" text="Event Date: 20 Feb 2025">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Label text="Peaceful protest demanding improvements in education policy and campus facilities." wrapText="true">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Label styleClass="link" text="View Details" />
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+               <HBox layoutX="15.0" layoutY="244.0" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="497.0" styleClass="post-card">
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets bottom="20.0" />
+                        </HBox.margin>
+                        <children>
+                           <Label styleClass="author" text="Sifat Al Islam" />
+                           <Label styleClass="date" text="Posted: 12 Jan 2025">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Label styleClass="title" text="Student Protest for Education Reform" wrapText="true" />
+                           <Label styleClass="event" text="Event Date: 20 Feb 2025">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Label text="Peaceful protest demanding improvements in education policy and campus facilities." wrapText="true">
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Label styleClass="link" text="View Details" />
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+
+                </VBox>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            </ScrollPane>
+
+        </VBox>
+    </center>
+
+</BorderPane>
