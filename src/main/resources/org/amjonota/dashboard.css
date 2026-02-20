@@ -41,12 +41,15 @@
 }
 
 .menu-item:hover {
-    -fx-background-color: #F1F2FF;
+    -fx-background-color: #6358dc;
+    -fx-text-fill: white !important;
 }
 
-.menu-item.active {
-    -fx-background-color: #6358DC;
+
+.menu-item-active {
+    -fx-background-color: #6358dc;
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 
 .main-area {
@@ -93,6 +96,16 @@
     -fx-padding: 5 5 20 5;
 }
 
+.post-box-parent{
+    -fx-background-color:  #6358dc;
+    -fx-background-radius: 18 100 100 18;
+}
+
+.post-box-parent-bookmarked{
+    -fx-background-color:  #28c76f;
+    -fx-background-radius: 18 100 100 18;
+}
+
 .post-card {
     -fx-background-color: white;
     -fx-padding: 18 20;
@@ -136,7 +149,7 @@
 }
 
 .attended {
-    -fx-border-color: #28C76F;
+    -fx-border-color: #28c76f;
     -fx-border-width: 0 0 0 4;
     -fx-border-radius: 14;
 }
@@ -169,8 +182,13 @@
 .btn-primary{
     -fx-background-color:  #6358DC;
     -fx-border-color:  #6358DC;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-text-fill: white;
+}
+
+.btn-primary:hover{
+    -fx-background-color: #584ec3;
+    -fx-border-color: #584ec3;
 }
 
 .profile-info-box{
@@ -187,4 +205,13 @@
 .profile-recent-box{
     -fx-background-color:  #F8F9FF;
     -fx-background-radius: 5;
+}
+
+.logout-btn{
+    -fx-text-fill: red;
+    -fx-fill: red;
+}
+
+.logout-btn:hover{
+    -fx-background-color: #ffdbdb;
 }
