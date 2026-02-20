@@ -15,7 +15,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("dashboard"), 1100, 825);
+        scene = new Scene(loadFXML("login"), 1100, 825);
         stage.setScene(scene);
         stage.setTitle("AndolonDesk");
         stage.show();

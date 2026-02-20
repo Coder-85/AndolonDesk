@@ -199,7 +199,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <Label text="Don't have any account?" />
-                                          <Hyperlink onAction="#setSceneRegister" style="-fx-underline: false;" text="Create One" />
+                                          <Hyperlink fx:id="createOne" onAction="#setSceneRegister" style="-fx-underline: false;" text="Create One" />
                                        </children>
                                     </HBox>
                                  </children>

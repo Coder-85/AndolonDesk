@@ -265,7 +265,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <Label text="Already have an account?" />
-                                          <Hyperlink onAction="#setSceneLogin" style="-fx-underline: false;" text="Login" />
+                                          <Hyperlink fx:id="login" onAction="#setSceneLogin" style="-fx-underline: false;" text="Login" />
                                        </children>
                                     </HBox>
                                  </children>

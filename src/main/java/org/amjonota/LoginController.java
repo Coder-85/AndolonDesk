@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ public class LoginController {
     @FXML private Button loginButton;
     @FXML private Button googleButton;
     @FXML private Button facebookButton;
+    @FXML private Hyperlink createOne;
 
     private final AuthService authService = new AuthService();
     private final OAuthService oauthService = new OAuthService();
@@ -49,7 +51,7 @@ public class LoginController {
             return;
         }
 
-        loginButton.setDisable(true);
+        disableButtons(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,7 +60,7 @@ public class LoginController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            loginButton.setDisable(false);
+                            disableButtons(false);
                             if (userOpt != null) {
                                 try {
                                     App.setRoot("dashboard");
@@ -79,7 +81,7 @@ public class LoginController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            loginButton.setDisable(false);
+                            disableButtons(false);
                             showAlert("Error", e.getMessage());
                         }
                     });
@@ -98,10 +100,15 @@ public class LoginController {
         startOAuth(OAuthService.Provider.FACEBOOK);
     }
 
+    private void disableButtons(boolean state) {
+        loginButton.setDisable(state);
+        googleButton.setDisable(state);
+        facebookButton.setDisable(state);
+        createOne.setDisable(state);
+    }
+
     private void startOAuth(OAuthService.Provider provider) {
-        googleButton.setDisable(true);
-        facebookButton.setDisable(true);
-        loginButton.setDisable(true);
+        disableButtons(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -110,9 +117,7 @@ public class LoginController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            googleButton.setDisable(false);
-                            facebookButton.setDisable(false);
-                            loginButton.setDisable(false);
+                            disableButtons(false);
                             try {
                                 App.setRoot("dashboard");
                             }
@@ -126,9 +131,7 @@ public class LoginController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            googleButton.setDisable(false);
-                            facebookButton.setDisable(false);
-                            loginButton.setDisable(false);
+                            disableButtons(false);
                             showAlert("Login Failed", e.getMessage());
                         }
                     });
