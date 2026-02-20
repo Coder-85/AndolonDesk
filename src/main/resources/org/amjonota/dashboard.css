@@ -191,6 +191,18 @@
     -fx-border-color: #584ec3;
 }
 
+.btn-warning{
+    -fx-background-color: #ffc107;
+    -fx-border-color:  #ffc107;
+    -fx-font-size: 12px;
+}
+
+.btn-warning:hover{
+    -fx-background-color: #dfa906;
+    -fx-border-color:  #dfa906;
+    -fx-text-fill: white;
+}
+
 .profile-info-box{
     -fx-background-color: white;
     -fx-background-radius: 10px;
