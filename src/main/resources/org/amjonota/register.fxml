@@ -75,7 +75,7 @@
                                                                   <Insets bottom="10.0" left="10.0" right="10.0" />
                                                                </padding>
                                                                <children>
-                                                                  <TextField promptText="John Doe" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                                  <TextField fx:id="nameField" promptText="John Doe" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -112,7 +112,7 @@
                                                                   <Insets bottom="10.0" left="10.0" right="10.0" />
                                                                </padding>
                                                                <children>
-                                                                  <TextField promptText="example@gmail.com" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                                  <TextField fx:id="emailField" promptText="example@gmail.com" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -149,7 +149,7 @@
                                                                   <Insets bottom="10.0" left="10.0" right="10.0" />
                                                                </padding>
                                                                <children>
-                                                                  <DatePicker maxWidth="1.7976931348623157E308" promptText="01/01/2000" style="-fx-border-color: none;" HBox.hgrow="ALWAYS">
+                                                                  <DatePicker fx:id="dobPicker" maxWidth="1.7976931348623157E308" promptText="01/01/2000" style="-fx-border-color: none;" HBox.hgrow="ALWAYS">
                                                                      <HBox.margin>
                                                                         <Insets left="1.0" />
                                                                      </HBox.margin>
@@ -196,7 +196,7 @@
                                                             <Insets bottom="10.0" left="10.0" right="10.0" />
                                                          </padding>
                                                          <children>
-                                                            <PasswordField promptText="**********" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                            <PasswordField fx:id="passwordField" promptText="**********" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -229,7 +229,7 @@
                                                             <Insets bottom="10.0" left="10.0" right="10.0" />
                                                          </padding>
                                                          <children>
-                                                            <PasswordField promptText="**********" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                            <PasswordField fx:id="confirmPasswordField" promptText="**********" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -242,7 +242,7 @@
                                        <children>
                                           <HBox maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Button maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" text="Register" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="registerButton" onAction="#registerBtn" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" text="Register" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>

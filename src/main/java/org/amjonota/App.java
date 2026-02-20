@@ -7,20 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("dashboard"), 900, 675);
+        scene = new Scene(loadFXML("login"), 900, 675);
         stage.setScene(scene);
         stage.setTitle("AndolonDesk");
         stage.show();
@@ -37,13 +32,11 @@ public class App extends Application {
 
     public static void main(String[] args) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:AndolonDesk.db");
-            System.out.println("Connected to AndolonDesk.db: " + conn.getMetaData().getURL());
-            conn.close();
-        } catch (SQLException e) {
-            System.err.println("Connection failed: " + e.getMessage());
+            DatabaseManager.getInstance();
         }
-
+        catch (SQLException e) {
+            System.err.println("Database initialization failed: " + e.getMessage());
+        }
         launch();
     }
 

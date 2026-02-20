@@ -19,3 +19,6 @@ Thumbs.db
 
 # DB Files
 **/*.db
+
+# Environment secrets
+.env
