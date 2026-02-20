@@ -61,7 +61,7 @@ public class LoginController {
                             loginButton.setDisable(false);
                             if (userOpt != null) {
                                 try {
-                                    App.setRoot("feed");
+                                    App.setRoot("dashboard");
                                 }
                                 catch (IOException e) {
                                     showAlert("Error", e.getMessage());
@@ -114,7 +114,7 @@ public class LoginController {
                             facebookButton.setDisable(false);
                             loginButton.setDisable(false);
                             try {
-                                App.setRoot("feed");
+                                App.setRoot("dashboard");
                             }
                             catch (IOException e) {
                                 showAlert("Error", e.getMessage());

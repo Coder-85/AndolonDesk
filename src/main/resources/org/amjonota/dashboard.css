@@ -1,8 +1,14 @@
 .root {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: Roboto;
     -fx-background-color: #F4F6FB;
 }
 
+
+.scroll-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: #F4F6FB;
+}
 .sidebar {
     -fx-background-color: white;
     -fx-pref-width: 240;
