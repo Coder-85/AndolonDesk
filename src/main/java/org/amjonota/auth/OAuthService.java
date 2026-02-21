@@ -38,18 +38,18 @@ public class OAuthService {
     // Google
     private static final String GOOGLE_CLIENT_ID;
     private static final String GOOGLE_CLIENT_SECRET;
-    private static final String GOOGLE_AUTH_URL      = "https://accounts.google.com/o/oauth2/v2/auth";
-    private static final String GOOGLE_TOKEN_URL     = "https://oauth2.googleapis.com/token";
-    private static final String GOOGLE_USERINFO_URL  = "https://www.googleapis.com/oauth2/v3/userinfo";
-    private static final String GOOGLE_SCOPE         = "openid email profile";
+    private static final String GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
+    private static final String GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
+    private static final String GOOGLE_USERINFO_URL = "https://www.googleapis.com/oauth2/v3/userinfo";
+    private static final String GOOGLE_SCOPE = "openid email profile";
 
     // Facebook
     private static final String FACEBOOK_CLIENT_ID;
     private static final String FACEBOOK_CLIENT_SECRET;
-    private static final String FACEBOOK_AUTH_URL     = "https://www.facebook.com/v19.0/dialog/oauth";
-    private static final String FACEBOOK_TOKEN_URL    = "https://graph.facebook.com/v19.0/oauth/access_token";
+    private static final String FACEBOOK_AUTH_URL = "https://www.facebook.com/v19.0/dialog/oauth";
+    private static final String FACEBOOK_TOKEN_URL = "https://graph.facebook.com/v19.0/oauth/access_token";
     private static final String FACEBOOK_USERINFO_URL = "https://graph.facebook.com/me?fields=id,name,email,birthday";
-    private static final String FACEBOOK_SCOPE        = "email,public_profile,user_birthday";
+    private static final String FACEBOOK_SCOPE = "email,public_profile,user_birthday";
 
     private static final String REDIRECT_URI = "http://localhost:8080/callback";
 
@@ -154,11 +154,11 @@ public class OAuthService {
             scope = FACEBOOK_SCOPE;
         }
         return authUrl
-            + "?client_id="     + encode(clientId)
-            + "&redirect_uri="  + encode(REDIRECT_URI)
+            + "?client_id=" + encode(clientId)
+            + "&redirect_uri=" + encode(REDIRECT_URI)
             + "&response_type=code"
-            + "&scope="         + encode(scope)
-            + "&state="         + encode(state);
+            + "&scope=" + encode(scope)
+            + "&state=" + encode(state);
     }
 
     private String exchangeCodeForToken(Provider provider, String code) throws IOException, InterruptedException {
@@ -173,10 +173,10 @@ public class OAuthService {
             tokenUrl = FACEBOOK_TOKEN_URL;
         }
 
-        String body = "client_id="     + encode(clientId)
+        String body = "client_id=" + encode(clientId)
             + "&client_secret=" + encode(clientSecret)
-            + "&code="          + encode(code)
-            + "&redirect_uri="  + encode(REDIRECT_URI)
+            + "&code=" + encode(code)
+            + "&redirect_uri=" + encode(REDIRECT_URI)
             + "&grant_type=authorization_code";
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -219,15 +219,11 @@ public class OAuthService {
             stmt.setString(2, providerId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new User(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        null,
-                        rs.getString("provider"),
-                        rs.getString("provider_id"),
-                        rs.getString("date_of_birth")
-                    );
+                    int id = rs.getInt("id");
+                    String createdAt = rs.getString("created_at");
+                    User user = new User(id, name, email, null, providerName, providerId, dob);
+                    user.setCreatedAt(createdAt);
+                    return user;
                 }
             }
         }
@@ -261,9 +257,70 @@ public class OAuthService {
         if (colon == -1) return null;
         int start = json.indexOf('"', colon + 1);
         if (start == -1) return null;
-        int end = json.indexOf('"', start + 1);
-        if (end == -1) return null;
-        return json.substring(start + 1, end);
+
+        StringBuilder raw = new StringBuilder();
+        int i = start + 1;
+
+        while (i < json.length()) {
+            char c = json.charAt(i);
+            if (c == '\\' && i + 1 < json.length()) {
+                raw.append(c).append(json.charAt(i + 1));
+                i += 2;
+            }
+            else if (c == '"') {
+                break;
+            }
+            else {
+                raw.append(c);
+                i++;
+            }
+        }
+
+        return unescapeJsonString(raw.toString());
+    }
+
+    private String unescapeJsonString(String s) {
+        if (s == null) return null;
+
+        StringBuilder sb = new StringBuilder(s.length());
+        int i = 0;
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            if (c == '\\' && i + 1 < s.length()) {
+                char next = s.charAt(i + 1);
+                switch (next) {
+                    case '"':  sb.append('"');  i += 2; break;
+                    case '\\': sb.append('\\'); i += 2; break;
+                    case '/':  sb.append('/');  i += 2; break;
+                    case 'n':  sb.append('\n'); i += 2; break;
+                    case 'r':  sb.append('\r'); i += 2; break;
+                    case 't':  sb.append('\t'); i += 2; break;
+                    case 'u':
+                        if (i + 5 < s.length()) {
+                            String hex = s.substring(i + 2, i + 6);
+                            try {
+                                sb.append((char) Integer.parseInt(hex, 16));
+                            }
+                            catch (NumberFormatException e) {
+                                sb.append(c);
+                            }
+                            i += 6;
+                        }
+                        else {
+                            sb.append(c);
+                            i++;
+                        }
+                        break;
+                    default: sb.append(c); i++;
+                }
+            }
+            else {
+                sb.append(c);
+                i++;
+            }
+        }
+
+        return sb.toString();
     }
 
     private String encode(String value) {

@@ -62,6 +62,7 @@ public class LoginController {
                         public void run() {
                             disableButtons(false);
                             if (userOpt != null) {
+                                Session.setCurrentUser(userOpt);
                                 try {
                                     App.setRoot("dashboard");
                                 }
@@ -113,11 +114,25 @@ public class LoginController {
             @Override
             public void run() {
                 try {
-                    oauthService.startOAuthFlow(provider);
+                    User user = oauthService.startOAuthFlow(provider);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
                             disableButtons(false);
+                            Session.setCurrentUser(user);
+                            String email = user.getEmail();
+                            String dob = user.getDateOfBirth();
+
+                            if (email == null || dob == null) {
+                                StringBuilder missing = new StringBuilder("Please update your ");
+                                if (email == null && dob == null) missing.append("email and date of birth");
+                                else if (email == null) missing.append("email");
+                                else missing.append("date of birth");
+                                missing.append(" in your profile page to completely use this app!");
+            
+                                showAlert("Missing Information", missing.toString());
+                            }
+
                             try {
                                 App.setRoot("dashboard");
                             }

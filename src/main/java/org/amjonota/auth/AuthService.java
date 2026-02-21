@@ -71,6 +71,7 @@ public class AuthService {
                 if (!result.verified) return null;
 
                 User user = new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"), storedHash, rs.getString("provider"), null, rs.getString("date_of_birth"));
+                user.setCreatedAt(rs.getString("created_at"));
 
                 return user;
             }
