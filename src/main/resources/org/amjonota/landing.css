@@ -1,0 +1,20 @@
+.logo-title{
+    -fx-text-fill: #6358DC;
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+}
+.nav-btn {
+    -fx-background-color: none;
+    -fx-border-color: none;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.nav-btn:hover{
+    -fx-text-fill:  #6358DC;
+}
+
+.nav-btn-active{
+    -fx-text-fill: #6358DC;
+
+}
