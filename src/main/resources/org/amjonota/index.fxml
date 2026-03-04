@@ -2,16 +2,19 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="900.0" stylesheets="@landing.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2000.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@landing.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.amjonota.IndexController">
    <children>
-      <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0">
+      <HBox fx:id="navBarBox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #f1f1f1;">
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="80.0" prefWidth="300.0">
                <children>
@@ -46,12 +49,20 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="436.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-font-family: verdana;" styleClass="nav-btn" text="Login" />
+                        <Button mnemonicParsing="false" onAction="#setLoginPage" style="-fx-font-family: verdana;" text="Login">
+                           <styleClass>
+                              <String fx:value="nav-btn" />
+                              <String fx:value="btn-outline-primary" />
+                           </styleClass></Button>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="490.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-font-family: verdana;" styleClass="nav-btn" text="Register" />
+                        <Button mnemonicParsing="false" onAction="#setRegisterPage" style="-fx-font-family: verdana;" text="Register">
+                           <styleClass>
+                              <String fx:value="nav-btn" />
+                              <String fx:value="btn-primary" />
+                           </styleClass></Button>
                      </children>
                   </HBox>
                </children>
@@ -61,6 +72,356 @@
             <Insets right="20.0" />
          </padding>
       </HBox>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="503.0" prefWidth="900.0" VBox.vgrow="ALWAYS" />
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="503.0" prefWidth="900.0" style="-fx-background-color: none;" VBox.vgrow="ALWAYS">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox fx:id="slider" prefHeight="700.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="slideTxtParent" alignment="CENTER" prefHeight="200.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox fx:id="slideTxt" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Label style="-fx-text-fill: #6358DC; -fx-font-size: 20;" styleClass="set-font" text="Welcome to AndolonDesk">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label style="-fx-font-size: 30; -fx-font-weight: 700;" styleClass="set-font" text="AndolonDesk provides timely alerts about upcoming movements and protests in real-time." wrapText="true">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox prefHeight="41.0" prefWidth="310.0">
+                                       <children>
+                                          <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setLoginPage" prefWidth="100.0" style="-fx-font-size: 17;" text="Login">
+                                             <styleClass>
+                                                <String fx:value="btn-outline-primary" />
+                                                <String fx:value="slider-btn" />
+                                                <String fx:value="set-font" />
+                                             </styleClass>
+                                             <HBox.margin>
+                                                <Insets right="30.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setRegisterPage" prefWidth="100.0" style="-fx-font-size: 17;" text="Register">
+                                             <styleClass>
+                                                <String fx:value="slider-btn" />
+                                                <String fx:value="btn-primary" />
+                                                <String fx:value="set-font" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox fx:id="slideImgParent" alignment="CENTER" prefHeight="200.0" prefWidth="450.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="slideImg" fitHeight="415.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../../images/index_slider.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="featureHBox" minHeight="-Infinity" prefHeight="400.0" prefWidth="900.0" styleClass="feature-box" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="slideImgParent1" alignment="CENTER" prefHeight="400.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="featureImg" fitHeight="351.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../../images/index_feature_people.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="400.0" prefWidth="462.0" style="-fx-background-color: none;" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox fx:id="feature1" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
+                                             <children>
+                                                <Group>
+                                                   <children>
+                                                      <SVGPath content="M576 112C576 100.9 570.3 90.6 560.8 84.8C551.3 79 539.6 78.4 529.7 83.4L413.5 141.5L234.1 81.6C226 78.9 217.3 79.5 209.7 83.3L81.7 147.3C70.8 152.8 64 163.9 64 176L64 528C64 539.1 69.7 549.4 79.2 555.2C88.7 561 100.4 561.6 110.3 556.6L226.4 498.5L405.8 558.3C413.9 561 422.6 560.4 430.2 556.6L558.2 492.6C569 487.2 575.9 476.1 575.9 464L575.9 112zM256 440.9L256 156.4L384 199.1L384 483.6L256 440.9z" scaleX="0.05" scaleY="0.05" style="-fx-fill: red;" />
+                                                   </children>
+                                                </Group>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label style="-fx-font-size: 20; -fx-font-weight: 700; -fx-text-fill: white;" text="Map">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Map feature to let you know Protest Location" wrapText="true" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="feature2" alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
+                                             <children>
+                                                <Group>
+                                                   <children>
+                                                      <SVGPath content="M568.4 37.7C578.2 34.2 589 36.7 596.4 44C603.8 51.3 606.2 62.2 602.7 72L424.7 568.9C419.7 582.8 406.6 592 391.9 592C377.7 592 364.9 583.4 359.6 570.3L295.4 412.3C290.9 401.3 292.9 388.7 300.6 379.7L395.1 267.3C400.2 261.2 399.8 252.3 394.2 246.7C388.6 241.1 379.6 240.7 373.6 245.8L261.2 340.1C252.1 347.7 239.6 349.7 228.6 345.3L70.1 280.8C57 275.5 48.4 262.7 48.4 248.5C48.4 233.8 57.6 220.7 71.5 215.7L568.4 37.7z" scaleX="0.05" scaleY="0.05" style="-fx-fill: red;" />
+                                                   </children>
+                                                </Group>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label style="-fx-font-size: 20; -fx-font-weight: 700; -fx-text-fill: white;" text="DM">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Ask host directly if you have any confusion" wrapText="true" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children></HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox fx:id="feature3" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
+                                             <children>
+                                                <Group>
+                                                   <children>
+                                                      <SVGPath content="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z" scaleX="0.05" scaleY="0.05" style="-fx-fill: red;" />
+                                                   </children>
+                                                </Group>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label style="-fx-font-size: 20; -fx-font-weight: 700; -fx-text-fill: white;" text="Search">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Find any protest easily using search bar" wrapText="true" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="feature4" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
+                                             <children>
+                                                <Group>
+                                                   <children>
+                                                      <SVGPath content="M576 160C576 210.2 516.9 285.1 491.4 315C487.6 319.4 482 321.1 476.9 320L384 320C366.3 320 352 334.3 352 352C352 369.7 366.3 384 384 384L480 384C533 384 576 427 576 480C576 533 533 576 480 576L203.6 576C212.3 566.1 222.9 553.4 233.6 539.2C239.9 530.8 246.4 521.6 252.6 512L480 512C497.7 512 512 497.7 512 480C512 462.3 497.7 448 480 448L384 448C331 448 288 405 288 352C288 299 331 256 384 256L423.8 256C402.8 224.5 384 188.3 384 160C384 107 427 64 480 64C533 64 576 107 576 160zM181.1 553.1C177.3 557.4 173.9 561.2 171 564.4L169.2 566.4L169 566.2C163 570.8 154.4 570.2 149 564.4C123.8 537 64 466.5 64 416C64 363 107 320 160 320C213 320 256 363 256 416C256 446 234.9 483 212.5 513.9C201.8 528.6 190.8 541.9 181.7 552.4L181.1 553.1zM192 416C192 398.3 177.7 384 160 384C142.3 384 128 398.3 128 416C128 433.7 142.3 448 160 448C177.7 448 192 433.7 192 416zM480 192C497.7 192 512 177.7 512 160C512 142.3 497.7 128 480 128C462.3 128 448 142.3 448 160C448 177.7 462.3 192 480 192z" scaleX="0.05" scaleY="0.05" style="-fx-fill: red;" />
+                                                   </children>
+                                                </Group>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label style="-fx-font-size: 20; -fx-font-weight: 700; -fx-text-fill: white;" text="Route">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Find the best route to your destination avoiding protests" wrapText="true" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children></HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="newsHBox" alignment="CENTER" minHeight="-Infinity" prefHeight="400.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="newsPicContentParent" alignment="CENTER" prefHeight="394.0" prefWidth="298.0">
+                           <children>
+                              <VBox fx:id="newsPicContent" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label prefHeight="134.0" prefWidth="368.0" style="-fx-font-size: 30; -fx-font-weight: 700;" text="Check Out Latest " wrapText="true" />
+                                                <Label prefHeight="134.0" prefWidth="368.0" style="-fx-font-size: 30; -fx-font-weight: 700; -fx-text-fill: #6358DC;" text="Andolons" wrapText="true" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <ImageView fitHeight="318.0" fitWidth="381.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/index_news.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="newsCardParent" prefHeight="500.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox fx:id="newsCard" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="205.0">
+                                                   <children>
+                                                      <Group>
+                                                         <children>
+                                                            <SVGPath content="M216 64C229.3 64 240 74.7 240 88L240 128L400 128L400 88C400 74.7 410.7 64 424 64C437.3 64 448 74.7 448 88L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 88C192 74.7 202.7 64 216 64zM216 176L160 176C151.2 176 144 183.2 144 192L144 240L496 240L496 192C496 183.2 488.8 176 480 176L216 176zM144 288L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 288L144 288z" scaleX="0.05" scaleY="0.05" style="-fx-fill: red;" />
+                                                         </children>
+                                                      </Group>
+                                                      <Label style="-fx-text-fill: #afafaf;" text="18 March 2026">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <Label style="-fx-font-size: 18; -fx-font-weight: 700;" styleClass="news-title" text="Students Demand on  Half Pass" wrapText="true">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label text="Gather at Shahbagh at 12:00PM on 12 March 2026. It's now or never. We hope..." wrapText="true">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox fx:id="slideImgParent11" alignment="CENTER" prefHeight="400.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fx:id="featureImg1" fitHeight="177.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../../images/index_news_map.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" />
+                                       </padding>
+                                       <VBox.margin>
+                                          <Insets bottom="25.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="205.0">
+                                                   <children>
+                                                      <Group>
+                                                         <children>
+                                                            <SVGPath content="M216 64C229.3 64 240 74.7 240 88L240 128L400 128L400 88C400 74.7 410.7 64 424 64C437.3 64 448 74.7 448 88L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 88C192 74.7 202.7 64 216 64zM216 176L160 176C151.2 176 144 183.2 144 192L144 240L496 240L496 192C496 183.2 488.8 176 480 176L216 176zM144 288L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 288L144 288z" scaleX="0.05" scaleY="0.05" style="-fx-fill: red;" />
+                                                         </children>
+                                                      </Group>
+                                                      <Label style="-fx-text-fill: #afafaf;" text="18 March 2026">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <Label style="-fx-font-size: 18; -fx-font-weight: 700;" styleClass="news-title" text="Students Demand on  Half Pass" wrapText="true">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label text="Gather at Shahbagh at 12:00PM on 12 March 2026. It's now or never. We hope..." wrapText="true">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox fx:id="slideImgParent111" alignment="CENTER" prefHeight="400.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <ImageView fx:id="featureImg11" fitHeight="177.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                                   <image>
+                                                      <Image url="@../../images/index_news_map.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="100.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="100.0" top="100.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </content></ScrollPane>
    </children>
 </VBox>

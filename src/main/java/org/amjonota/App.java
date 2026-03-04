@@ -1,5 +1,6 @@
 package org.amjonota;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1100, 825);
+        scene = new Scene(loadFXML("index"), 1100, 825);
         stage.setScene(scene);
         stage.setTitle("AndolonDesk");
         stage.show();
