@@ -4,6 +4,7 @@ module org.amjonota {
     requires java.sql;
     requires java.net.http;
     requires java.desktop;
+    requires java.prefs;
     requires jdk.httpserver;
     requires bcrypt;
 

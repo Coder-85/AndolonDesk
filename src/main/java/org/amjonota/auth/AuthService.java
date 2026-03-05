@@ -77,4 +77,51 @@ public class AuthService {
             }
         }
     }
+
+    public String generateRememberToken(int userId) throws SQLException {
+        String ruuid = java.util.UUID.randomUUID().toString();
+        String token = BCrypt.withDefaults().hashToString(4, ruuid.toCharArray()).replaceAll("[^A-Za-z0-9]", "");
+        String expiresAt = LocalDateTime.now().plusDays(30).format(DATETIME_FORMAT);
+
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "INSERT INTO remember_tokens (user_id, token, expires_at) VALUES (?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, token);
+            stmt.setString(3, expiresAt);
+            stmt.executeUpdate();
+        }
+
+        return token;
+    }
+
+    public User validateRememberToken(String token) throws SQLException {
+        if (token == null || token.isEmpty()) return null;
+
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "SELECT u.* FROM users u INNER JOIN remember_tokens rt ON u.id = rt.user_id WHERE rt.token = ? AND rt.expires_at > datetime('now')";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, token);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (!rs.next()) return null;
+                User user = new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"), null, rs.getString("provider"), rs.getString("provider_id"), rs.getString("date_of_birth"));
+                user.setCreatedAt(rs.getString("created_at"));
+                return user;
+            }
+        }
+    }
+
+    public void deleteRememberToken(String token) throws SQLException {
+        if (token == null || token.isEmpty()) return;
+
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "DELETE FROM remember_tokens WHERE token = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, token);
+            stmt.executeUpdate();
+        }
+    }
 }

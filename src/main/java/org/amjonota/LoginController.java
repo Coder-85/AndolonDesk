@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ public class LoginController {
     @FXML private Button googleButton;
     @FXML private Button facebookButton;
     @FXML private Hyperlink createOne;
+    @FXML private CheckBox rememberMe;
 
     private final AuthService authService = new AuthService();
     private final OAuthService oauthService = new OAuthService();
@@ -63,6 +65,15 @@ public class LoginController {
                             disableButtons(false);
                             if (userOpt != null) {
                                 Session.setCurrentUser(userOpt);
+                                if (rememberMe.isSelected()) {
+                                    try {
+                                        String token = authService.generateRememberToken(userOpt.getId());
+                                        Session.saveToken(token);
+                                    }
+                                    catch (SQLException e) {
+                                        System.err.println("Could not save remember token: " + e.getMessage());
+                                    }
+                                }
                                 try {
                                     App.setRoot("dashboard");
                                 }
@@ -120,6 +131,15 @@ public class LoginController {
                         public void run() {
                             disableButtons(false);
                             Session.setCurrentUser(user);
+                            if (rememberMe.isSelected()) {
+                                try {
+                                    String token = authService.generateRememberToken(user.getId());
+                                    Session.saveToken(token);
+                                }
+                                catch (SQLException e) {
+                                    System.err.println("Could not save remember token: " + e.getMessage());
+                                }
+                            }
                             String email = user.getEmail();
                             String dob = user.getDateOfBirth();
 

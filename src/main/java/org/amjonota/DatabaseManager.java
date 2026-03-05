@@ -33,6 +33,8 @@ public class DatabaseManager {
             stmt.execute("CREATE TABLE IF NOT EXISTS protests (id INTEGER PRIMARY KEY AUTOINCREMENT, author TEXT NOT NULL, posted_date DATE NOT NULL, title TEXT NOT NULL, event_date DATE NOT NULL, summary TEXT NOT NULL, description TEXT, category TEXT, member_count INTEGER NOT NULL DEFAULT 0, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
             stmt.execute("CREATE TABLE IF NOT EXISTS user_bookmarks (user_id INTEGER NOT NULL, protest_id INTEGER NOT NULL, PRIMARY KEY (user_id, protest_id), FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, FOREIGN KEY (protest_id) REFERENCES protests(id) ON DELETE CASCADE)");
+
+            stmt.execute("CREATE TABLE IF NOT EXISTS remember_tokens (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, token TEXT NOT NULL UNIQUE, expires_at DATETIME NOT NULL, FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE)");
         }
     }
 }

@@ -5,6 +5,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import org.amjonota.auth.AuthService;
+import java.sql.SQLException;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -89,6 +91,16 @@ public class DashboardController {
 
     @FXML
     public void navLogout(MouseEvent e) {
+        try {
+            String token = Session.loadToken();
+            if (token != null) {
+                new AuthService().deleteRememberToken(token);
+                Session.clearToken();
+            }
+        }
+        catch (SQLException ex) {
+            System.err.println("Could not clear remember token: " + ex.getMessage());
+        }
         Session.clear();
         try {
              App.setRoot("login");

@@ -3,13 +3,14 @@ package org.amjonota;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import org.amjonota.auth.AuthService;
+import java.sql.SQLException;
 
 import org.amjonota.model.User;
 
 import java.io.IOException;
 
 public class ProfileController {
-
     @FXML private Label profileName;
     @FXML private Label profileEmail;
     @FXML private Label profileDob;
@@ -63,6 +64,16 @@ public class ProfileController {
 
     @FXML
     public void navLogout(MouseEvent e) {
+        try {
+            String token = Session.loadToken();
+            if (token != null) {
+                new AuthService().deleteRememberToken(token);
+                Session.clearToken();
+            }
+        }
+        catch (SQLException ex) {
+            System.err.println("Could not clear remember token: " + ex.getMessage());
+        }
         Session.clear();
         try {
             App.setRoot("login");

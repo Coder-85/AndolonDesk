@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import org.amjonota.auth.AuthService;
+import org.amjonota.model.User;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -16,7 +19,28 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("index"), 1100, 825);
+        String landPage = "index";
+        String savedToken = Session.loadToken();
+
+        if (savedToken != null) {
+            try {
+                AuthService authService = new AuthService();
+                User user = authService.validateRememberToken(savedToken);
+                if (user != null) {
+                    Session.setCurrentUser(user);
+                    landPage = "dashboard";
+                }
+                else {
+                    Session.clearToken();
+                }
+            }
+            catch (SQLException e) {
+                System.err.println("Auto login failed: " + e.getMessage());
+                Session.clearToken();
+            }
+        }
+
+        scene = new Scene(loadFXML(landPage), 1100, 825);
         stage.setScene(scene);
         stage.setTitle("AndolonDesk");
         stage.show();
