@@ -25,7 +25,9 @@ public class IndexController {
     @FXML private HBox navBarBox;
     @FXML private HBox slider;
     @FXML private ScrollPane scrollPane;
+    @FXML private VBox content;
     @FXML private HBox featureHBox;
+    private SequentialTransition seqFeature;
 
 
     @FXML private ImageView featureImg;
@@ -58,6 +60,7 @@ public class IndexController {
 
     private TranslateTransition newstt;
     private TranslateTransition newstt2;
+    static boolean isFeatureBtnClicked = false;
 
     private double rootWidth;
     private double rootHeight;
@@ -131,6 +134,10 @@ public class IndexController {
             newstt2.setFromX(newsCardWidth);
             newstt2.setToX(0);
 
+            if(isFeatureBtnClicked){
+                gotoFeature();
+            }
+
         });
 
         root.layoutBoundsProperty().addListener((obs, oldValue, newValue) -> {
@@ -154,7 +161,7 @@ public class IndexController {
         // Preparing Feature Nodes;
         initializeFeatureNode();
         FadeTransition[] ftArray = new FadeTransition[numberOfNodes];
-        SequentialTransition seqFeature = new SequentialTransition();
+        seqFeature = new SequentialTransition();
         for(int i = 0; i<numberOfNodes; i++){
             featureNodes[i].setOpacity(0);
 
@@ -239,5 +246,24 @@ public class IndexController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setAboutPage() {
+        try {
+            App.setRoot("about_us");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void gotoFeature() {
+        double height = content.getHeight();
+        double y = featureHBox.getLayoutY();
+        scrollPane.setVvalue(y / height);
+        if(!isFeatureTriggeredOnce){
+            seqFeature.play();
+            isFeatureTriggeredOnce = true;
+        }
+        isFeatureBtnClicked = false;
     }
 }

@@ -39,12 +39,12 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-font-family: verdana;" styleClass="nav-btn" text="Feature" />
+                        <Button mnemonicParsing="false" onAction="#gotoFeature" style="-fx-font-family: verdana;" styleClass="nav-btn" text="Feature" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="330.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-font-family: verdana;" styleClass="nav-btn" text="About Us" />
+                        <Button mnemonicParsing="false" onAction="#setAboutPage" style="-fx-font-family: verdana;" styleClass="nav-btn" text="About Us" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="436.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
@@ -74,7 +74,7 @@
       </HBox>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="503.0" prefWidth="900.0" style="-fx-background-color: none;" VBox.vgrow="ALWAYS">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="content" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <HBox fx:id="slider" prefHeight="700.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
@@ -422,18 +422,9 @@
                   </HBox>
                   <HBox fx:id="statBox" layoutX="10.0" layoutY="784.0" minHeight="-Infinity" prefHeight="500.0" prefWidth="900.0" styleClass="news-box">
                      <children>
-                        <VBox fx:id="slideImgParent12" alignment="CENTER" prefHeight="400.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <ImageView fx:id="statImg" fitHeight="289.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                                 <image>
-                                    <Image url="@../../images/stat_pic_new.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </VBox>
                         <VBox alignment="CENTER" prefHeight="400.0" prefWidth="462.0" style="-fx-background-color: none;" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox fx:id="stat1" alignment="CENTER_LEFT" layoutX="10.0" layoutY="180.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                              <HBox fx:id="stat1" alignment="CENTER" layoutX="10.0" layoutY="180.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
                                  <children>
                                     <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
                                        <children>
@@ -465,7 +456,7 @@
                                     <Insets bottom="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox fx:id="stat2" alignment="CENTER_LEFT" layoutX="10.0" layoutY="190.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                              <HBox fx:id="stat2" alignment="CENTER" layoutX="10.0" layoutY="190.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
                                  <children>
                                     <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
                                        <children>
@@ -497,7 +488,7 @@
                                     <Insets bottom="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox fx:id="stat3" alignment="CENTER_LEFT" layoutX="10.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                              <HBox fx:id="stat3" alignment="CENTER" layoutX="10.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
                                  <children>
                                     <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 100%;">
                                        <children>
@@ -526,6 +517,18 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="70.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="slideImgParent12" alignment="CENTER" prefHeight="400.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="statImg" fitHeight="289.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../../images/stat_pic_new.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </VBox>
                      </children>
