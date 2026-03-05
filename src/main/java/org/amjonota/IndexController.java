@@ -42,10 +42,22 @@ public class IndexController {
     @FXML private VBox newsCardParent;
     @FXML private VBox newsCard;
 
+    @FXML private HBox statBox;
+    @FXML private ImageView statImg;
+    @FXML private HBox stat1;
+    @FXML private HBox stat2;
+    @FXML private HBox stat3;
+    private FadeTransition[] statTransition;
+    private int statTransitionCount = 4;
+    private SequentialTransition statSequence;
+
 
     private TranslateTransition tt;
     private TranslateTransition tt2;
     private SequentialTransition sequence;
+
+    private TranslateTransition newstt;
+    private TranslateTransition newstt2;
 
     private double rootWidth;
     private double rootHeight;
@@ -53,6 +65,7 @@ public class IndexController {
     private double newsCardWidth;
     private boolean isFeatureTriggeredOnce = false;
     private boolean isNewsTriggeredOnce = false;
+    private boolean isStatTriggeredOnce = false;
     private void initializeFeatureNode(){
         numberOfNodes = 5;
         featureNodes = new Node[numberOfNodes];
@@ -67,6 +80,10 @@ public class IndexController {
 
     public void initialize() {
         featureImg.setOpacity(0);
+        statImg.setOpacity(0);
+        stat1.setOpacity(0);
+        stat2.setOpacity(0);
+        stat3.setOpacity(0);
 
         Platform.runLater(() -> {
 
@@ -99,6 +116,21 @@ public class IndexController {
             newsPicWidth = newsPicContentParent.getWidth();
             newsCardWidth = newsCardParent.getWidth();
 
+            newsCard.setTranslateX(newsCardWidth);
+            newsPicContent.setTranslateX(-newsPicWidth);
+
+            newstt = new TranslateTransition();
+            newstt.setNode(newsPicContent);
+            newstt.setDuration(Duration.seconds(0.5));
+            newstt.setFromX(-newsPicWidth);
+            newstt.setToX(0);
+
+            newstt2 = new TranslateTransition();
+            newstt2.setNode(newsCard);
+            newstt2.setDuration(Duration.seconds(0.5));
+            newstt2.setFromX(newsCardWidth);
+            newstt2.setToX(0);
+
         });
 
         root.layoutBoundsProperty().addListener((obs, oldValue, newValue) -> {
@@ -106,6 +138,16 @@ public class IndexController {
 
             newsPicWidth = newsPicContentParent.getWidth();
             newsCardWidth = newsCardParent.getWidth();
+
+            if(!isNewsTriggeredOnce){
+                newsCard.setTranslateX(newsCardWidth);
+                newsPicContent.setTranslateX(-newsPicWidth);
+            }
+
+            if(newstt != null && newstt2 != null){
+                newstt.setFromX(-newsPicWidth);
+                newstt2.setFromX(newsCardWidth);
+            }
         });
 
 
@@ -126,6 +168,21 @@ public class IndexController {
             seqFeature.getChildren().add(ftArray[i]);
         }
 
+        // Preparing Stat Nodes
+        statSequence = new SequentialTransition();
+        statTransition = new FadeTransition[statTransitionCount];
+        Node[] statNodes = {statImg, stat1, stat2, stat3};
+        for(int i = 0; i<statTransitionCount; i++){
+            statTransition[i] = new FadeTransition(Duration.seconds(0.4), statNodes[i]);
+            statTransition[i].setFromValue(0);
+            statTransition[i].setToValue(1);
+            statTransition[i].setCycleCount(1);
+            statTransition[i].setAutoReverse(false);
+            if(i > 0){
+                statSequence.getChildren().add(statTransition[i]);
+            }
+        }
+
         scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
             Bounds hboxBounds = featureHBox.localToScene(featureHBox.getBoundsInLocal());
             Bounds viewportBounds = scrollPane.getViewportBounds();
@@ -134,25 +191,34 @@ public class IndexController {
                     - Math.max(hboxBounds.getMinY(), 0);
             visibleHeight = Math.max(0, visibleHeight);
 
-            if (visibleHeight > featureHBox.getHeight() * 0.5 && !isFeatureTriggeredOnce) {
+            if (visibleHeight > featureHBox.getHeight() * 0.6 && !isFeatureTriggeredOnce) {
                 seqFeature.play();
                 isFeatureTriggeredOnce = true;
             }
 
-        });
 
-        scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
-            Bounds hboxBounds = newsHBox.localToScene(newsHBox.getBoundsInLocal());
-            Bounds viewportBounds = scrollPane.getViewportBounds();
+            Bounds newshboxBounds = newsHBox.localToScene(newsHBox.getBoundsInLocal());
 
-            double visibleHeight = Math.min(hboxBounds.getMaxY(), viewportBounds.getHeight())
-                    - Math.max(hboxBounds.getMinY(), 0);
-            visibleHeight = Math.max(0, visibleHeight);
+            double visibleHeightNews = Math.min(newshboxBounds.getMaxY(), viewportBounds.getHeight())
+                    - Math.max(newshboxBounds.getMinY(), 0);
+            visibleHeightNews = Math.max(0, visibleHeightNews);
 
-            if (visibleHeight > newsHBox.getHeight() * 0.5 && !isNewsTriggeredOnce) {
-
-                System.out.println(50);
+            if (visibleHeightNews > newsHBox.getHeight() * 1 && !isNewsTriggeredOnce) {
+                newstt.play();
+                newstt2.play();
                 isNewsTriggeredOnce = true;
+            }
+
+            Bounds statHboxBounds = statBox.localToScene(statBox.getBoundsInLocal());
+
+            double visibleHeightStat = Math.min(statHboxBounds.getMaxY(), viewportBounds.getHeight())
+                    - Math.max(statHboxBounds.getMinY(), 0);
+            visibleHeightStat = Math.max(0, visibleHeightStat);
+
+            if (visibleHeightStat > statBox.getHeight() * 0.7 && !isStatTriggeredOnce) {
+                statTransition[0].play();
+                statSequence.play();
+                isStatTriggeredOnce = true;
             }
 
         });

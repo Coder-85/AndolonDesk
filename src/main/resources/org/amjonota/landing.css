@@ -5,6 +5,13 @@
     -fx-background-position: center center;
 }
 
+.news-box{
+    -fx-background-image: url("../../images/news_stat_background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
 .set-font{
     -fx-font-family: "dfsdfd"; /* font should be added*/
 }
