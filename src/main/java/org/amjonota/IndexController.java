@@ -117,7 +117,7 @@ public class IndexController {
             sequence.play();
 
             newsPicWidth = newsPicContentParent.getWidth();
-            newsCardWidth = newsCardParent.getWidth();
+            newsCardWidth = root.getWidth()-newsPicWidth;
 
             newsCard.setTranslateX(newsCardWidth);
             newsPicContent.setTranslateX(-newsPicWidth);
@@ -144,7 +144,7 @@ public class IndexController {
             slider.setMinHeight(newValue.getHeight() - navBarBox.getHeight());
 
             newsPicWidth = newsPicContentParent.getWidth();
-            newsCardWidth = newsCardParent.getWidth();
+            newsCardWidth = root.getWidth()-newsPicWidth;
 
             if(!isNewsTriggeredOnce){
                 newsCard.setTranslateX(newsCardWidth);
