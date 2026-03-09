@@ -1,10 +1,8 @@
 package org.amjonota;
 
-import javafx.animation.FadeTransition;
+import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -16,6 +14,8 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
+import javafx.scene.control.Label;
+import java.security.Key;
 
 public class IndexController {
     @FXML private ImageView slideImg;
@@ -49,9 +49,19 @@ public class IndexController {
     @FXML private HBox stat1;
     @FXML private HBox stat2;
     @FXML private HBox stat3;
-    private FadeTransition[] statTransition;
-    private int statTransitionCount = 4;
-    private SequentialTransition statSequence;
+
+    @FXML private Label statUserNum;
+    @FXML private Label statPostNum;
+    @FXML private Label statViewNum;
+    private int statUserCount = 217;
+    private int statPostCount = 35;
+    private int statViewCount = 4324;
+    private final int statAnimTime = 1000; // in ms
+    private final int frameChangingTime = 20;
+    private int startingUserCount = 0;
+    private int startingPostCount = 0;
+    private int startingViewCount = 0;
+    private Timeline statTimeline;
 
 
     private TranslateTransition tt;
@@ -79,14 +89,36 @@ public class IndexController {
         featureNodes[4] = feature4;
     }
 
+    private void animateStat(Label label, int target) {
+
+        int frames = statAnimTime / frameChangingTime;
+        double increment = (double) target / frames;
+
+        final double[] value = {0};
+
+        Timeline timeline = new Timeline();
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(frameChangingTime), e -> {
+            value[0] += increment;
+
+            if (value[0] >= target) {
+                label.setText(String.valueOf(target));
+                timeline.stop();
+            } else {
+                label.setText(String.valueOf((int) value[0]));
+            }
+        });
+
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
 
 
     public void initialize() {
         featureImg.setOpacity(0);
-        statImg.setOpacity(0);
-        stat1.setOpacity(0);
-        stat2.setOpacity(0);
-        stat3.setOpacity(0);
+
 
         Platform.runLater(() -> {
 
@@ -175,20 +207,6 @@ public class IndexController {
             seqFeature.getChildren().add(ftArray[i]);
         }
 
-        // Preparing Stat Nodes
-        statSequence = new SequentialTransition();
-        statTransition = new FadeTransition[statTransitionCount];
-        Node[] statNodes = {statImg, stat1, stat2, stat3};
-        for(int i = 0; i<statTransitionCount; i++){
-            statTransition[i] = new FadeTransition(Duration.seconds(0.4), statNodes[i]);
-            statTransition[i].setFromValue(0);
-            statTransition[i].setToValue(1);
-            statTransition[i].setCycleCount(1);
-            statTransition[i].setAutoReverse(false);
-            if(i > 0){
-                statSequence.getChildren().add(statTransition[i]);
-            }
-        }
 
         scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
             Bounds hboxBounds = featureHBox.localToScene(featureHBox.getBoundsInLocal());
@@ -223,8 +241,9 @@ public class IndexController {
             visibleHeightStat = Math.max(0, visibleHeightStat);
 
             if (visibleHeightStat > statBox.getHeight() * 0.7 && !isStatTriggeredOnce) {
-                statTransition[0].play();
-                statSequence.play();
+                animateStat(statUserNum, statUserCount);
+                animateStat(statPostNum, statPostCount);
+                animateStat(statViewNum, statViewCount);
                 isStatTriggeredOnce = true;
             }
 
