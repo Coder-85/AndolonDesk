@@ -62,7 +62,7 @@ public class DashboardController {
     @FXML
     public void navAddAndolon(MouseEvent e) {
         try {
-             App.setRoot("dashboard");
+             App.setRoot("add_andolon");
         }
         catch (IOException ex) {
              ex.printStackTrace();

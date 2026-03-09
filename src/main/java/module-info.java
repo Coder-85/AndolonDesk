@@ -1,6 +1,8 @@
 module org.amjonota {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.web;
+
     requires java.sql;
     requires java.net.http;
     requires java.desktop;
