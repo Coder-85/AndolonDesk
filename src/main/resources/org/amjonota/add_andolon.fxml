@@ -197,7 +197,7 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                    <HBox prefWidth="480.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                              <children>
@@ -249,6 +249,20 @@
                                     </ComboBox>
                                  </children>
                               </HBox>
+                              <HBox layoutX="50.0" layoutY="420.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="62.0" prefWidth="200.0" style="-fx-border-color: #ececec; -fx-background-radius: 5; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#picSelect" prefHeight="60.0" prefWidth="133.0" style="-fx-cursor: hand;" styleClass="input-row" text="Choose Photo" HBox.hgrow="ALWAYS" />
+                                          <Label fx:id="fileNameLabel" minHeight="-Infinity" prefHeight="60.0" text="No File Chosen" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
                               <HBox layoutX="50.0" layoutY="145.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="490.0" styleClass="input-row" HBox.hgrow="ALWAYS">
@@ -265,7 +279,7 @@
                                                       <Insets bottom="10.0" right="10.0" />
                                                    </padding>
                                                    <children>
-                                                      <WebView fx:id="andolonWebView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                      <WebView fx:id="andolonWebView" prefHeight="440.0" prefWidth="440.0" HBox.hgrow="ALWAYS">
                                                          <HBox.margin>
                                                             <Insets left="10.0" />
                                                          </HBox.margin>
@@ -298,6 +312,9 @@
                            </children>
                         </VBox>
                      </children>
+                     <padding>
+                        <Insets bottom="50.0" top="20.0" />
+                     </padding>
                   </VBox>
                </children>
                 </VBox>
