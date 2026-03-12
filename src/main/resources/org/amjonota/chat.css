@@ -1,0 +1,38 @@
+.chat-list{
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-start-margin: 20px;
+    -fx-end-margin: 20px;
+}
+
+.chat-list:hover{
+    -fx-background-color: #cac7ff;
+}
+
+.main_msg{
+    -fx-font-size: 14px;
+}
+
+
+.msg_time{
+    -fx-font-weight: 700;
+}
+
+.received_msg{
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color:  #f5f5f5;
+    -fx-end-margin : 50px;
+}
+
+.sent_msg{
+    -fx-background-color: #0082ff;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.sent_msg .label{
+    -fx-text-fill: white;
+}
