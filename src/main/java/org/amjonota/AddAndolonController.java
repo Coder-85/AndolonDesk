@@ -4,8 +4,8 @@ import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
+import com.sothawo.mapjfx.MapView;
+import com.sothawo.mapjfx.Coordinate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.amjonota.auth.AuthService;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class AddAndolonController {
 
     @FXML
-    private WebView andolonWebView;
+    private MapView andolonMapView;
 
     @FXML
     private Label fileNameLabel;
@@ -26,7 +26,8 @@ public class AddAndolonController {
     private File selectedFile;
 
     public void initialize() {
-
+        andolonMapView.initialize();
+        andolonMapView.setCenter(new Coordinate(49.015511, 8.323497));
     }
 
 

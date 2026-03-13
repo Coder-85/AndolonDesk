@@ -2,6 +2,7 @@ module org.amjonota {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires com.sothawo.mapjfx;
 
     requires java.sql;
     requires java.net.http;
