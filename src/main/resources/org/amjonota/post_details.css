@@ -1,0 +1,7 @@
+.attend_btn:hover{
+    -fx-background-color: #292524 !important;
+}
+
+.save_share_btn:hover {
+    -fx-background-color: #fafaf9 !important;
+}

@@ -42,7 +42,14 @@
 
 .menu-item:hover {
     -fx-background-color: #6358dc;
-    -fx-text-fill: white !important;
+}
+
+.menu-item:hover .label{
+    -fx-text-fill: white;
+}
+
+.menu-item:hover .icon{
+    -fx-fill: white !important;
 }
 
 
@@ -63,9 +70,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 15, 0.2, 0, 4);
 }
 
-.stat-card:first-child{
-
-}
 
 .stat-number {
     -fx-font-size: 26;
@@ -220,8 +224,11 @@
 }
 
 .logout-btn{
-    -fx-text-fill: red;
     -fx-fill: red;
+}
+
+.logout-btn .label{
+    -fx-text-fill: red !important;
 }
 
 .logout-btn:hover{

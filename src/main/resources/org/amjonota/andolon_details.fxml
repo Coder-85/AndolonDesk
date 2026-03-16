@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.sothawo.mapjfx.MapView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefHeight="825.0" prefWidth="1100.0" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.amjonota.AndolonDetailsController">
+
+    <left>
+        <VBox prefWidth="232.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="25" left="18" right="18" top="25" />
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <StackPane styleClass="logo-icon">
+                    <Label text="A" />
+                </StackPane>
+                <Label styleClass="logo-text" text="AndolonDesk" />
+            </HBox>
+
+            <VBox spacing="6" styleClass="menu-container">
+                <HBox onMouseClicked="#navHome" spacing="12" styleClass="menu-item">
+                    <Group>
+                        <children>
+                            <SVGPath content="M341.8 72.6C329.5 61.2 310.5 61.2 298.3 72.6L74.3 280.6C64.7 289.6 61.5 303.5 66.3 315.7C71.1 327.9 82.8 336 96 336L112 336L112 512C112 547.3 140.7 576 176 576L464 576C499.3 576 528 547.3 528 512L528 336L544 336C557.2 336 569 327.9 573.8 315.7C578.6 303.5 575.4 289.5 565.8 280.6L341.8 72.6zM304 384L336 384C362.5 384 384 405.5 384 432L384 528L256 528L256 432C256 405.5 277.5 384 304 384z" scaleX="0.04" scaleY="0.04" />
+                        </children>
+                        <HBox.margin>
+                            <Insets right="5.0" />
+                        </HBox.margin>
+                    </Group>
+                    <Label text="Home" />
+                </HBox>
+                <HBox onMouseClicked="#navAddAndolon" spacing="12" styleClass="menu-item">
+                    <children>
+                        <Group>
+                            <children>
+                                <SVGPath content="M505 122.9L517.1 135C526.5 144.4 526.5 159.6 517.1 168.9L488 198.1L441.9 152L471 122.9C480.4 113.5 495.6 113.5 504.9 122.9zM273.8 320.2L408 185.9L454.1 232L319.8 366.2C316.9 369.1 313.3 371.2 309.4 372.3L250.9 389L267.6 330.5C268.7 326.6 270.8 323 273.7 320.1zM437.1 89L239.8 286.2C231.1 294.9 224.8 305.6 221.5 317.3L192.9 417.3C190.5 425.7 192.8 434.7 199 440.9C205.2 447.1 214.2 449.4 222.6 447L322.6 418.4C334.4 415 345.1 408.7 353.7 400.1L551 202.9C579.1 174.8 579.1 129.2 551 101.1L538.9 89C510.8 60.9 465.2 60.9 437.1 89zM152 128C103.4 128 64 167.4 64 216L64 488C64 536.6 103.4 576 152 576L424 576C472.6 576 512 536.6 512 488L512 376C512 362.7 501.3 352 488 352C474.7 352 464 362.7 464 376L464 488C464 510.1 446.1 528 424 528L152 528C129.9 528 112 510.1 112 488L112 216C112 193.9 129.9 176 152 176L264 176C277.3 176 288 165.3 288 152C288 138.7 277.3 128 264 128L152 128z" scaleX="0.04" scaleY="0.04" />
+                            </children>
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Group>
+                        <Label text="Add Andolon" />
+                    </children>
+                </HBox>
+
+                <HBox onMouseClicked="#navBookmarked" spacing="12" styleClass="menu-item">
+                    <Group>
+                        <children>
+                            <SVGPath content="M128 128C128 92.7 156.7 64 192 64L448 64C483.3 64 512 92.7 512 128L512 545.1C512 570.7 483.5 585.9 462.2 571.7L320 476.8L177.8 571.7C156.5 585.9 128 570.6 128 545.1L128 128zM192 112C183.2 112 176 119.2 176 128L176 515.2L293.4 437C309.5 426.3 330.5 426.3 346.6 437L464 515.2L464 128C464 119.2 456.8 112 448 112L192 112z" scaleX="0.04" scaleY="0.04" />
+                        </children>
+                        <HBox.margin>
+                            <Insets right="10.0" />
+                        </HBox.margin>
+                    </Group>
+                    <Label text="Bookmarked" />
+                </HBox>
+
+                <HBox onMouseClicked="#navProfile" spacing="12" styleClass="menu-item">
+                    <Group>
+                        <children>
+                            <SVGPath content="M240 192C240 147.8 275.8 112 320 112C364.2 112 400 147.8 400 192C400 236.2 364.2 272 320 272C275.8 272 240 236.2 240 192zM448 192C448 121.3 390.7 64 320 64C249.3 64 192 121.3 192 192C192 262.7 249.3 320 320 320C390.7 320 448 262.7 448 192zM144 544C144 473.3 201.3 416 272 416L368 416C438.7 416 496 473.3 496 544L496 552C496 565.3 506.7 576 520 576C533.3 576 544 565.3 544 552L544 544C544 446.8 465.2 368 368 368L272 368C174.8 368 96 446.8 96 544L96 552C96 565.3 106.7 576 120 576C133.3 576 144 565.3 144 552L144 544z" scaleX="0.04" scaleY="0.04" />
+                        </children>
+                        <HBox.margin>
+                            <Insets right="10.0" />
+                        </HBox.margin>
+                    </Group>
+                    <Label text="Profile" />
+                </HBox>
+                <HBox layoutX="10.0" layoutY="220.0" onMouseClicked="#navLogout" spacing="12">
+                    <children>
+                        <Group>
+                            <children>
+                                <SVGPath content="M352 64C352 46.3 337.7 32 320 32C302.3 32 288 46.3 288 64L288 320C288 337.7 302.3 352 320 352C337.7 352 352 337.7 352 320L352 64zM210.3 162.4C224.8 152.3 228.3 132.3 218.2 117.8C208.1 103.3 188.1 99.8 173.6 109.9C107.4 156.1 64 233 64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 233 532.6 156.1 466.3 109.9C451.8 99.8 431.9 103.3 421.7 117.8C411.5 132.3 415.1 152.2 429.6 162.4C479.4 197.2 511.9 254.8 511.9 320C511.9 426 425.9 512 319.9 512C213.9 512 128 426 128 320C128 254.8 160.5 197.1 210.3 162.4z" scaleX="0.04" scaleY="0.04" styleClass="logout-btn" />
+                            </children>
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                        </Group>
+                        <Label styleClass="logout-btn" text="Logout" />
+                    </children>
+                    <styleClass>
+                        <String fx:value="logout-btn" />
+                        <String fx:value="menu-item" />
+                    </styleClass>
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="22" style="-fx-background-color: #fafaf9;" styleClass="main-area" stylesheets="@post_details.css">
+            <padding>
+                <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+            </padding>
+
+            <ScrollPane fitToWidth="true" maxHeight="-Infinity" prefWidth="820.0" styleClass="feed-scroll">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+            <content>
+               <HBox minHeight="-Infinity" prefHeight="740.0" prefWidth="759.0">
+                  <children>
+                     <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="460.0" HBox.hgrow="ALWAYS">
+                        <children>
+                           <ScrollPane fx:id="postDetailsScroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="feed-scroll" VBox.vgrow="ALWAYS">
+                              <content>
+                                 <VBox alignment="TOP_CENTER" prefWidth="488.0" spacing="40.0">
+                                    <padding>
+                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                    <children>
+                                       <VBox fx:id="bgBox" alignment="BOTTOM_LEFT" maxWidth="650.0" prefHeight="304.0" prefWidth="444.0" styleClass="set_bg_temp" stylesheets="@styles.css">
+                                          <children>
+                                             <Label style="-fx-background-color: #00bc7d; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: 700; -fx-border-radius: 20; -fx-background-radius: 20;" text="Active Protest">
+                                                <VBox.margin>
+                                                   <Insets left="20.0" right="20.0" />
+                                                </VBox.margin>
+                                                <padding>
+                                                   <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
+                                                </padding>
+                                             </Label>
+                                             <HBox alignment="CENTER_LEFT" style="-fx-background-color: #0000007d;">
+                                                <children>
+                                                   <Label style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: 700;" text="This is the title of the andolon post and it is big This is the title of the andolo" wrapText="true" />
+                                                </children>
+                                                <padding>
+                                                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                </padding>
+                                                <VBox.margin>
+                                                   <Insets top="15.0" />
+                                                </VBox.margin>
+                                             </HBox>
+                                          </children>
+                                       </VBox>
+                                       <VBox maxWidth="650.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: #e7e5e4;">
+                                          <children>
+                                             <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" prefWidth="444.0">
+                                                <children>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM288 224C288 206.3 302.3 192 320 192C337.7 192 352 206.3 352 224C352 241.7 337.7 256 320 256C302.3 256 288 241.7 288 224zM280 288L328 288C341.3 288 352 298.7 352 312L352 400L360 400C373.3 400 384 410.7 384 424C384 437.3 373.3 448 360 448L280 448C266.7 448 256 437.3 256 424C256 410.7 266.7 400 280 400L304 400L304 336L280 336C266.7 336 256 325.3 256 312C256 298.7 266.7 288 280 288z" scaleX="0.04" scaleY="0.04" style="-fx-fill: #a6a09b;" />
+                                                      </children>
+                                                   </Group>
+                                                   <Label style="-fx-font-size: 18; -fx-font-weight: 700;" text="About this Protest" wrapText="true">
+                                                      <HBox.margin>
+                                                         <Insets left="20.0" />
+                                                      </HBox.margin>
+                                                   </Label>
+                                                </children>
+                                             </HBox>
+                                             <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="21.0" minHeight="-Infinity" prefHeight="60.0" prefWidth="444.0">
+                                                <children>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M160 96C160 78.3 174.3 64 192 64L448 64C465.7 64 480 78.3 480 96C480 113.7 465.7 128 448 128L418.5 128L428.8 262.1C465.9 283.3 494.6 318.5 507 361.8L510.8 375.2C513.6 384.9 511.6 395.2 505.6 403.3C499.6 411.4 490 416 480 416L160 416C150 416 140.5 411.3 134.5 403.3C128.5 395.3 126.5 384.9 129.3 375.2L133 361.8C145.4 318.5 174 283.3 211.2 262.1L221.5 128L192 128C174.3 128 160 113.7 160 96zM288 464L352 464L352 576C352 593.7 337.7 608 320 608C302.3 608 288 593.7 288 576L288 464z" scaleX="0.03" scaleY="0.03" style="-fx-fill: #a6a09b;" />
+                                                      </children>
+                                                   </Group>
+                                                   <Label style="-fx-font-size: 16; -fx-font-weight: 700;" text="Category 4" wrapText="true">
+                                                      <HBox.margin>
+                                                         <Insets left="25.0" />
+                                                      </HBox.margin>
+                                                   </Label>
+                                                </children>
+                                             </HBox>
+                                             <HBox>
+                                                <children>
+                                                   <Label style="-fx-font-size: 15;" text="Join thousands of activists as we demand immediate climate action from world leaders. This peaceful protest aims to highlight the urgency of the climate crisis and advocate for renewable energy transitions, environmental protection, and social justice for affected communities.We will gather at the city center and march towards the parliament house. Please bring your own banners, water, and wear comfortable shoes. Let's make our voices heard for a sustainable future! Join thousands of activists as we demand immediate climate action from world leaders. This peaceful protest aims to highlight the urgency of the climate crisis and advocate for renewable energy transitions, environmental protection, and social justice for affected communities.We will gather at the city center and march towards the parliament house. Please bring your own banners, water, and wear comfortable shoes. Let's make our voices heard for a sustainable future!" wrapText="true" />
+                                                </children>
+                                             </HBox>
+                                          </children>
+                                          <padding>
+                                             <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                                          </padding>
+                                       </VBox>
+                                       <VBox layoutX="20.0" layoutY="364.0" maxWidth="650.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: #e7e5e4;">
+                                          <children>
+                                             <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" prefWidth="444.0">
+                                                <children>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z" scaleX="0.04" scaleY="0.04" style="-fx-fill: #a6a09b;" />
+                                                      </children>
+                                                   </Group>
+                                                   <Label style="-fx-font-size: 18; -fx-font-weight: 700;" text="Location Preview" wrapText="true">
+                                                      <HBox.margin>
+                                                         <Insets left="20.0" />
+                                                      </HBox.margin>
+                                                   </Label>
+                                                </children>
+                                             </HBox>
+                                             <HBox fx:id="mapHbox">
+                                                <children>
+                                                   <MapView fx:id="andolonMapView" prefHeight="380.0" prefWidth="380.0" HBox.hgrow="ALWAYS" />
+                                                </children>
+                                             </HBox>
+                                          </children>
+                                          <padding>
+                                             <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                                          </padding>
+                                       </VBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </children>
+                     </VBox>
+                     <VBox maxWidth="450.0" minWidth="-Infinity" prefHeight="106.0" prefWidth="315.0" HBox.hgrow="ALWAYS">
+                        <children>
+                           <VBox minWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: #e7e5e4;">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                          <children>
+                                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #f5f5f4; -fx-border-radius: 15; -fx-background-radius: 15;">
+                                                <children>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M216 64C229.3 64 240 74.7 240 88L240 128L400 128L400 88C400 74.7 410.7 64 424 64C437.3 64 448 74.7 448 88L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 88C192 74.7 202.7 64 216 64zM216 176L160 176C151.2 176 144 183.2 144 192L144 240L496 240L496 192C496 183.2 488.8 176 480 176L216 176zM144 288L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 288L144 288z" scaleX="0.05" scaleY="0.05" style="-fx-fill: #57534d;" />
+                                                      </children>
+                                                   </Group>
+                                                </children>
+                                             </HBox>
+                                          </children>
+                                       </VBox>
+                                       <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                             <Label style="-fx-font-weight: 700; -fx-text-fill: #a6a09b;" text="DATE &amp; TIME" />
+                                             <Label layoutX="10.0" layoutY="52.0" style="-fx-font-weight: 700; -fx-font-size: 17;" text="Monday, March 23, 2026" wrapText="true" />
+                                          </children>
+                                       </VBox>
+                                    </children>
+                                    <VBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </VBox.margin>
+                                 </HBox>
+                                 <HBox alignment="CENTER_LEFT" layoutX="21.0" layoutY="11.0" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                          <children>
+                                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #f5f5f4; -fx-border-radius: 15; -fx-background-radius: 15;">
+                                                <children>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z" scaleX="0.05" scaleY="0.05" style="-fx-fill: #57534d;" />
+                                                      </children>
+                                                   </Group>
+                                                </children>
+                                             </HBox>
+                                          </children>
+                                       </VBox>
+                                       <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                             <Label style="-fx-font-weight: 700; -fx-text-fill: #a6a09b;" text="MEETING POINT" />
+                                             <Label layoutX="10.0" layoutY="52.0" style="-fx-font-weight: 700; -fx-font-size: 17;" text="Shahbagh, Dhaka-1230" wrapText="true" />
+                                          </children>
+                                       </VBox>
+                                    </children>
+                                    <VBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </VBox.margin>
+                                 </HBox>
+                                 <VBox>
+                                    <VBox.margin>
+                                       <Insets top="30.0" />
+                                    </VBox.margin>
+                                    <children>
+                                       <HBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" prefWidth="298.0">
+                                          <children>
+                                             <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #1c1917; -fx-text-fill: white; -fx-border-color: none; -fx-font-size: 16; -fx-font-weight: 700; -fx-border-radius: 15; -fx-background-radius: 15;" text="Attend Protest">
+                                                <styleClass>
+                                                   <String fx:value="btn" />
+                                                   <String fx:value="attend_btn" />
+                                                </styleClass>
+                                             </Button>
+                                          </children>
+                                       </HBox>
+                                       <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" prefHeight="75.0" prefWidth="200.0">
+                                          <children>
+                                             <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="105.0" style="-fx-border-color: #e7e5e4; -fx-font-size: 14; -fx-font-weight: 700; -fx-border-radius: 15; -fx-background-radius: 15; -fx-text-fill: #57534d;" text="Save">
+                                                <HBox.margin>
+                                                   <Insets right="15.0" />
+                                                </HBox.margin>
+                                                <graphic>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M128 128C128 92.7 156.7 64 192 64L448 64C483.3 64 512 92.7 512 128L512 545.1C512 570.7 483.5 585.9 462.2 571.7L320 476.8L177.8 571.7C156.5 585.9 128 570.6 128 545.1L128 128zM192 112C183.2 112 176 119.2 176 128L176 515.2L293.4 437C309.5 426.3 330.5 426.3 346.6 437L464 515.2L464 128C464 119.2 456.8 112 448 112L192 112z" scaleX="0.03" scaleY="0.03" />
+                                                      </children>
+                                                   </Group>
+                                                </graphic>
+                                                <styleClass>
+                                                   <String fx:value="btn" />
+                                                   <String fx:value="save_share_btn" />
+                                                </styleClass>
+                                             </Button>
+                                             <Button layoutX="106.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="105.0" style="-fx-border-color: #e7e5e4; -fx-font-size: 14; -fx-font-weight: 700; -fx-border-radius: 15; -fx-background-radius: 15; -fx-text-fill: #57534d;" text="Share">
+                                                <graphic>
+                                                   <Group>
+                                                      <children>
+                                                         <SVGPath content="M448 256C501 256 544 213 544 160C544 107 501 64 448 64C395 64 352 107 352 160C352 165.4 352.5 170.8 353.3 176L223.6 248.1C206.7 233.1 184.4 224 160 224C107 224 64 267 64 320C64 373 107 416 160 416C184.4 416 206.6 406.9 223.6 391.9L353.3 464C352.4 469.2 352 474.5 352 480C352 533 395 576 448 576C501 576 544 533 544 480C544 427 501 384 448 384C423.6 384 401.4 393.1 384.4 408.1L254.7 336C255.6 330.8 256 325.5 256 320C256 314.5 255.5 309.2 254.7 304L384.4 231.9C401.3 246.9 423.6 256 448 256z" scaleX="0.03" scaleY="0.03" />
+                                                      </children>
+                                                   </Group>
+                                                </graphic>
+                                                <styleClass>
+                                                   <String fx:value="btn" />
+                                                   <String fx:value="save_share_btn" />
+                                                </styleClass>
+                                             </Button>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </VBox>
+                           <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                              <children>
+                                 <VBox minWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #1c1917; -fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <children>
+                                       <VBox spacing="20.0">
+                                          <VBox.margin>
+                                             <Insets bottom="30.0" top="30.0" />
+                                          </VBox.margin>
+                                          <padding>
+                                             <Insets left="20.0" right="20.0" />
+                                          </padding>
+                                          <children>
+                                             <HBox>
+                                                <children>
+                                                   <Label style="-fx-text-fill: #a6a09b; -fx-font-size: 14; -fx-font-weight: 700;" text="LIVE STATISTICS" />
+                                                </children>
+                                             </HBox>
+                                             <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="10.0" spacing="15.0">
+                                                <children>
+                                                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #33302f; -fx-border-radius: 15; -fx-background-radius: 15;">
+                                                      <children>
+                                                         <Group>
+                                                            <children>
+                                                               <SVGPath content="M96 192C96 130.1 146.1 80 208 80C269.9 80 320 130.1 320 192C320 253.9 269.9 304 208 304C146.1 304 96 253.9 96 192zM32 528C32 430.8 110.8 352 208 352C305.2 352 384 430.8 384 528L384 534C384 557.2 365.2 576 342 576L74 576C50.8 576 32 557.2 32 534L32 528zM464 128C517 128 560 171 560 224C560 277 517 320 464 320C411 320 368 277 368 224C368 171 411 128 464 128zM464 368C543.5 368 608 432.5 608 512L608 534.4C608 557.4 589.4 576 566.4 576L421.6 576C428.2 563.5 432 549.2 432 534L432 528C432 476.5 414.6 429.1 385.5 391.3C408.1 376.6 435.1 368 464 368z" scaleX="0.05" scaleY="0.05" style="-fx-fill: #00d492;" />
+                                                            </children>
+                                                         </Group>
+                                                      </children>
+                                                   </HBox>
+                                                   <Label style="-fx-text-fill: #d6d3d1; -fx-font-size: 14;" text="Attendees" />
+                                                   <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                                      <children>
+                                                         <Label style="-fx-text-fill: #ffffff; -fx-font-size: 25; -fx-font-weight: 700;" text="1240" />
+                                                      </children>
+                                                   </HBox>
+                                                </children>
+                                             </HBox>
+                                             <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="50.0" spacing="15.0">
+                                                <children>
+                                                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #33302f; -fx-border-radius: 15; -fx-background-radius: 15;">
+                                                      <children>
+                                                         <Group>
+                                                            <children>
+                                                               <SVGPath content="M128 128C128 92.7 156.7 64 192 64L448 64C483.3 64 512 92.7 512 128L512 545.1C512 570.7 483.5 585.9 462.2 571.7L320 476.8L177.8 571.7C156.5 585.9 128 570.6 128 545.1L128 128zM192 112C183.2 112 176 119.2 176 128L176 515.2L293.4 437C309.5 426.3 330.5 426.3 346.6 437L464 515.2L464 128C464 119.2 456.8 112 448 112L192 112z" scaleX="0.05" scaleY="0.05" style="-fx-fill: #ffb900;" />
+                                                            </children>
+                                                         </Group>
+                                                      </children>
+                                                   </HBox>
+                                                   <Label style="-fx-text-fill: #d6d3d1; -fx-font-size: 14;" text="Bookmarked" />
+                                                   <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                                      <children>
+                                                         <Label style="-fx-text-fill: #ffffff; -fx-font-size: 25; -fx-font-weight: 700;" text="450" />
+                                                      </children>
+                                                   </HBox>
+                                                </children>
+                                             </HBox>
+                                             <HBox layoutX="30.0" layoutY="10.0" style="-fx-border-color: #33302f; -fx-border-width: 1 0 0 0;">
+                                                <children>
+                                                   <Label style="-fx-text-fill: #a6a09b; -fx-font-size: 12;" text="Join 1,240 others already attending this event." wrapText="true" />
+                                                </children>
+                                                <padding>
+                                                   <Insets top="10.0" />
+                                                </padding>
+                                             </HBox>
+                                          </children>
+                                       </VBox>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </VBox>
+                        </children>
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding></VBox>
+                  </children>
+               </HBox>
+            </content>
+            </ScrollPane>
+
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -205,3 +205,17 @@
 .navigationItem:hover{
     -fx-background-color: #dddddd;
 }
+
+.set_bg_temp{
+    -fx-background-image: url("../../images/post_details_bg.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+
+    -fx-background-radius: 20px;
+    -fx-background-insets: 0;
+    -fx-background-clip: padding-box;
+    -fx-border-radius: 20px;
+
+    /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.2, 0, 5);;*/
+}
