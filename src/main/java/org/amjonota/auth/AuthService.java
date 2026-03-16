@@ -134,9 +134,9 @@ public class AuthService {
         User currentUser = Session.getCurrentUser();
 
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, author_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, getCurrentUser().getId());
+            stmt.setInt(1, currentUser.getId());
             stmt.setString(2, createdAt);
             stmt.setString(3, title);
             stmt.setString(4, eventDate);
@@ -146,6 +146,7 @@ public class AuthService {
             stmt.setString(8, picName);
             stmt.setString(9, "map coordinates");
             stmt.setString(10, address);
+            stmt.setString(11, currentUser.getName());
             stmt.executeUpdate();
 
             try (ResultSet keys = stmt.getGeneratedKeys()) {

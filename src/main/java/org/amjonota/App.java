@@ -40,7 +40,7 @@ public class App extends Application {
             }
         }
 
-        scene = new Scene(loadFXML("andolon_details"), 1100, 825);
+        scene = new Scene(loadFXML("dashboard"), 1100, 825);
         stage.setScene(scene);
         stage.setTitle("AndolonDesk");
         stage.show();

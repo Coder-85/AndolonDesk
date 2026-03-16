@@ -1,10 +1,13 @@
 package org.amjonota;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.amjonota.auth.AuthService;
 import java.sql.SQLException;
 import javafx.scene.layout.HBox;
@@ -44,10 +47,10 @@ public class DashboardController {
         try (PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                ProtestItem item = new ProtestItem(rs.getString("author"), rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"));
+                ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"),rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"));
                 item.setId(rs.getInt("id"));
                 items.add(item);
-                System.out.println("Title: " + item.getDescription());
+                //System.out.println("Title: " + item.getDescription());
             }
         }
 
@@ -76,6 +79,16 @@ public class DashboardController {
         }
         catch (IOException ex) {
              ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void navDMList(MouseEvent e) {
+        try {
+            App.setRoot("chat_list");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -128,6 +141,23 @@ public class DashboardController {
         VBox.setMargin(summary, new Insets(0, 0, 15, 0));
         Button viewBtn = new Button("View Details");
         viewBtn.getStyleClass().addAll("btn", "btn-primary");
+        viewBtn.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("andolon_details.fxml"));
+                Parent root = loader.load();
+
+                AndolonDetailsController controller = loader.getController();
+                controller.setPostID(item.getId());
+
+                Stage stage = (Stage) viewBtn.getScene().getWindow();
+                stage.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         viewBtn.setMnemonicParsing(false);
 
         VBox card = new VBox(author, postedDate, title, eventDate, summary, viewBtn);
