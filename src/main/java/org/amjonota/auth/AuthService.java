@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.amjonota.Session.getCurrentUser;
-
 public class AuthService {
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -125,39 +123,6 @@ public class AuthService {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, token);
             stmt.executeUpdate();
-        }
-    }
-
-    public void addAndolon(String title, String description, String eventDate, String category, String picName, String address) throws AuthException, SQLException {
-        String createdAt = LocalDateTime.now().format(DATETIME_FORMAT);
-
-        User currentUser = Session.getCurrentUser();
-
-        Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, author_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, currentUser.getId());
-            stmt.setString(2, createdAt);
-            stmt.setString(3, title);
-            stmt.setString(4, eventDate);
-            stmt.setString(5, "No summary");
-            stmt.setString(6, description);
-            stmt.setString(7, category);
-            stmt.setString(8, picName);
-            stmt.setString(9, "map coordinates");
-            stmt.setString(10, address);
-            stmt.setString(11, currentUser.getName());
-            stmt.executeUpdate();
-
-            try (ResultSet keys = stmt.getGeneratedKeys()) {
-                if (!keys.next()) throw new AuthException("An unexpected database error occured!");
-
-                //System.out.println("Success with id " + keys.getInt(1));
-
-            }
-        }
-        catch (Exception e) {
-            throw new AuthException("An unexpected database error occured!");
         }
     }
 }

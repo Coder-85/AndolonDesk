@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import com.sothawo.mapjfx.MapView;
 import com.sothawo.mapjfx.Coordinate;
+import com.sothawo.mapjfx.Marker;
+import com.sothawo.mapjfx.event.MapViewEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.amjonota.auth.AuthService;
@@ -23,7 +25,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class AddAndolonController {
@@ -45,6 +52,9 @@ public class AddAndolonController {
     private Label fileNameLabel;
     private File selectedFile;
     private String picNewName;
+    private Marker selectedLocationMarker;
+    private String mapCoordinates;
+    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void initialize() {
         andolonCategory.getItems().add("Category 1");
@@ -53,6 +63,22 @@ public class AddAndolonController {
         andolonCategory.getItems().add("Category 4");
         andolonMapView.initialize();
         andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
+
+        selectedLocationMarker = Marker.createProvided(Marker.Provided.RED).setVisible(false);
+        andolonMapView.addEventHandler(MapViewEvent.MAP_CLICKED, new javafx.event.EventHandler<MapViewEvent>() {
+            @Override
+            public void handle(MapViewEvent event) {
+                event.consume();
+                Coordinate clicked = event.getCoordinate();
+
+                if (clicked == null) {
+                    return;
+                }
+                selectedLocationMarker.setPosition(clicked).setVisible(true);
+                andolonMapView.addMarker(selectedLocationMarker);
+                mapCoordinates = clicked.getLatitude() + "," + clicked.getLongitude();
+            }
+        });
     }
 
 
@@ -87,6 +113,7 @@ public class AddAndolonController {
 
         String address = addressInShort.getText();
         if (!Utils.isNonEmpty(address)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Address is required."); return; }
+        if (!Utils.isNonEmpty(mapCoordinates)) { showAlert(Alert.AlertType.ERROR, "Submission Error", "Please click on the map to select a location."); return; }
 
         andolonSubmitBtn.setDisable(true);
         picNewName = selectedFile.getName();
@@ -117,7 +144,7 @@ public class AddAndolonController {
             @Override
             public void run() {
                 try {
-                    authService.addAndolon(title, description, eventDate, category, picNewName, address);
+                    addAndolon(title, description, eventDate, category, picNewName, address);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -132,7 +159,7 @@ public class AddAndolonController {
                         }
                     });
                 }
-                catch (AuthService.AuthException | SQLException e) {
+                catch (SQLException e) {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -144,6 +171,27 @@ public class AddAndolonController {
             }
         }).start();
 
+    }
+
+    private void addAndolon(String title, String description, String eventDate, String category, String imgName, String address) throws SQLException {
+        Connection conn = DatabaseManager.getInstance().getConnection();
+
+        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Session.getCurrentUser().getId());
+            stmt.setString(2, LocalDate.now().toString());
+            stmt.setString(3, title);
+            stmt.setString(4, eventDate);
+            stmt.setString(5, description);
+            stmt.setString(6, description);
+            stmt.setString(7, category);
+            stmt.setString(8, imgName);
+            stmt.setString(9, mapCoordinates);
+            stmt.setString(10, address);
+            stmt.setString(11, LocalDateTime.now().format(DATETIME_FORMAT));
+            stmt.executeUpdate();
+        }
     }
 
     @FXML

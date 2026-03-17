@@ -2,6 +2,9 @@ package org.amjonota;
 
 import com.sothawo.mapjfx.Coordinate;
 import com.sothawo.mapjfx.MapView;
+import com.sothawo.mapjfx.Marker;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,6 +32,8 @@ public class AndolonDetailsController {
     private boolean isIDSet = false;
     private boolean isSaved = false;
     private boolean isAttending = false;
+    private Marker protestLocationMarker;
+    private Coordinate protestCoordinates;
     @FXML private MapView andolonMapView;
     @FXML private HBox mapHbox;
     @FXML private ScrollPane postDetailsScroll;
@@ -89,6 +94,7 @@ public class AndolonDetailsController {
                 joiningPplCount.setText(String.valueOf(rs.getInt("member_count")));
                 savedPplCount.setText(String.valueOf(rs.getInt("bookmarked_count")));
                 totalViewCount.setText(String.valueOf(rs.getInt("views")));
+                showProtestLocation(rs.getString("map_coordinates"));
 
                 String imgPath = "uploads/" + rs.getString("img_name");
 
@@ -139,6 +145,16 @@ public class AndolonDetailsController {
 
         andolonMapView.initialize();
         andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
+        protestLocationMarker = Marker.createProvided(Marker.Provided.RED).setVisible(false);
+        andolonMapView.initializedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (Boolean.TRUE.equals(newValue) && protestCoordinates != null) {
+                    applyMarker(protestCoordinates );
+                    protestCoordinates = null;
+                }
+            }
+        });
 
         Rectangle clip = new Rectangle();
         clip.setArcWidth(40);
@@ -158,12 +174,33 @@ public class AndolonDetailsController {
         clip2.heightProperty().bind(mapHbox.heightProperty());
 
         mapHbox.setClip(clip2);
+    }
 
-        Platform.runLater(() -> {
-            postDetailsScroll.setVvalue(0);
-            andolonMapView.prefHeightProperty().bind(andolonMapView.widthProperty());
-        });
+    private void showProtestLocation(String mapCoordinates) {
+        if (mapCoordinates == null || mapCoordinates.trim().isEmpty()) {
+            return;
+        }
+        String[] parts = mapCoordinates.split(",");
+        if (parts.length != 2) {
+            return;
+        }
+        try {
+            double lat = Double.parseDouble(parts[0].trim());
+            double lng = Double.parseDouble(parts[1].trim());
+            Coordinate coordinate = new Coordinate(lat, lng);
+            if (!andolonMapView.getInitialized()) {
+                protestCoordinates = coordinate;
+                return;
+            }
+            applyMarker(coordinate);
+        }
+        catch (NumberFormatException e) {}
+    }
 
+    private void applyMarker(Coordinate coordinate) {
+        protestLocationMarker.setPosition(coordinate).setVisible(true);
+        andolonMapView.addMarker(protestLocationMarker);
+        andolonMapView.setCenter(coordinate);
     }
 
 
