@@ -46,10 +46,7 @@ public class BookmarkedController {
     private List<ProtestItem> loadBookmarkedProtests(int id) throws SQLException {
         List<ProtestItem> items = new ArrayList<ProtestItem>();
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT p.* FROM protests p " +
-            "INNER JOIN user_bookmarks b ON p.id = b.protest_id " +
-            "WHERE b.user_id = ? " +
-            "ORDER BY p.posted_date DESC";
+        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM user_bookmarks ub2 WHERE ub2.protest_id = p.id) AS bookmarked_count FROM protests p INNER JOIN user_bookmarks b ON p.id = b.protest_id INNER JOIN users u ON u.id = p.author_id WHERE b.user_id = ? ORDER BY p.posted_date DESC";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);

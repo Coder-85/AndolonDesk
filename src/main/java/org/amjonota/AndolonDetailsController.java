@@ -67,7 +67,7 @@ public class AndolonDetailsController {
 
     private void loadPostData() throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT * FROM protests WHERE id = ?";
+        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM user_bookmarks ub WHERE ub.protest_id = p.id) AS bookmarked_count FROM protests p INNER JOIN users u ON u.id = p.author_id WHERE p.id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, postID);
             try (ResultSet rs = stmt.executeQuery()) {
