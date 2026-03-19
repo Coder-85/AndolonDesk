@@ -1,6 +1,7 @@
 package org.amjonota;
 
 import com.sothawo.mapjfx.Coordinate;
+import com.sothawo.mapjfx.CoordinateLine;
 import com.sothawo.mapjfx.MapView;
 import com.sothawo.mapjfx.Marker;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import org.amjonota.auth.AuthService;
@@ -25,6 +27,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AndolonDetailsController {
 
@@ -33,7 +37,9 @@ public class AndolonDetailsController {
     private boolean isSaved = false;
     private boolean isAttending = false;
     private Marker protestLocationMarker;
+    private CoordinateLine protestAreaPolygon;
     private Coordinate protestCoordinates;
+    private final List<Coordinate> polygonCoordinates = new ArrayList<Coordinate>();
     @FXML private MapView andolonMapView;
     @FXML private HBox mapHbox;
     @FXML private ScrollPane postDetailsScroll;
@@ -94,6 +100,7 @@ public class AndolonDetailsController {
                 joiningPplCount.setText(String.valueOf(rs.getInt("member_count")));
                 savedPplCount.setText(String.valueOf(rs.getInt("bookmarked_count")));
                 totalViewCount.setText(String.valueOf(rs.getInt("views")));
+                loadPolygonCoordinates();
                 showProtestLocation(rs.getString("map_coordinates"));
 
                 String imgPath = "uploads/" + rs.getString("img_name");
@@ -139,6 +146,29 @@ public class AndolonDetailsController {
             }
         }
         return false;
+    }
+
+    private void loadPolygonCoordinates() throws SQLException {
+        polygonCoordinates.clear();
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "SELECT coordinates FROM protest_polygons WHERE protest_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, postID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String raw = rs.getString("coordinates");
+                    if (raw == null || raw.trim().isEmpty()) continue;
+                    String[] parts = raw.split(",");
+                    if (parts.length != 2) continue;
+                    try {
+                        double lat = Double.parseDouble(parts[0].trim());
+                        double lng = Double.parseDouble(parts[1].trim());
+                        polygonCoordinates.add(new Coordinate(lat, lng));
+                    }
+                    catch (NumberFormatException e) {}
+                }
+            }
+        }
     }
 
     public void initialize() {
@@ -201,6 +231,19 @@ public class AndolonDetailsController {
         protestLocationMarker.setPosition(coordinate).setVisible(true);
         andolonMapView.addMarker(protestLocationMarker);
         andolonMapView.setCenter(coordinate);
+
+        if (protestAreaPolygon != null) {
+            andolonMapView.removeCoordinateLine(protestAreaPolygon);
+            protestAreaPolygon = null;
+        }
+
+        protestAreaPolygon = new CoordinateLine(polygonCoordinates)
+            .setClosed(true)
+            .setColor(Color.DODGERBLUE)
+            .setFillColor(Color.color(0.12, 0.45, 0.98, 0.2))
+            .setWidth(2);
+        andolonMapView.addCoordinateLine(protestAreaPolygon);
+        protestAreaPolygon.setVisible(true);
     }
 
 
@@ -304,25 +347,6 @@ public class AndolonDetailsController {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @FXML
     public void navHome(MouseEvent e) {

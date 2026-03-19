@@ -8,9 +8,11 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -19,6 +21,9 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="2000.0" prefWidth="900.0" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.amjonota.AddAndolonController">
+   <fx:define>
+      <ToggleGroup fx:id="mapSelectionModeGroup" />
+   </fx:define>
 
     <left>
         <VBox prefWidth="232.0" styleClass="sidebar">
@@ -274,18 +279,32 @@
                                                       <Label text="Select Area" />
                                                    </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="460.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox" VBox.vgrow="ALWAYS">
-                                                   <padding>
-                                                      <Insets bottom="10.0" right="10.0" />
-                                                   </padding>
-                                                   <children>
-                                                      <MapView fx:id="andolonMapView" prefHeight="440.0" prefWidth="440.0" HBox.hgrow="ALWAYS">
-                                                         <HBox.margin>
-                                                            <Insets left="10.0" />
-                                                         </HBox.margin>
-                                                      </MapView>
-                                                   </children>
-                                                </HBox>
+                                                 <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="460.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-title" VBox.vgrow="ALWAYS">
+                                                    <padding>
+                                                       <Insets bottom="10.0" right="10.0" />
+                                                    </padding>
+                                                    <children>
+                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                                          <children>
+                                                             <HBox alignment="CENTER_LEFT" spacing="14.0">
+                                                                <children>
+                                                                   <RadioButton fx:id="selectCenterPointRadio" mnemonicParsing="false" selected="true" text="Select Center Point">
+                                                                      <toggleGroup>
+                                                                         <ToggleGroup fx:id="mapModeButtons" />
+                                                                      </toggleGroup>
+                                                                   </RadioButton>
+                                                                   <RadioButton fx:id="defineAreaRadio" mnemonicParsing="false" text="Define Area" toggleGroup="$mapModeButtons" />
+                                                                </children>
+                                                             </HBox>
+                                                             <MapView fx:id="andolonMapView" prefHeight="440.0" prefWidth="440.0" VBox.vgrow="ALWAYS">
+                                                                <HBox.margin>
+                                                                   <Insets left="10.0" />
+                                                                </HBox.margin>
+                                                             </MapView>
+                                                          </children>
+                                                       </VBox>
+                                                    </children>
+                                                 </HBox>
                                              </children>
                                           </VBox>
                                        </children>
