@@ -8,31 +8,55 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import org.amjonota.auth.AuthService;
-import java.sql.SQLException;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
+import javafx.stage.Stage;
+import org.amjonota.auth.AuthService;
 import org.amjonota.model.ProtestItem;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
 
-public class DashboardController {
-    @FXML private VBox feedList;
+public class UserProfileController {
+    @FXML private VBox postList;
+    @FXML private Label profileName;
+    private int userID;
 
-    @FXML
-    public void initialize() {
+    public void setUserID(int id) throws SQLException {
+        userID = id;
+        loadUserData();
+    }
+
+    private void loadUserData(){
+        String sql = "SELECT * FROM users WHERE id = ?";
+
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    profileName.setText(name);
+                } else {
+                    System.out.println("No user found");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
             for (ProtestItem item : loadAllProtests()) {
-                feedList.getChildren().add(buildCard(item));
+                postList.getChildren().add(buildCard(item));
             }
         }
         catch (SQLException e) {
@@ -40,54 +64,58 @@ public class DashboardController {
         }
     }
 
+    @FXML
+    public void initialize() {
+
+    }
+
     private List<ProtestItem> loadAllProtests() throws SQLException {
         List<ProtestItem> items = new ArrayList<ProtestItem>();
 
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM user_bookmarks ub WHERE ub.protest_id = p.id) AS bookmarked_count FROM protests p INNER JOIN users u ON u.id = p.author_id ORDER BY p.posted_date DESC";
+        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM user_bookmarks ub WHERE ub.protest_id = p.id) AS bookmarked_count FROM protests p INNER JOIN users u ON u.id = p.author_id WHERE p.author_id = ? ORDER BY p.posted_date DESC";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"),rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"));
-                item.setId(rs.getInt("id"));
-                items.add(item);
-                //System.out.println("Title: " + item.getDescription());
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userID);
+            try(ResultSet rs = stmt.executeQuery()){
+                while (rs.next()) {
+                    ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"),rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"));
+                    item.setId(rs.getInt("id"));
+                    items.add(item);
+                    //System.out.println("Title: " + item.getDescription());
+                }
             }
+
         }
 
         return items;
     }
 
+
     @FXML
     public void navHome(MouseEvent e) {
-        
+        try {
+            App.setRoot("dashboard");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     public void navAddAndolon(MouseEvent e) {
         try {
-             App.setRoot("add_andolon");
+            App.setRoot("dashboard");
         }
         catch (IOException ex) {
-             ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
     @FXML
     public void navBookmarked(MouseEvent e) {
         try {
-             App.setRoot("bookmarked");
-        }
-        catch (IOException ex) {
-             ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void navDMList(MouseEvent e) {
-        try {
-            App.setRoot("chat_list");
+            App.setRoot("bookmarked");
         }
         catch (IOException ex) {
             ex.printStackTrace();
@@ -96,12 +124,7 @@ public class DashboardController {
 
     @FXML
     public void navProfile(MouseEvent e) {
-        try {
-             App.setRoot("profile");
-        }
-        catch (IOException ex) {
-             ex.printStackTrace();
-        }
+
     }
 
     @FXML
@@ -118,12 +141,13 @@ public class DashboardController {
         }
         Session.clear();
         try {
-             App.setRoot("login");
+            App.setRoot("login");
         }
         catch (IOException ex) {
-             ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
+
 
     private HBox buildCard(ProtestItem item) {
         Label author = new Label(item.getAuthor());
@@ -202,4 +226,5 @@ public class DashboardController {
 
         return wrapper;
     }
+
 }

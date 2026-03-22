@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
@@ -114,7 +113,15 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Circle fill="DODGERBLUE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="65.0" style="-fx-background-color: #6358DC; -fx-background-radius: 65;">
+                                 <children>
+                                    <Group>
+                                       <children>
+                                          <SVGPath content="M320 312C386.3 312 440 258.3 440 192C440 125.7 386.3 72 320 72C253.7 72 200 125.7 200 192C200 258.3 253.7 312 320 312zM290.3 368C191.8 368 112 447.8 112 546.3C112 562.7 125.3 576 141.7 576L498.3 576C514.7 576 528 562.7 528 546.3C528 447.8 448.2 368 349.7 368L290.3 368z" scaleX="0.05" scaleY="0.05" style="-fx-fill: white;" />
+                                       </children>
+                                    </Group>
+                                 </children>
+                              </HBox>
                            </children>
                            <padding>
                               <Insets right="20.0" />
