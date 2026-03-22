@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -66,7 +66,7 @@
                                  <children>
                                     <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button alignment="CENTER" graphicTextGap="10.0" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" style="-fx-effect: dropshadow(        gaussian,      /* type of shadow */        rgba(0,0,0,0.5), /* color (semi-transparent black) */        10,            /* radius */        0,             /* spread (0 = default) */        0,             /* offset-x */        0              /* offset-y */    );" fx:id="googleButton" onAction="#loginBtnGoogle" styleClass="btn" text="Login with Google" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="googleButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#loginBtnGoogle" prefHeight="26.0" prefWidth="434.0" style="-fx-effect: dropshadow(        gaussian,      /* type of shadow */        rgba(0,0,0,0.5), /* color (semi-transparent black) */        10,            /* radius */        0,             /* spread (0 = default) */        0,             /* offset-x */        0              /* offset-y */    );" styleClass="btn" text="Login with Google" HBox.hgrow="ALWAYS">
                                              <graphic>
                                                 <Group>
                                                    <SVGPath content="M564 325.8C564 467.3 467.1 568 324 568C186.8 568 76 457.2 76 320C76 182.8 186.8 72 324 72C390.8 72 447 96.5 490.3 136.9L422.8 201.8C334.5 116.6 170.3 180.6 170.3 320C170.3 406.5 239.4 476.6 324 476.6C422.2 476.6 459 406.2 464.8 369.7L324 369.7L324 284.4L560.1 284.4C562.4 297.1 564 309.3 564 325.8z" fill="#404040" scaleX="0.03" scaleY="0.03" />
@@ -77,7 +77,7 @@
                                     </HBox>
                                     <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button alignment="CENTER" graphicTextGap="10.0" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="434.0" style="-fx-effect: dropshadow(        gaussian,      /* type of shadow */        rgba(0,0,0,0.5), /* color (semi-transparent black) */        10,            /* radius */        0,             /* spread (0 = default) */        0,             /* offset-x */        0              /* offset-y */    );" fx:id="facebookButton" onAction="#loginBtnFacebook" styleClass="btn" text="Login with Facebook" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="facebookButton" alignment="CENTER" graphicTextGap="10.0" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#loginBtnFacebook" prefHeight="26.0" prefWidth="434.0" style="-fx-effect: dropshadow(        gaussian,      /* type of shadow */        rgba(0,0,0,0.5), /* color (semi-transparent black) */        10,            /* radius */        0,             /* spread (0 = default) */        0,             /* offset-x */        0              /* offset-y */    );" styleClass="btn" text="Login with Facebook" HBox.hgrow="ALWAYS">
                                              <graphic>
                                                 <Group>
                                                    <SVGPath content="M240 363.3L240 576L356 576L356 363.3L442.5 363.3L460.5 265.5L356 265.5L356 230.9C356 179.2 376.3 159.4 428.7 159.4C445 159.4 458.1 159.8 465.7 160.6L465.7 71.9C451.4 68 416.4 64 396.2 64C289.3 64 240 114.5 240 223.4L240 265.5L174 265.5L174 363.3L240 363.3z" fill="#404040" scaleX="0.03" scaleY="0.03" />
@@ -96,7 +96,11 @@
                                              <children>
                                                 <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
                                                    <children>
-                                                      <SVGPath content="M112 128C85.5 128 64 149.5 64 176C64 191.1 71.1 205.3 83.2 214.4L291.2 370.4C308.3 383.2 331.7 383.2 348.8 370.4L556.8 214.4C568.9 205.3 576 191.1 576 176C576 149.5 554.5 128 528 128L112 128zM64 260L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 260L377.6 408.8C343.5 434.4 296.5 434.4 262.4 408.8L64 260z" fill="#404040" scaleX="0.05" scaleY="0.05" scaleZ="0.05" />
+                                                      <Group>
+                                                         <children>
+                                                            <SVGPath content="M112 128C85.5 128 64 149.5 64 176C64 191.1 71.1 205.3 83.2 214.4L291.2 370.4C308.3 383.2 331.7 383.2 348.8 370.4L556.8 214.4C568.9 205.3 576 191.1 576 176C576 149.5 554.5 128 528 128L112 128zM64 260L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 260L377.6 408.8C343.5 434.4 296.5 434.4 262.4 408.8L64 260z" fill="#404040" scaleX="0.05" scaleY="0.05" />
+                                                         </children>
+                                                      </Group>
                                                    </children>
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -126,7 +130,11 @@
                                              <children>
                                                 <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 5;">
                                                    <children>
-                                                      <SVGPath content="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z" fill="#404040" scaleX="0.05" scaleY="0.05" scaleZ="0.05" />
+                                                      <Group>
+                                                         <children>
+                                                            <SVGPath content="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z" fill="#404040" scaleX="0.05" scaleY="0.05" />
+                                                         </children>
+                                                      </Group>
                                                    </children>
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
