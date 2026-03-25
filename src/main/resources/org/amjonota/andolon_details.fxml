@@ -335,7 +335,7 @@
                                                    <String fx:value="save_share_btn" />
                                                 </styleClass>
                                              </Button>
-                                             <Button layoutX="106.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="105.0" style="-fx-border-color: #e7e5e4; -fx-font-size: 14; -fx-font-weight: 700; -fx-border-radius: 15; -fx-background-radius: 15; -fx-text-fill: #57534d;" text="DM Host">
+                                             <Button fx:id="dmBtn" layoutX="106.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dmHostBtn" prefHeight="50.0" prefWidth="105.0" style="-fx-border-color: #e7e5e4; -fx-font-size: 14; -fx-font-weight: 700; -fx-border-radius: 15; -fx-background-radius: 15; -fx-text-fill: #57534d;" text="DM Host">
                                                 <graphic>
                                                    <Group>
                                                       <children>

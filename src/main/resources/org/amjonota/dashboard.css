@@ -234,3 +234,133 @@
 .logout-btn:hover{
     -fx-background-color: #ffdbdb;
 }
+
+.notification-badge {
+    -fx-background-color: #e53935;
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-padding: 1 4 1 4;
+    -fx-background-radius: 8;
+    -fx-translate-x: 6;
+    -fx-translate-y: -6;
+}
+
+.notification-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: #e8e8f0;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.16), 24, 0.08, 0, 8);
+}
+
+.notification-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1a2e;
+}
+
+.mark-all-read {
+    -fx-font-size: 11px;
+    -fx-text-fill: #6358dc;
+    -fx-cursor: hand;
+}
+
+.mark-all-read:hover {
+    -fx-underline: true;
+}
+
+.notification-separator {
+    -fx-background-color: #f0f0f8;
+    -fx-padding: 0;
+}
+
+.notification-scroll {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.notification-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.notification-scroll .scroll-bar:vertical,
+.notification-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.notification-row {
+    -fx-background-color: white;
+    -fx-cursor: hand;
+}
+
+.notification-row:hover {
+    -fx-background-color: #f5f4ff;
+}
+
+.notification-unread {
+    -fx-background-color: #f0effe;
+}
+
+.notification-unread:hover {
+    -fx-background-color: #e8e6fc;
+}
+
+.notif-avatar {
+    -fx-background-color: #6358dc;
+    -fx-background-radius: 20;
+    -fx-min-width: 36;
+    -fx-min-height: 36;
+    -fx-max-width: 36;
+    -fx-max-height: 36;
+    -fx-alignment: center;
+}
+
+.notif-avatar-label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.notif-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #2d2d44;
+}
+
+.notif-time {
+    -fx-font-size: 10px;
+    -fx-text-fill: #9090aa;
+}
+
+.notif-dot {
+    -fx-background-color: #6358dc;
+    -fx-background-radius: 5;
+    -fx-min-width: 8;
+    -fx-min-height: 8;
+    -fx-max-width: 8;
+    -fx-max-height: 8;
+}
+
+.notification-footer {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 0 0 14 14;
+}
+
+.view-all-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6358dc;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.view-all-label:hover {
+    -fx-underline: true;
+}
+
+.notification-separator{
+    -fx-background-radius: 0 0 14 14;
+}

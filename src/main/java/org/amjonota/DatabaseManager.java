@@ -39,6 +39,10 @@ public class DatabaseManager {
             stmt.execute("CREATE TABLE IF NOT EXISTS attending_protests (user_id INTEGER NOT NULL, protest_id INTEGER NOT NULL, PRIMARY KEY (user_id, protest_id), FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, FOREIGN KEY (protest_id) REFERENCES protests(id) ON DELETE CASCADE)");
 
             stmt.execute("CREATE TABLE IF NOT EXISTS protest_polygons (protest_id INTEGER NOT NULL, coordinates TEXT NOT NULL, FOREIGN KEY (protest_id) REFERENCES protests(id) ON DELETE CASCADE)");
+
+            stmt.execute("CREATE TABLE IF NOT EXISTS chat_list (id INTEGER PRIMARY KEY AUTOINCREMENT, from_user_id INTEGER, to_user_id INTEGER, from_name TEXT, to_name TEXT, msg TEXT, time_ms INTEGER, status TEXT, time DATETIME default CURRENT_TIMESTAMP )");
+
+            stmt.execute("CREATE TABLE IF NOT EXISTS chat (id INTEGER PRIMARY KEY AUTOINCREMENT, from_id INTEGER, to_id INTEGER, from_name TEXT, to_name TEXT, msg TEXT, status TEXT, time DATETIME default CURRENT_TIMESTAMP)");
         }
     }
 }

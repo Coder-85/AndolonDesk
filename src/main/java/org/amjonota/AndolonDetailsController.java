@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -32,6 +33,9 @@ import java.util.List;
 
 public class AndolonDetailsController {
 
+    private int authorID;
+    private String authorName;
+
     private int postID;
     private boolean isIDSet = false;
     private boolean isSaved = false;
@@ -40,38 +44,60 @@ public class AndolonDetailsController {
     private CoordinateLine protestAreaPolygon;
     private Coordinate protestCoordinates;
     private final List<Coordinate> polygonCoordinates = new ArrayList<Coordinate>();
-    @FXML private MapView andolonMapView;
-    @FXML private HBox mapHbox;
-    @FXML private ScrollPane postDetailsScroll;
+    @FXML
+    private MapView andolonMapView;
+    @FXML
+    private HBox mapHbox;
+    @FXML
+    private ScrollPane postDetailsScroll;
 
-    @FXML private Label title;
-    @FXML private Label category;
-    @FXML private Label postTime;
-    @FXML private Label description;
-    @FXML private Label eventTime;
-    @FXML private Label address;
-    @FXML private Label hostName;
-    @FXML private Label joiningPplCount;
-    @FXML private Label savedPplCount;
-    @FXML private Label totalViewCount;
+    @FXML
+    private Label title;
+    @FXML
+    private Label category;
+    @FXML
+    private Label postTime;
+    @FXML
+    private Label description;
+    @FXML
+    private Label eventTime;
+    @FXML
+    private Label address;
+    @FXML
+    private Label hostName;
+    @FXML
+    private Label joiningPplCount;
+    @FXML
+    private Label savedPplCount;
+    @FXML
+    private Label totalViewCount;
 
-    @FXML private Button attendBtn;
-    @FXML private Button saveBtn;
-    @FXML private SVGPath saveIcon;
+    @FXML
+    private Button attendBtn;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private SVGPath saveIcon;
+    @FXML
+    private Button dmBtn;
 
     @FXML
     private VBox bgBox;
+
+
 
     public void setPostID(int id) throws SQLException {
         postID = id;
         isIDSet = true;
         loadPostData();
-        if(isSaved){
+
+
+        if (isSaved) {
             saveBtn.setText("Saved");
             saveIcon.setContent("M192 64C156.7 64 128 92.7 128 128L128 544C128 555.5 134.2 566.2 144.2 571.8C154.2 577.4 166.5 577.3 176.4 571.4L320 485.3L463.5 571.4C473.4 577.3 485.7 577.5 495.7 571.8C505.7 566.1 512 555.5 512 544L512 128C512 92.7 483.3 64 448 64L192 64z");
         }
 
-        if(isAttending){
+        if (isAttending) {
             attendBtn.setText("Attending");
         }
     }
@@ -96,7 +122,15 @@ public class AndolonDetailsController {
                 description.setText(rs.getString("description"));
                 eventTime.setText(rs.getString("event_date"));
                 address.setText(rs.getString("address"));
-                hostName.setText(rs.getString("author_name"));
+
+                authorName = rs.getString("author_name");
+                authorID = rs.getInt("author_id");
+
+                if (authorID == Session.getCurrentUser().getId()) {
+                    dmBtn.setDisable(true);
+                }
+
+                hostName.setText(authorName);
                 joiningPplCount.setText(String.valueOf(rs.getInt("member_count")));
                 savedPplCount.setText(String.valueOf(rs.getInt("bookmarked_count")));
                 totalViewCount.setText(String.valueOf(rs.getInt("views")));
@@ -135,12 +169,12 @@ public class AndolonDetailsController {
 
     private boolean checkIf(String colName) throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT * FROM " + colName +" WHERE user_id = ? AND protest_id = ?";
+        String sql = "SELECT * FROM " + colName + " WHERE user_id = ? AND protest_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
             stmt.setInt(2, postID);
             try (ResultSet rs = stmt.executeQuery()) {
-                if(rs.next()){
+                if (rs.next()) {
                     return true;
                 }
             }
@@ -164,8 +198,8 @@ public class AndolonDetailsController {
                         double lat = Double.parseDouble(parts[0].trim());
                         double lng = Double.parseDouble(parts[1].trim());
                         polygonCoordinates.add(new Coordinate(lat, lng));
+                    } catch (NumberFormatException e) {
                     }
-                    catch (NumberFormatException e) {}
                 }
             }
         }
@@ -180,7 +214,7 @@ public class AndolonDetailsController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (Boolean.TRUE.equals(newValue) && protestCoordinates != null) {
-                    applyMarker(protestCoordinates );
+                    applyMarker(protestCoordinates);
                     protestCoordinates = null;
                 }
             }
@@ -204,6 +238,8 @@ public class AndolonDetailsController {
         clip2.heightProperty().bind(mapHbox.heightProperty());
 
         mapHbox.setClip(clip2);
+
+
     }
 
     private void showProtestLocation(String mapCoordinates) {
@@ -223,8 +259,8 @@ public class AndolonDetailsController {
                 return;
             }
             applyMarker(coordinate);
+        } catch (NumberFormatException e) {
         }
-        catch (NumberFormatException e) {}
     }
 
     private void applyMarker(Coordinate coordinate) {
@@ -238,27 +274,27 @@ public class AndolonDetailsController {
         }
 
         protestAreaPolygon = new CoordinateLine(polygonCoordinates)
-            .setClosed(true)
-            .setColor(Color.DODGERBLUE)
-            .setFillColor(Color.color(0.12, 0.45, 0.98, 0.2))
-            .setWidth(2);
+                .setClosed(true)
+                .setColor(Color.DODGERBLUE)
+                .setFillColor(Color.color(0.12, 0.45, 0.98, 0.2))
+                .setWidth(2);
         andolonMapView.addCoordinateLine(protestAreaPolygon);
         protestAreaPolygon.setVisible(true);
     }
 
 
-    private void updateStat(int type , int addOrSubtract) throws SQLException {
+    private void updateStat(int type, int addOrSubtract) throws SQLException {
         String colName;
         int value;
         Label countTxtField;
         Connection conn = DatabaseManager.getInstance().getConnection();
-        if(type == 1){
+        if (type == 1) {
             colName = "member_count";
             countTxtField = joiningPplCount;
-        }else if(type == 2){
+        } else if (type == 2) {
             colName = "bookmarked_count";
             countTxtField = savedPplCount;
-        }else{
+        } else {
             colName = "views";
             countTxtField = totalViewCount;
         }
@@ -269,22 +305,21 @@ public class AndolonDetailsController {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     value = rs.getInt(colName);
-                }else{
+                } else {
                     return;
                 }
             }
         }
 
 
-
         String sql2 = "UPDATE protests SET " + colName + " = ? WHERE id = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql2)) {
             int lastValue;
-            if((value + addOrSubtract) < 0){
+            if ((value + addOrSubtract) < 0) {
                 stmt.setInt(1, (0));
                 lastValue = 0;
-            }else {
-                stmt.setInt(1, (value+addOrSubtract));
+            } else {
+                stmt.setInt(1, (value + addOrSubtract));
                 lastValue = value + addOrSubtract;
             }
 
@@ -309,7 +344,7 @@ public class AndolonDetailsController {
                 saveIcon.setContent("M192 64C156.7 64 128 92.7 128 128L128 544C128 555.5 134.2 566.2 144.2 571.8C154.2 577.4 166.5 577.3 176.4 571.4L320 485.3L463.5 571.4C473.4 577.3 485.7 577.5 495.7 571.8C505.7 566.1 512 555.5 512 544L512 128C512 92.7 483.3 64 448 64L192 64z");
                 updateStat(2, 1);
             }
-        }else{
+        } else {
             String sql = "DELETE FROM user_bookmarks WHERE user_id = ? AND protest_id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, Session.getCurrentUser().getId());
@@ -335,7 +370,7 @@ public class AndolonDetailsController {
                 attendBtn.setText("Attending");
                 updateStat(1, 1);
             }
-        }else{
+        } else {
             String sql = "DELETE FROM attending_protests WHERE user_id = ? AND protest_id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, Session.getCurrentUser().getId());
@@ -346,6 +381,69 @@ public class AndolonDetailsController {
                 updateStat(1, -1);
             }
         }
+    }
+
+    @FXML
+    public void dmHostBtn() throws SQLException {
+        String sql = "INSERT INTO chat (from_id, to_id, from_name, to_name, msg, status) VALUES (?, ?, ?, ?, ?, ?)";
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Session.getCurrentUser().getId());
+            stmt.setInt(2, authorID);
+            stmt.setString(3, Session.getCurrentUser().getName());
+            stmt.setString(4, authorName);
+            stmt.setString(5, "Hello, I have something to know about your andolon '" + title.getText() + "'");
+            stmt.setString(6, "unread");
+            try {
+                stmt.executeUpdate();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Message has been sent to host. Go to chat list for further conversation.");
+            } catch (SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Error while trying to send message. Please try again later.");
+            }
+
+        }
+
+        String sql2 = "SELECT * FROM chat_list WHERE (from_user_id = ? AND to_user_id = ?) OR (from_user_id = ? AND to_user_id = ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql2)) {
+            stmt.setInt(1, Session.getCurrentUser().getId());
+            stmt.setInt(2, authorID);
+
+            stmt.setInt(3, authorID);
+            stmt.setInt(4, Session.getCurrentUser().getId());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                int rowID;
+                if (rs.next()) {
+                    rowID = rs.getInt("id");
+                    String sqlLast = "DELETE FROM chat_list WHERE id = ?";
+                    try (PreparedStatement stmt2 = conn.prepareStatement(sqlLast)) {
+                        stmt2.setInt(1, rowID);
+                        stmt2.executeUpdate();
+                    }
+                }
+                String sqlLast = "INSERT INTO chat_list (from_user_id, to_user_id, from_name, to_name, msg, time_ms, status) values (?, ?, ?, ?, ?, ?, ?);";
+                try (PreparedStatement stmt2 = conn.prepareStatement(sqlLast)) {
+                    stmt2.setInt(1, Session.getCurrentUser().getId());
+                    stmt2.setInt(2, authorID);
+                    stmt2.setString(3, Session.getCurrentUser().getName());
+                    stmt2.setString(4, authorName);
+                    stmt2.setString(5, "Hello, I have something to know about your andolon '" + title.getText() + "'");
+                    stmt2.setLong(6, System.currentTimeMillis());
+                    stmt2.setString(7, "unread");
+                    stmt2.executeUpdate();
+                }
+
+            }
+        }
+    }
+
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
