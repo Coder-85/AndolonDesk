@@ -339,6 +339,9 @@ public class AndolonDetailsController {
                 stmt.setInt(1, Session.getCurrentUser().getId());
                 stmt.setInt(2, postID);
                 stmt.executeUpdate();
+                if(authorID != Session.getCurrentUser().getId()){
+                    sendNotification("Someone has bookmarked your andolon titled '" + title.getText() + "'", "bookmarked");
+                }
                 isSaved = true;
                 saveBtn.setText("Saved");
                 saveIcon.setContent("M192 64C156.7 64 128 92.7 128 128L128 544C128 555.5 134.2 566.2 144.2 571.8C154.2 577.4 166.5 577.3 176.4 571.4L320 485.3L463.5 571.4C473.4 577.3 485.7 577.5 495.7 571.8C505.7 566.1 512 555.5 512 544L512 128C512 92.7 483.3 64 448 64L192 64z");
@@ -366,6 +369,9 @@ public class AndolonDetailsController {
                 stmt.setInt(1, Session.getCurrentUser().getId());
                 stmt.setInt(2, postID);
                 stmt.executeUpdate();
+                if(authorID != Session.getCurrentUser().getId()){
+                    sendNotification("Hurrah! Your andolon titled '" + title.getText() + "' got one new attendee", "attendee");
+                }
                 isAttending = true;
                 attendBtn.setText("Attending");
                 updateStat(1, 1);
@@ -396,6 +402,9 @@ public class AndolonDetailsController {
             stmt.setString(6, "unread");
             try {
                 stmt.executeUpdate();
+                if(authorID != Session.getCurrentUser().getId()){
+                    sendNotification(Session.getCurrentUser().getName() + " wants to know something about your andolon titled '" + title.getText() + "'. Reply asap!", "dm");
+                }
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Message has been sent to host. Go to chat list for further conversation.");
             } catch (SQLException e) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Error while trying to send message. Please try again later.");
@@ -437,6 +446,23 @@ public class AndolonDetailsController {
         }
     }
 
+
+    private void sendNotification(String mainText, String type) throws SQLException {
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "INSERT INTO notifications (from_id, to_id, from_name, to_name, main_txt, type, status, protest_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Session.getCurrentUser().getId());
+            stmt.setInt(2, authorID);
+            stmt.setString(3, Session.getCurrentUser().getName());
+            stmt.setString(4, authorName);
+            stmt.setString(5, mainText);
+            stmt.setString(6, type);
+            stmt.setString(7, "unread");
+            stmt.setInt(8, postID);
+
+            stmt.executeUpdate();
+        }
+    }
 
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
