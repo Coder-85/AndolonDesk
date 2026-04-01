@@ -82,3 +82,14 @@
     -fx-background-color: #6358DC;
     -fx-text-fill: white;
 }
+
+.about-us-card {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0.2, 0, 4);
+}
+
+.about-us-card:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 18, 0.3, 0, 6);
+}

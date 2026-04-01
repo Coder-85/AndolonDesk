@@ -159,22 +159,17 @@
 
                 <HBox alignment="CENTER_LEFT" spacing="25">
                     <VBox alignment="CENTER" style="-fx-background-color: rgb(232, 247, 239);" styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label styleClass="stat-number" text="18" />
-                        <Label text="Attended" />
+                        <Label fx:id="totalLabel" styleClass="stat-number" />
+                        <Label text="Total Protest" />
                     </VBox>
 
                     <VBox alignment="CENTER" style="-fx-background-color: rgb(236, 235, 255);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label styleClass="stat-number" text="12" />
-                        <Label text="Upcoming" />
-                    </VBox>
-
-                    <VBox alignment="CENTER" style="-fx-background-color: rgb(255, 244, 229);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label styleClass="stat-number" text="3" />
-                        <Label text="Ongoing" />
+                        <Label fx:id="attendingLabel" styleClass="stat-number" />
+                        <Label text="Attended" />
                     </VBox>
 
                     <VBox alignment="CENTER" style="-fx-background-color: rgb(255, 236, 236);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label styleClass="stat-number" text="7" />
+                        <Label fx:id="missedLabel" styleClass="stat-number" />
                         <Label text="Missed" />
                     </VBox>
                     <padding>

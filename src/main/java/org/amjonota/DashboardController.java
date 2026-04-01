@@ -39,10 +39,20 @@ public class DashboardController {
     @FXML private Label notificationBadge;
     @FXML private VBox notificationList;
 
+    @FXML private Label attendingLabel;
+    @FXML private Label totalLabel;
+    @FXML private Label missedLabel;
+
     @FXML private SVGPath dmIcon;
 
+    private StatData statData;
+
+
+
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
+        statData = new StatData();
+        setProtestStatistics();
         sortByTimeCombo.getItems().add("Default");
         sortByTimeCombo.getItems().add("Upcoming");
         sortByTimeCombo.getItems().add("Ongoing");
@@ -74,6 +84,15 @@ public class DashboardController {
                 dmIcon.setStyle("-fx-fill: red;");
             }
         });
+    }
+
+
+
+
+    private void setProtestStatistics(){
+        attendingLabel.setText(String.valueOf(statData.getAttended()));
+        totalLabel.setText(String.valueOf(statData.getProtestNum()));
+        missedLabel.setText(String.valueOf(statData.getProtestNum() - statData.getAttended()));
     }
 
 

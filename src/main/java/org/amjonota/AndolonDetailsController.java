@@ -50,6 +50,8 @@ public class AndolonDetailsController {
     private HBox mapHbox;
     @FXML
     private ScrollPane postDetailsScroll;
+    @FXML
+    private ScrollPane outerScroll;
 
     @FXML
     private Label title;

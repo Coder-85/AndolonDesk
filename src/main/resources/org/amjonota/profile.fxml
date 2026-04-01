@@ -167,25 +167,25 @@
                      <children>
                         <VBox alignment="CENTER" style="-fx-background-color: rgb(232, 247, 239);" styleClass="stat-card" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label styleClass="stat-number" text="18" />
+                              <Label fx:id="attendingLabel" styleClass="stat-number" />
                               <Label text="Attended" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" style="-fx-background-color: rgb(236, 235, 255);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label styleClass="stat-number" text="12" />
+                              <Label fx:id="upcomingLabel" styleClass="stat-number" />
                               <Label text="Upcoming" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" style="-fx-background-color: rgb(255, 236, 236);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label styleClass="stat-number" text="7" />
+                              <Label fx:id="missedLabel" styleClass="stat-number" />
                               <Label text="Missed" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" style="-fx-background-color: rgb(255, 244, 229);;" styleClass="stat-card" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label styleClass="stat-number" text="72%" />
+                              <Label fx:id="activerateLabel" styleClass="stat-number" />
                               <Label text="Active Rate" />
                            </children>
                         </VBox>

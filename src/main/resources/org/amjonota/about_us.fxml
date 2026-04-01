@@ -154,11 +154,11 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #0000ff9e;" VBox.vgrow="ALWAYS">
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #0000ff9e;" styleClass="about-us-card" VBox.vgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0">
                                        <children>
-                                          <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: 700;" text="Developers" />
+                                          <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: 700;" text="Developed By" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="20.0" />
@@ -188,7 +188,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #0000ff9e;">
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #0000ff9e;" styleClass="about-us-card">
                                  <children>
                                     <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="200.0">
                                        <children>

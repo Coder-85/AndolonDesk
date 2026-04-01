@@ -34,10 +34,19 @@ public class ProfileController {
     @FXML private Label profileJoined;
     @FXML private VBox postList;
 
+    @FXML private Label attendingLabel;
+    @FXML private Label upcomingLabel;
+    @FXML private Label missedLabel;
+    @FXML private Label activerateLabel;
+    private StatData statData;
+
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         User user = Session.getCurrentUser();
         if (user == null) return;
+
+        statData = new StatData();
+        setStatDataTxt();
 
         profileName.setText(user.getName());
         profileEmail.setText(user.getEmail());
@@ -53,6 +62,14 @@ public class ProfileController {
             System.err.println("Failed to load protests: " + e.getMessage());
         }
     }
+
+    private void setStatDataTxt(){
+        attendingLabel.setText(String.valueOf(statData.getAttended()));
+        upcomingLabel.setText(String.valueOf(statData.getUpcoming()));
+        missedLabel.setText(String.valueOf(statData.getMissed()));
+        activerateLabel.setText(String.valueOf((int)((double)statData.getAttended()/ (double)statData.getProtestNum()* 100) ) + "%");
+    }
+
 
 
     private List<ProtestItem> loadAllProtests() throws SQLException {
