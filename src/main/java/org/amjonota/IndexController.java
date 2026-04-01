@@ -14,45 +14,78 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
+
 import javafx.scene.control.Label;
+
 import java.security.Key;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class IndexController {
-    @FXML private ImageView slideImg;
-    @FXML private VBox root;
-    @FXML private VBox slideTxt;
-    @FXML private VBox slideTxtParent;
-    @FXML private HBox navBarBox;
-    @FXML private HBox slider;
-    @FXML private ScrollPane scrollPane;
-    @FXML private VBox content;
-    @FXML private HBox featureHBox;
+    @FXML
+    private ImageView slideImg;
+    @FXML
+    private VBox root;
+    @FXML
+    private VBox slideTxt;
+    @FXML
+    private VBox slideTxtParent;
+    @FXML
+    private HBox navBarBox;
+    @FXML
+    private HBox slider;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox content;
+    @FXML
+    private HBox featureHBox;
     private SequentialTransition seqFeature;
 
 
-    @FXML private ImageView featureImg;
-    @FXML private HBox feature1;
-    @FXML private HBox feature2;
-    @FXML private HBox feature3;
-    @FXML private HBox feature4;
+    @FXML
+    private ImageView featureImg;
+    @FXML
+    private HBox feature1;
+    @FXML
+    private HBox feature2;
+    @FXML
+    private HBox feature3;
+    @FXML
+    private HBox feature4;
     private Node[] featureNodes;
     private int numberOfNodes;
 
-    @FXML private HBox newsHBox;
-    @FXML private VBox newsPicContentParent;
-    @FXML private VBox newsPicContent;
-    @FXML private VBox newsCardParent;
-    @FXML private VBox newsCard;
+    @FXML
+    private HBox newsHBox;
+    @FXML
+    private VBox newsPicContentParent;
+    @FXML
+    private VBox newsPicContent;
+    @FXML
+    private VBox newsCardParent;
+    @FXML
+    private VBox newsCard;
 
-    @FXML private HBox statBox;
-    @FXML private ImageView statImg;
-    @FXML private HBox stat1;
-    @FXML private HBox stat2;
-    @FXML private HBox stat3;
+    @FXML
+    private HBox statBox;
+    @FXML
+    private ImageView statImg;
+    @FXML
+    private HBox stat1;
+    @FXML
+    private HBox stat2;
+    @FXML
+    private HBox stat3;
 
-    @FXML private Label statUserNum;
-    @FXML private Label statPostNum;
-    @FXML private Label statViewNum;
+    @FXML
+    private Label statUserNum;
+    @FXML
+    private Label statPostNum;
+    @FXML
+    private Label statViewNum;
     private int statUserCount = 217;
     private int statPostCount = 35;
     private int statViewCount = 4324;
@@ -79,7 +112,8 @@ public class IndexController {
     private boolean isFeatureTriggeredOnce = false;
     private boolean isNewsTriggeredOnce = false;
     private boolean isStatTriggeredOnce = false;
-    private void initializeFeatureNode(){
+
+    private void initializeFeatureNode() {
         numberOfNodes = 5;
         featureNodes = new Node[numberOfNodes];
         featureNodes[0] = featureImg;
@@ -115,9 +149,10 @@ public class IndexController {
     }
 
 
-
-    public void initialize() {
+    public void initialize() throws SQLException {
         featureImg.setOpacity(0);
+
+        updateStat();
 
 
         Platform.runLater(() -> {
@@ -149,7 +184,7 @@ public class IndexController {
             sequence.play();
 
             newsPicWidth = newsPicContentParent.getWidth();
-            newsCardWidth = root.getWidth()-newsPicWidth;
+            newsCardWidth = root.getWidth() - newsPicWidth;
 
             newsCard.setTranslateX(newsCardWidth);
             newsPicContent.setTranslateX(-newsPicWidth);
@@ -166,7 +201,7 @@ public class IndexController {
             newstt2.setFromX(newsCardWidth);
             newstt2.setToX(0);
 
-            if(isFeatureBtnClicked){
+            if (isFeatureBtnClicked) {
                 gotoFeature();
             }
 
@@ -176,14 +211,14 @@ public class IndexController {
             slider.setMinHeight(newValue.getHeight() - navBarBox.getHeight());
 
             newsPicWidth = newsPicContentParent.getWidth();
-            newsCardWidth = root.getWidth()-newsPicWidth;
+            newsCardWidth = root.getWidth() - newsPicWidth;
 
-            if(!isNewsTriggeredOnce){
+            if (!isNewsTriggeredOnce) {
                 newsCard.setTranslateX(newsCardWidth);
                 newsPicContent.setTranslateX(-newsPicWidth);
             }
 
-            if(newstt != null && newstt2 != null){
+            if (newstt != null && newstt2 != null) {
                 newstt.setFromX(-newsPicWidth);
                 newstt2.setFromX(newsCardWidth);
             }
@@ -194,7 +229,7 @@ public class IndexController {
         initializeFeatureNode();
         FadeTransition[] ftArray = new FadeTransition[numberOfNodes];
         seqFeature = new SequentialTransition();
-        for(int i = 0; i<numberOfNodes; i++){
+        for (int i = 0; i < numberOfNodes; i++) {
             featureNodes[i].setOpacity(0);
 
             ftArray[i] = new FadeTransition(Duration.seconds(0.4), featureNodes[i]);
@@ -251,6 +286,29 @@ public class IndexController {
 
     }
 
+    private void updateStat() throws SQLException {
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String userSql = "SELECT COUNT(*) FROM users;";
+
+        try (PreparedStatement stmt = conn.prepareStatement(userSql);
+             ResultSet rs = stmt.executeQuery();) {
+                statUserCount = rs.getInt(1);
+        }
+
+        String postSql = "SELECT COUNT(*) FROM protests;";
+
+        try (PreparedStatement stmt = conn.prepareStatement(postSql);
+             ResultSet rs = stmt.executeQuery();) {
+            statPostCount = rs.getInt(1);
+        }
+
+        String viewSql = "SELECT COALESCE(SUM(views), 0) FROM protests;";
+        try (PreparedStatement stmt = conn.prepareStatement(viewSql);
+             ResultSet rs = stmt.executeQuery();) {
+            statViewCount = rs.getInt(1);
+        }
+    }
+
     public void setLoginPage() {
         try {
             App.setRoot("login");
@@ -279,7 +337,7 @@ public class IndexController {
         double height = content.getHeight();
         double y = featureHBox.getLayoutY();
         scrollPane.setVvalue(y / height);
-        if(!isFeatureTriggeredOnce){
+        if (!isFeatureTriggeredOnce) {
             seqFeature.play();
             isFeatureTriggeredOnce = true;
         }

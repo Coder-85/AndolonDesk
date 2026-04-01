@@ -49,10 +49,16 @@ public class DashboardController {
         sortByTimeCombo.getItems().add("Previous");
 
         sortByCategoryCombo.getItems().add("Default");
-        sortByCategoryCombo.getItems().add("Category 1");
-        sortByCategoryCombo.getItems().add("Category 2");
-        sortByCategoryCombo.getItems().add("Category 3");
-        sortByCategoryCombo.getItems().add("Category 4");
+        sortByCategoryCombo.getItems().add("Human Chain");
+        sortByCategoryCombo.getItems().add("General Strike");
+        sortByCategoryCombo.getItems().add("Blockade");
+        sortByCategoryCombo.getItems().add("Rally");
+        sortByCategoryCombo.getItems().add("Sit-in Protest");
+        sortByCategoryCombo.getItems().add("Siege Protest");
+        sortByCategoryCombo.getItems().add("Non-cooperation Movement");
+        sortByCategoryCombo.getItems().add("Peaceful Protest");
+        sortByCategoryCombo.getItems().add("Hunger Strike");
+
         try {
             for (ProtestItem item : loadAllProtests()) {
                 feedList.getChildren().add(buildCard(item));

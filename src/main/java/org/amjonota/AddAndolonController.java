@@ -63,10 +63,15 @@ public class AddAndolonController {
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void initialize() {
-        andolonCategory.getItems().add("Category 1");
-        andolonCategory.getItems().add("Category 2");
-        andolonCategory.getItems().add("Category 3");
-        andolonCategory.getItems().add("Category 4");
+        andolonCategory.getItems().add("Human Chain");
+        andolonCategory.getItems().add("General Strike");
+        andolonCategory.getItems().add("Blockade");
+        andolonCategory.getItems().add("Rally");
+        andolonCategory.getItems().add("Sit-in Protest");
+        andolonCategory.getItems().add("Siege Protest");
+        andolonCategory.getItems().add("Non-cooperation Movement");
+        andolonCategory.getItems().add("Peaceful Protest");
+        andolonCategory.getItems().add("Hunger Strike");
         andolonMapView.initialize();
         andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
 
