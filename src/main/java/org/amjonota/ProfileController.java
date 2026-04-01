@@ -24,6 +24,7 @@ import org.amjonota.model.ProtestItem;
 import org.amjonota.model.User;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class ProfileController {
     @FXML private Label profileDob;
     @FXML private Label profileJoined;
     @FXML private VBox postList;
+
+    @FXML private Label lastAttendingTitle;
+    @FXML private Label lastAttendingDate;
 
     @FXML private Label attendingLabel;
     @FXML private Label upcomingLabel;
@@ -47,6 +51,8 @@ public class ProfileController {
 
         statData = new StatData();
         setStatDataTxt();
+
+        setAttendingData();
 
         profileName.setText(user.getName());
         profileEmail.setText(user.getEmail());
@@ -68,6 +74,45 @@ public class ProfileController {
         upcomingLabel.setText(String.valueOf(statData.getUpcoming()));
         missedLabel.setText(String.valueOf(statData.getMissed()));
         activerateLabel.setText(String.valueOf((int)((double)statData.getAttended()/ (double)statData.getProtestNum()* 100) ) + "%");
+    }
+
+    private void setAttendingData() throws SQLException {
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "SELECT * FROM attending_protests WHERE user_id = ? ORDER BY id DESC LIMIT 1";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Session.getCurrentUser().getId());
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    int protestId = rs.getInt("protest_id");
+                    setLatestData(protestId);
+                }
+            }
+        }
+    }
+
+    private void setLatestData(int protestId) throws SQLException {
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "SELECT * FROM protests WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, protestId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String title = rs.getString("title");
+                    String eventDateStr = rs.getString("event_date");
+                    LocalDate eventDate = LocalDate.parse(eventDateStr);
+                    LocalDate today = LocalDate.now();
+                    lastAttendingTitle.setText(title);
+
+                    if (eventDate.isBefore(today) || eventDate.isEqual(today)) {
+                        lastAttendingDate.setText("Attended • " + eventDateStr);
+                    } else{
+                        lastAttendingDate.setStyle("-fx-text-fill: #6358DC;");
+                        lastAttendingDate.setText("Attending • " + eventDateStr);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -190,6 +235,17 @@ public class ProfileController {
         wrapper.setPadding(new Insets(0, 0, 0, 5));
 
         return wrapper;
+    }
+
+
+    @FXML
+    public void seeAllAttending() {
+        try {
+            App.setRoot("attending_protest");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
