@@ -25,78 +25,92 @@
                 </StackPane>
                 <Label styleClass="logo-text" text="AndolonDesk" />
             </HBox>
-
-            <VBox spacing="6" styleClass="menu-container">
-                <HBox onMouseClicked="#navHome" spacing="12" styleClass="menu-item">
-                    <Group>
+         <VBox spacing="6" styleClass="menu-container">
+            <children>
+               <HBox onMouseClicked="#navHome" spacing="12" styleClass="menu-item">
+                  <children>
+                     <Group styleClass="menu-item-active">
                         <children>
-                            <SVGPath content="M341.8 72.6C329.5 61.2 310.5 61.2 298.3 72.6L74.3 280.6C64.7 289.6 61.5 303.5 66.3 315.7C71.1 327.9 82.8 336 96 336L112 336L112 512C112 547.3 140.7 576 176 576L464 576C499.3 576 528 547.3 528 512L528 336L544 336C557.2 336 569 327.9 573.8 315.7C578.6 303.5 575.4 289.5 565.8 280.6L341.8 72.6zM304 384L336 384C362.5 384 384 405.5 384 432L384 528L256 528L256 432C256 405.5 277.5 384 304 384z" scaleX="0.04" scaleY="0.04" />
+                           <SVGPath content="M341.8 72.6C329.5 61.2 310.5 61.2 298.3 72.6L74.3 280.6C64.7 289.6 61.5 303.5 66.3 315.7C71.1 327.9 82.8 336 96 336L112 336L112 512C112 547.3 140.7 576 176 576L464 576C499.3 576 528 547.3 528 512L528 336L544 336C557.2 336 569 327.9 573.8 315.7C578.6 303.5 575.4 289.5 565.8 280.6L341.8 72.6zM304 384L336 384C362.5 384 384 405.5 384 432L384 528L256 528L256 432C256 405.5 277.5 384 304 384z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
                         </children>
                         <HBox.margin>
-                            <Insets right="5.0" />
+                           <Insets right="5.0" />
                         </HBox.margin>
-                    </Group>
-                    <Label text="Home" />
-                </HBox>
-                <HBox onMouseClicked="#navAddAndolon" spacing="12" styleClass="menu-item">
-                    <children>
-                        <Group>
-                            <children>
-                                <SVGPath content="M505 122.9L517.1 135C526.5 144.4 526.5 159.6 517.1 168.9L488 198.1L441.9 152L471 122.9C480.4 113.5 495.6 113.5 504.9 122.9zM273.8 320.2L408 185.9L454.1 232L319.8 366.2C316.9 369.1 313.3 371.2 309.4 372.3L250.9 389L267.6 330.5C268.7 326.6 270.8 323 273.7 320.1zM437.1 89L239.8 286.2C231.1 294.9 224.8 305.6 221.5 317.3L192.9 417.3C190.5 425.7 192.8 434.7 199 440.9C205.2 447.1 214.2 449.4 222.6 447L322.6 418.4C334.4 415 345.1 408.7 353.7 400.1L551 202.9C579.1 174.8 579.1 129.2 551 101.1L538.9 89C510.8 60.9 465.2 60.9 437.1 89zM152 128C103.4 128 64 167.4 64 216L64 488C64 536.6 103.4 576 152 576L424 576C472.6 576 512 536.6 512 488L512 376C512 362.7 501.3 352 488 352C474.7 352 464 362.7 464 376L464 488C464 510.1 446.1 528 424 528L152 528C129.9 528 112 510.1 112 488L112 216C112 193.9 129.9 176 152 176L264 176C277.3 176 288 165.3 288 152C288 138.7 277.3 128 264 128L152 128z" scaleX="0.04" scaleY="0.04" />
-                            </children>
-                            <HBox.margin>
-                                <Insets right="5.0" />
-                            </HBox.margin>
-                        </Group>
-                        <Label text="Add Andolon" />
-                    </children>
-                </HBox>
-
-                <HBox onMouseClicked="#navBookmarked" spacing="12">
-                    <Group>
+                     </Group>
+                     <Label text="Home" />
+                  </children>
+               </HBox>
+               <HBox layoutX="10.0" layoutY="74.0" onMouseClicked="#navAddAndolon" spacing="12" styleClass="menu-item">
+                  <children>
+                     <Group>
                         <children>
-                            <SVGPath content="M128 128C128 92.7 156.7 64 192 64L448 64C483.3 64 512 92.7 512 128L512 545.1C512 570.7 483.5 585.9 462.2 571.7L320 476.8L177.8 571.7C156.5 585.9 128 570.6 128 545.1L128 128zM192 112C183.2 112 176 119.2 176 128L176 515.2L293.4 437C309.5 426.3 330.5 426.3 346.6 437L464 515.2L464 128C464 119.2 456.8 112 448 112L192 112z" scaleX="0.04" scaleY="0.04" styleClass="menu-item-active" />
+                           <SVGPath content="M505 122.9L517.1 135C526.5 144.4 526.5 159.6 517.1 168.9L488 198.1L441.9 152L471 122.9C480.4 113.5 495.6 113.5 504.9 122.9zM273.8 320.2L408 185.9L454.1 232L319.8 366.2C316.9 369.1 313.3 371.2 309.4 372.3L250.9 389L267.6 330.5C268.7 326.6 270.8 323 273.7 320.1zM437.1 89L239.8 286.2C231.1 294.9 224.8 305.6 221.5 317.3L192.9 417.3C190.5 425.7 192.8 434.7 199 440.9C205.2 447.1 214.2 449.4 222.6 447L322.6 418.4C334.4 415 345.1 408.7 353.7 400.1L551 202.9C579.1 174.8 579.1 129.2 551 101.1L538.9 89C510.8 60.9 465.2 60.9 437.1 89zM152 128C103.4 128 64 167.4 64 216L64 488C64 536.6 103.4 576 152 576L424 576C472.6 576 512 536.6 512 488L512 376C512 362.7 501.3 352 488 352C474.7 352 464 362.7 464 376L464 488C464 510.1 446.1 528 424 528L152 528C129.9 528 112 510.1 112 488L112 216C112 193.9 129.9 176 152 176L264 176C277.3 176 288 165.3 288 152C288 138.7 277.3 128 264 128L152 128z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
                         </children>
                         <HBox.margin>
-                            <Insets right="10.0" />
+                           <Insets right="5.0" />
                         </HBox.margin>
-                    </Group>
-                    <Label styleClass="menu-item-active" text="Bookmarked" />
-                    <styleClass>
-                        <String fx:value="menu-item" />
-                        <String fx:value="menu-item-active" />
-                    </styleClass>
-                </HBox>
-
-                <HBox onMouseClicked="#navProfile" spacing="12" styleClass="menu-item">
-                    <Group>
+                     </Group>
+                     <Label text="Add Andolon" />
+                  </children>
+               </HBox>
+               <HBox onMouseClicked="#navBookmarked" spacing="12" styleClass="menu-item">
+                  <children>
+                     <Group>
                         <children>
-                            <SVGPath content="M240 192C240 147.8 275.8 112 320 112C364.2 112 400 147.8 400 192C400 236.2 364.2 272 320 272C275.8 272 240 236.2 240 192zM448 192C448 121.3 390.7 64 320 64C249.3 64 192 121.3 192 192C192 262.7 249.3 320 320 320C390.7 320 448 262.7 448 192zM144 544C144 473.3 201.3 416 272 416L368 416C438.7 416 496 473.3 496 544L496 552C496 565.3 506.7 576 520 576C533.3 576 544 565.3 544 552L544 544C544 446.8 465.2 368 368 368L272 368C174.8 368 96 446.8 96 544L96 552C96 565.3 106.7 576 120 576C133.3 576 144 565.3 144 552L144 544z" scaleX="0.04" scaleY="0.04" />
+                           <SVGPath content="M128 128C128 92.7 156.7 64 192 64L448 64C483.3 64 512 92.7 512 128L512 545.1C512 570.7 483.5 585.9 462.2 571.7L320 476.8L177.8 571.7C156.5 585.9 128 570.6 128 545.1L128 128zM192 112C183.2 112 176 119.2 176 128L176 515.2L293.4 437C309.5 426.3 330.5 426.3 346.6 437L464 515.2L464 128C464 119.2 456.8 112 448 112L192 112z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
                         </children>
                         <HBox.margin>
-                            <Insets right="10.0" />
+                           <Insets right="10.0" />
                         </HBox.margin>
-                    </Group>
-                    <Label text="Profile" />
-                </HBox>
-                <HBox layoutX="10.0" layoutY="220.0" onMouseClicked="#navLogout" spacing="12">
-                    <children>
-                        <Group>
-                            <children>
-                                <SVGPath content="M352 64C352 46.3 337.7 32 320 32C302.3 32 288 46.3 288 64L288 320C288 337.7 302.3 352 320 352C337.7 352 352 337.7 352 320L352 64zM210.3 162.4C224.8 152.3 228.3 132.3 218.2 117.8C208.1 103.3 188.1 99.8 173.6 109.9C107.4 156.1 64 233 64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 233 532.6 156.1 466.3 109.9C451.8 99.8 431.9 103.3 421.7 117.8C411.5 132.3 415.1 152.2 429.6 162.4C479.4 197.2 511.9 254.8 511.9 320C511.9 426 425.9 512 319.9 512C213.9 512 128 426 128 320C128 254.8 160.5 197.1 210.3 162.4z" scaleX="0.04" scaleY="0.04" styleClass="logout-btn" />
-                            </children>
-                            <HBox.margin>
-                                <Insets right="10.0" />
-                            </HBox.margin>
-                        </Group>
-                        <Label styleClass="logout-btn" text="Logout" />
-                    </children>
-                    <styleClass>
-                        <String fx:value="logout-btn" />
-                        <String fx:value="menu-item" />
-                    </styleClass>
-                </HBox>
-            </VBox>
+                     </Group>
+                     <Label text="Bookmarked" />
+                  </children>
+               </HBox>
+               <HBox layoutX="10.0" layoutY="123.0" onMouseClicked="#navDMList" spacing="12" styleClass="menu-item">
+                  <children>
+                     <Group>
+                        <children>
+                           <SVGPath fx:id="dmIcon" content="M322.5 351.7L523.4 150.9L391 520.3L322.5 351.7zM489.4 117L288.6 317.8L120 249.3L489.4 117zM70.1 280.8L275.9 364.4L359.5 570.2C364.8 583.3 377.6 591.9 391.8 591.9C406.5 591.9 419.6 582.7 424.6 568.8L602.6 72C606.1 62.2 603.6 51.4 596.3 44C589 36.6 578.1 34.2 568.3 37.7L71.4 215.7C57.5 220.7 48.3 233.8 48.3 248.5C48.3 262.7 56.9 275.5 70 280.8z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
+                        </children>
+                        <HBox.margin>
+                           <Insets right="5.0" />
+                        </HBox.margin>
+                     </Group>
+                     <Label text="Direct Message" />
+                  </children>
+               </HBox>
+               <HBox onMouseClicked="#navProfile" spacing="12" styleClass="menu-item">
+                  <children>
+                     <Group>
+                        <children>
+                           <SVGPath content="M240 192C240 147.8 275.8 112 320 112C364.2 112 400 147.8 400 192C400 236.2 364.2 272 320 272C275.8 272 240 236.2 240 192zM448 192C448 121.3 390.7 64 320 64C249.3 64 192 121.3 192 192C192 262.7 249.3 320 320 320C390.7 320 448 262.7 448 192zM144 544C144 473.3 201.3 416 272 416L368 416C438.7 416 496 473.3 496 544L496 552C496 565.3 506.7 576 520 576C533.3 576 544 565.3 544 552L544 544C544 446.8 465.2 368 368 368L272 368C174.8 368 96 446.8 96 544L96 552C96 565.3 106.7 576 120 576C133.3 576 144 565.3 144 552L144 544z" scaleX="0.04" scaleY="0.04" styleClass="icon" />
+                        </children>
+                        <HBox.margin>
+                           <Insets right="10.0" />
+                        </HBox.margin>
+                     </Group>
+                     <Label text="Profile" />
+                  </children>
+               </HBox>
+               <HBox layoutX="10.0" layoutY="220.0" onMouseClicked="#navLogout" spacing="12">
+                  <children>
+                     <Group>
+                        <children>
+                           <SVGPath content="M352 64C352 46.3 337.7 32 320 32C302.3 32 288 46.3 288 64L288 320C288 337.7 302.3 352 320 352C337.7 352 352 337.7 352 320L352 64zM210.3 162.4C224.8 152.3 228.3 132.3 218.2 117.8C208.1 103.3 188.1 99.8 173.6 109.9C107.4 156.1 64 233 64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 233 532.6 156.1 466.3 109.9C451.8 99.8 431.9 103.3 421.7 117.8C411.5 132.3 415.1 152.2 429.6 162.4C479.4 197.2 511.9 254.8 511.9 320C511.9 426 425.9 512 319.9 512C213.9 512 128 426 128 320C128 254.8 160.5 197.1 210.3 162.4z" scaleX="0.04" scaleY="0.04" styleClass="logout-btn" />
+                        </children>
+                        <HBox.margin>
+                           <Insets right="10.0" />
+                        </HBox.margin>
+                     </Group>
+                     <Label styleClass="logout-btn" text="Logout" />
+                  </children>
+                  <styleClass>
+                     <String fx:value="logout-btn" />
+                     <String fx:value="menu-item" />
+                  </styleClass>
+               </HBox>
+            </children>
+         </VBox>
         </VBox>
     </left>
 

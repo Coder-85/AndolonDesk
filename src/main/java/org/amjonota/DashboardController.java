@@ -269,25 +269,6 @@ public class DashboardController {
     }
 
 
-    public boolean hasUnreadMessages() {
-        try {
-            Connection conn = DatabaseManager.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) AS unread_count FROM chat_list WHERE to_user_id = ? AND status = 'unread'";
-
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, Session.getCurrentUser().getId());
-                ResultSet rs = stmt.executeQuery();
-
-                if (rs.next()) {
-                    return rs.getInt("unread_count") > 0;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     @FXML
     public void handleNotificationClick(MouseEvent event) {
         boolean nowVisible = !notificationPanel.isVisible();
@@ -365,6 +346,25 @@ public class DashboardController {
         return items;
     }
 
+
+    public boolean hasUnreadMessages() {
+        try {
+            Connection conn = DatabaseManager.getInstance().getConnection();
+            String sql = "SELECT COUNT(*) AS unread_count FROM chat_list WHERE to_user_id = ? AND status = 'unread'";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Session.getCurrentUser().getId());
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("unread_count") > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     @FXML
     public void navHome(MouseEvent e) {
 
