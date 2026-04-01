@@ -215,57 +215,7 @@
                 <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="notification-scroll" VBox.vgrow="ALWAYS">
                     <VBox fx:id="notificationList" spacing="0" styleClass="notification-list">
 
-                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="notification-row, notification-unread">
-                            <StackPane styleClass="notif-avatar"><Label styleClass="notif-avatar-label" text="R" /></StackPane>
-                            <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="notif-message" text="Rahim joined Andolon #42" wrapText="true" />
-                                <Label styleClass="notif-time" text="2 min ago" />
-                            </VBox>
-                            <StackPane styleClass="notif-dot" />
-                            <padding><Insets bottom="12" left="16" right="16" top="12" /></padding>
-                        </HBox>
-                        <Separator styleClass="notification-separator" />
 
-                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="notification-row, notification-unread">
-                            <StackPane styleClass="notif-avatar"><Label styleClass="notif-avatar-label" text="K" /></StackPane>
-                            <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="notif-message" text="Karim commented on your post" wrapText="true" />
-                                <Label styleClass="notif-time" text="15 min ago" />
-                            </VBox>
-                            <StackPane styleClass="notif-dot" />
-                            <padding><Insets bottom="12" left="16" right="16" top="12" /></padding>
-                        </HBox>
-                        <Separator styleClass="notification-separator" />
-
-                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="notification-row, notification-unread">
-                            <StackPane styleClass="notif-avatar"><Label styleClass="notif-avatar-label" text="S" /></StackPane>
-                            <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="notif-message" text="Sumaiya liked your Andolon" wrapText="true" />
-                                <Label styleClass="notif-time" text="1 hr ago" />
-                            </VBox>
-                            <StackPane styleClass="notif-dot" />
-                            <padding><Insets bottom="12" left="16" right="16" top="12" /></padding>
-                        </HBox>
-                        <Separator styleClass="notification-separator" />
-
-                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="notification-row">
-                            <StackPane styleClass="notif-avatar"><Label styleClass="notif-avatar-label" text="T" /></StackPane>
-                            <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="notif-message" text="Tania sent you a direct message" wrapText="true" />
-                                <Label styleClass="notif-time" text="3 hrs ago" />
-                            </VBox>
-                            <padding><Insets bottom="12" left="16" right="16" top="12" /></padding>
-                        </HBox>
-                        <Separator styleClass="notification-separator" />
-
-                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="notification-row">
-                            <StackPane styleClass="notif-avatar"><Label styleClass="notif-avatar-label" text="N" /></StackPane>
-                            <VBox spacing="3" HBox.hgrow="ALWAYS">
-                                <Label styleClass="notif-message" text="New Andolon: Rally at Shahbag tomorrow" wrapText="true" />
-                                <Label styleClass="notif-time" text="Yesterday" />
-                            </VBox>
-                            <padding><Insets bottom="12" left="16" right="16" top="12" /></padding>
-                        </HBox>
 
                     </VBox>
                 </ScrollPane>

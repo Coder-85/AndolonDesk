@@ -109,13 +109,7 @@
                 <children>
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                         <children>
-                            <Label style="-fx-font-weight: 700;" styleClass="top-nav-title" text="Bookmarked" />
-                        </children>
-                    </HBox>
-                    <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="242.0" HBox.hgrow="ALWAYS" />
-                    <HBox alignment="CENTER_RIGHT" prefHeight="70.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
-                        <children>
-                            <Group />
+                            <Label style="-fx-font-weight: 700;" styleClass="top-nav-title" text="Attending &amp; Attended" />
                         </children>
                     </HBox>
                 </children>

@@ -78,6 +78,9 @@ public class DashboardController {
             System.err.println("Failed to load protests: " + e.getMessage());
         }
 
+        loadNotifications();
+
+
         Platform.runLater(() -> {
             if(hasUnreadMessages()){
                 dmIcon.setContent("M568.4 37.7C578.2 34.2 589 36.7 596.4 44C603.8 51.3 606.2 62.2 602.7 72L424.7 568.9C419.7 582.8 406.6 592 391.9 592C377.7 592 364.9 583.4 359.6 570.3L295.4 412.3C290.9 401.3 292.9 388.7 300.6 379.7L395.1 267.3C400.2 261.2 399.8 252.3 394.2 246.7C388.6 241.1 379.6 240.7 373.6 245.8L261.2 340.1C252.1 347.7 239.6 349.7 228.6 345.3L70.1 280.8C57 275.5 48.4 262.7 48.4 248.5C48.4 233.8 57.6 220.7 71.5 215.7L568.4 37.7z");
@@ -87,7 +90,177 @@ public class DashboardController {
     }
 
 
+    private void loadNotifications() {
+        notificationList.getChildren().clear();
 
+        try {
+            Connection conn = DatabaseManager.getInstance().getConnection();
+            String sql = "SELECT * FROM notifications WHERE to_id = ? ORDER BY id DESC";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Session.getCurrentUser().getId());
+                ResultSet rs = stmt.executeQuery();
+
+                int unreadCount = 0;
+
+                while (rs.next()) {
+                    HBox row = buildNotificationRow(
+                            rs.getInt("id"),
+                            rs.getInt("from_id"),
+                            rs.getString("from_name"),
+                            rs.getString("main_txt"),
+                            rs.getString("type"),
+                            rs.getString("status"),
+                            rs.getString("time"),
+                            rs.getInt("protest_id")
+                    );
+
+                    if ("unread".equals(rs.getString("status"))) {
+                        unreadCount++;
+                    }
+
+                    notificationList.getChildren().add(row);
+                    notificationList.getChildren().add(new javafx.scene.control.Separator());
+                }
+
+                if (unreadCount > 0) {
+                    notificationBadge.setText(String.valueOf(unreadCount));
+                    notificationBadge.setVisible(true);
+                } else {
+                    notificationBadge.setVisible(false);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private HBox buildNotificationRow(int id, int fromId, String fromName, String message, String type, String status, String time, int protestId) {
+
+        StackPane avatar = new StackPane();
+        avatar.getStyleClass().add("notif-avatar");
+
+        Label avatarLabel = new Label(fromName.substring(0, 1));
+        avatarLabel.getStyleClass().add("notif-avatar-label");
+        avatar.getChildren().add(avatarLabel);
+
+        Label msgLabel = new Label(message);
+        msgLabel.getStyleClass().add("notif-message");
+        msgLabel.setWrapText(true);
+
+        Label timeLabel = new Label(time);
+        timeLabel.getStyleClass().add("notif-time");
+
+        VBox textBox = new VBox(msgLabel, timeLabel);
+        textBox.setSpacing(3);
+        HBox.setHgrow(textBox, Priority.ALWAYS);
+
+        StackPane dot = new StackPane();
+        dot.getStyleClass().add("notif-dot");
+
+        HBox row = new HBox(avatar, textBox);
+        row.setSpacing(12);
+        row.getStyleClass().add("notification-row");
+
+        if ("unread".equals(status)) {
+            row.getStyleClass().add("notification-unread");
+            row.getChildren().add(dot);
+        }
+
+        row.setPadding(new Insets(12, 16, 12, 16));
+
+        row.setOnMouseClicked(e -> {
+            handleNotificationClickAction(id, type, protestId, row, dot, fromId, fromName);
+        });
+
+        return row;
+    }
+
+
+    private void handleNotificationClickAction(int notificationId, String type, int protestId, HBox row, StackPane dot, int fromId, String fromName) {
+
+        markNotificationAsRead(notificationId, row, dot);
+
+        try {
+
+            if ("dm".equals(type)) {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("chat_area.fxml"));
+                Parent rootMain = loader.load();
+
+                ChatAreaController controller = loader.getController();
+                controller.setUserData(fromId, fromName);
+
+                Stage stage = (Stage) row.getScene().getWindow();
+                stage.getScene().setRoot(rootMain);
+
+            } else {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("andolon_details.fxml"));
+                Parent root = loader.load();
+
+                AndolonDetailsController controller = loader.getController();
+                controller.setPostID(protestId);
+
+                Stage stage = (Stage) row.getScene().getWindow();
+                stage.getScene().setRoot(root);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    private void markNotificationAsRead(int notificationId, HBox row, StackPane dot) {
+        try {
+            Connection conn = DatabaseManager.getInstance().getConnection();
+
+            String sql = "UPDATE notifications SET status = 'read' WHERE id = ? AND status = 'unread'";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, notificationId);
+                stmt.executeUpdate();
+            }
+
+            row.getStyleClass().remove("notification-unread");
+
+            if (dot != null) {
+                dot.setVisible(false);
+            }
+
+            updateBadgeCount();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void updateBadgeCount() {
+        try {
+            Connection conn = DatabaseManager.getInstance().getConnection();
+            String sql = "SELECT COUNT(*) AS cnt FROM notifications WHERE to_id = ? AND status = 'unread'";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Session.getCurrentUser().getId());
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    int count = rs.getInt("cnt");
+
+                    if (count > 0) {
+                        notificationBadge.setText(String.valueOf(count));
+                        notificationBadge.setVisible(true);
+                    } else {
+                        notificationBadge.setVisible(false);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void setProtestStatistics(){
         attendingLabel.setText(String.valueOf(statData.getAttended()));
@@ -138,16 +311,34 @@ public class DashboardController {
 
     @FXML
     public void handleMarkAllRead(MouseEvent event) {
+
+        try {
+            Connection conn = DatabaseManager.getInstance().getConnection();
+            String sql = "UPDATE notifications SET status = 'read' WHERE to_id = ? AND status = 'unread'";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Session.getCurrentUser().getId());
+                stmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         notificationBadge.setVisible(false);
+
         notificationList.getChildren().forEach(node -> {
             node.getStyleClass().remove("notification-unread");
+
             if (node instanceof HBox) {
                 HBox row = (HBox) node;
+
                 row.getChildren().stream()
                         .filter(c -> c.getStyleClass().contains("notif-dot"))
                         .forEach(dot -> dot.setVisible(false));
             }
         });
+
         event.consume();
     }
 
