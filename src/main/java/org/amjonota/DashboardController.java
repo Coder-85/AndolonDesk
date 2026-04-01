@@ -95,7 +95,7 @@ public class DashboardController {
 
         try {
             Connection conn = DatabaseManager.getInstance().getConnection();
-            String sql = "SELECT * FROM notifications WHERE to_id = ? ORDER BY id DESC";
+            String sql = "SELECT n.*, u.name AS from_name FROM notifications n INNER JOIN users u ON n.from_id = u.id WHERE to_id = ? ORDER BY n.id DESC";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, Session.getCurrentUser().getId());

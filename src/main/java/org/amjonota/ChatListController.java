@@ -65,10 +65,12 @@ public class ChatListController {
         List<VBox> items = new ArrayList<VBox>();
 
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT * FROM chat_list WHERE from_user_id = " + Session.getCurrentUser().getId() + " OR to_user_id = " + Session.getCurrentUser().getId() + " ORDER BY time_ms DESC";
+        String sql = "SELECT cl.*, u_from.name AS from_name, u_to.name AS to_name FROM chat_list cl INNER JOIN users u_from ON cl.from_user_id = u_from.id INNER JOIN users u_to ON cl.to_user_id = u_to.id WHERE from_user_id = ? OR to_user_id = ? ORDER BY time_ms DESC";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Session.getCurrentUser().getId());
+            stmt.setInt(2, Session.getCurrentUser().getId());
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String name;
                 String date;

@@ -132,15 +132,13 @@ public class ChatAreaController {
         try {
             Connection conn = DatabaseManager.getInstance().getConnection();
 
-            String sql = "INSERT INTO chat (from_id, to_id, from_name, to_name, msg, status) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO chat (from_id, to_id, msg, status) VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, Session.getCurrentUser().getId());
                 stmt.setInt(2, personUserID);
-                stmt.setString(3, Session.getCurrentUser().getName());
-                stmt.setString(4, personName);
-                stmt.setString(5, messageText);
-                stmt.setString(6, "unread");
+                stmt.setString(3, messageText);
+                stmt.setString(4, "unread");
                 stmt.executeUpdate();
             }
 
@@ -153,15 +151,13 @@ public class ChatAreaController {
                 stmt.executeUpdate();
             }
 
-            String sqlInsert = "INSERT INTO chat_list (from_user_id, to_user_id, from_name, to_name, msg, time_ms, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sqlInsert = "INSERT INTO chat_list (from_user_id, to_user_id, msg, time_ms, status) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement stmt = conn.prepareStatement(sqlInsert)) {
                 stmt.setInt(1, Session.getCurrentUser().getId());
                 stmt.setInt(2, personUserID);
-                stmt.setString(3, Session.getCurrentUser().getName());
-                stmt.setString(4, personName);
-                stmt.setString(5, messageText);
-                stmt.setLong(6, System.currentTimeMillis());
-                stmt.setString(7, "unread");
+                stmt.setString(3, messageText);
+                stmt.setLong(4, System.currentTimeMillis());
+                stmt.setString(5, "unread");
                 stmt.executeUpdate();
             }
 

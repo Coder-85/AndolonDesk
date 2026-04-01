@@ -90,12 +90,11 @@ public class ProfileController {
 
     private void setAttendingData() throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT * FROM attending_protests WHERE user_id = ? ORDER BY id DESC LIMIT 1";
+        String sql = "SELECT ap.*, p.event_date FROM attending_protests ap INNER JOIN protests p ON ap.protest_id = p.id WHERE ap.user_id = ? ORDER BY p.event_date DESC LIMIT 1";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    int id = rs.getInt("id");
                     int protestId = rs.getInt("protest_id");
                     setLatestData(protestId);
                 }

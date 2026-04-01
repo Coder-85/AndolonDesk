@@ -308,8 +308,17 @@ public class AndolonDetailsController {
             colName = "member_count";
             countTxtField = joiningPplCount;
         } else if (type == 2) {
-            colName = "bookmarked_count";
-            countTxtField = savedPplCount;
+            String sql = "SELECT COUNT(*) AS count FROM user_bookmarks WHERE protest_id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, postID);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        savedPplCount.setText(String.valueOf(rs.getInt("count")));
+                    }
+                }
+            }
+
+            return;
         } else {
             colName = "views";
             countTxtField = totalViewCount;
@@ -407,15 +416,13 @@ public class AndolonDetailsController {
 
     @FXML
     public void dmHostBtn() throws SQLException {
-        String sql = "INSERT INTO chat (from_id, to_id, from_name, to_name, msg, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO chat (from_id, to_id, msg, status) VALUES (?, ?, ?, ?)";
         Connection conn = DatabaseManager.getInstance().getConnection();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
             stmt.setInt(2, authorID);
-            stmt.setString(3, Session.getCurrentUser().getName());
-            stmt.setString(4, authorName);
-            stmt.setString(5, "Hello, I have something to know about your andolon '" + title.getText() + "'");
-            stmt.setString(6, "unread");
+            stmt.setString(3, "Hello, I have something to know about your andolon '" + title.getText() + "'");
+            stmt.setString(4, "unread");
             try {
                 stmt.executeUpdate();
                 if(authorID != Session.getCurrentUser().getId()){
@@ -446,15 +453,13 @@ public class AndolonDetailsController {
                         stmt2.executeUpdate();
                     }
                 }
-                String sqlLast = "INSERT INTO chat_list (from_user_id, to_user_id, from_name, to_name, msg, time_ms, status) values (?, ?, ?, ?, ?, ?, ?);";
+                String sqlLast = "INSERT INTO chat_list (from_user_id, to_user_id, msg, time_ms, status) values (?, ?, ?, ?, ?);";
                 try (PreparedStatement stmt2 = conn.prepareStatement(sqlLast)) {
                     stmt2.setInt(1, Session.getCurrentUser().getId());
                     stmt2.setInt(2, authorID);
-                    stmt2.setString(3, Session.getCurrentUser().getName());
-                    stmt2.setString(4, authorName);
-                    stmt2.setString(5, "Hello, I have something to know about your andolon '" + title.getText() + "'");
-                    stmt2.setLong(6, System.currentTimeMillis());
-                    stmt2.setString(7, "unread");
+                    stmt2.setString(3, "Hello, I have something to know about your andolon '" + title.getText() + "'");
+                    stmt2.setLong(4, System.currentTimeMillis());
+                    stmt2.setString(5, "unread");
                     stmt2.executeUpdate();
                 }
 
@@ -465,16 +470,14 @@ public class AndolonDetailsController {
 
     private void sendNotification(String mainText, String type) throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "INSERT INTO notifications (from_id, to_id, from_name, to_name, main_txt, type, status, protest_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notifications (from_id, to_id, main_txt, type, status, protest_id) VALUES(?, ?, ?, ?, ?, ?);";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
             stmt.setInt(2, authorID);
-            stmt.setString(3, Session.getCurrentUser().getName());
-            stmt.setString(4, authorName);
-            stmt.setString(5, mainText);
-            stmt.setString(6, type);
-            stmt.setString(7, "unread");
-            stmt.setInt(8, postID);
+            stmt.setString(3, mainText);
+            stmt.setString(4, type);
+            stmt.setString(5, "unread");
+            stmt.setInt(6, postID);
 
             stmt.executeUpdate();
         }

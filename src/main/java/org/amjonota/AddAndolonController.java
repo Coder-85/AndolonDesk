@@ -230,7 +230,7 @@ public class AddAndolonController {
     private void addAndolon(String title, String description, String eventDate, String category, String imgName, String address) throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
 
-        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, author_name, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
@@ -243,8 +243,7 @@ public class AddAndolonController {
             stmt.setString(8, imgName);
             stmt.setString(9, mapCoordinates);
             stmt.setString(10, address);
-            stmt.setString(11, Session.getCurrentUser().getName());
-            stmt.setString(12, LocalDateTime.now().format(DATETIME_FORMAT));
+            stmt.setString(11, LocalDateTime.now().format(DATETIME_FORMAT));
             stmt.executeUpdate();
 
             int protestId = -1;

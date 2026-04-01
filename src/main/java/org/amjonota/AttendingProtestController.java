@@ -60,7 +60,7 @@ public class AttendingProtestController {
     private List<ProtestItem> loadAttendingProtests(int id) throws SQLException {
         List<ProtestItem> items = new ArrayList<ProtestItem>();
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM attending_protests ub2 WHERE ub2.protest_id = p.id) AS attending_count FROM protests p INNER JOIN attending_protests b ON p.id = b.protest_id INNER JOIN users u ON u.id = p.author_id WHERE b.user_id = ? ORDER BY b.id DESC";
+        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM attending_protests ub2 WHERE ub2.protest_id = p.id) AS attending_count FROM protests p INNER JOIN attending_protests b ON p.id = b.protest_id INNER JOIN users u ON u.id = p.author_id WHERE b.user_id = ? ORDER BY p.id DESC";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
