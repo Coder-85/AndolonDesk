@@ -28,7 +28,7 @@ public class DatabaseManager {
 
     private void initSchema() throws SQLException {
         try (Statement stmt = connection.createStatement()) {
-            stmt.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL UNIQUE, password_hash TEXT, provider TEXT NOT NULL DEFAULT 'local', provider_id TEXT, date_of_birth DATE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+            stmt.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL UNIQUE, password_hash TEXT, provider TEXT NOT NULL DEFAULT 'local', provider_id TEXT, date_of_birth DATE, security_question TEXT, security_answer_hash TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
             stmt.execute("CREATE TABLE IF NOT EXISTS protests (id INTEGER PRIMARY KEY AUTOINCREMENT, author_id INTEGER NOT NULL, posted_date DATE NOT NULL, title TEXT NOT NULL, event_date DATE NOT NULL, summary TEXT NOT NULL, description TEXT, category TEXT, member_count INTEGER NOT NULL DEFAULT 0, img_name TEXT, map_coordinates TEXT, views INTEGER NOT NULL DEFAULT 0, address TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE)");
 
