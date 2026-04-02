@@ -133,7 +133,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="242.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <TextField prefHeight="35.0" prefWidth="190.0" promptText="   Search Andolon..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="search-field" />
+                                <TextField fx:id="searchField" prefHeight="35.0" prefWidth="190.0" promptText="   Search Andolon..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="search-field" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="140.0" HBox.hgrow="ALWAYS">

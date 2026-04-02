@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
@@ -24,27 +26,50 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class BookmarkedController {
     @FXML private VBox bookmarkList;
     @FXML private SVGPath dmIcon;
+    @FXML private ComboBox<String> sortByTimeCombo;
+    @FXML private ComboBox<String> sortByCategoryCombo;
+    @FXML private TextField searchField;
+    private List<ProtestItem> allBookmarked = new ArrayList<ProtestItem>();
 
 
     @FXML
     public void initialize() {
         User user = Session.getCurrentUser();
         if (user == null) return;
+        sortByTimeCombo.getItems().add("Default");
+        sortByTimeCombo.getItems().add("Upcoming");
+        sortByTimeCombo.getItems().add("Ongoing");
+        sortByTimeCombo.getItems().add("Previous");
+
+        sortByCategoryCombo.getItems().add("Default");
+        sortByCategoryCombo.getItems().add("Human Chain");
+        sortByCategoryCombo.getItems().add("General Strike");
+        sortByCategoryCombo.getItems().add("Blockade");
+        sortByCategoryCombo.getItems().add("Rally");
+        sortByCategoryCombo.getItems().add("Sit-in Protest");
+        sortByCategoryCombo.getItems().add("Siege Protest");
+        sortByCategoryCombo.getItems().add("Non-cooperation Movement");
+        sortByCategoryCombo.getItems().add("Peaceful Protest");
+        sortByCategoryCombo.getItems().add("Hunger Strike");
+        sortByTimeCombo.setValue("Default");
+        sortByCategoryCombo.setValue("Default");
 
         try {
-            for (ProtestItem item : loadBookmarkedProtests(user.getId())) {
-                bookmarkList.getChildren().add(buildCard(item));
-            }
+            allBookmarked = loadBookmarkedProtests(user.getId());
+            renderBookmarkList(allBookmarked);
         }
         catch (SQLException e) {
             System.err.println("Failed to load bookmarks: " + e.getMessage());
         }
+        bindFilterListeners();
 
         Platform.runLater(() -> {
             if(hasUnreadMessages()){
@@ -71,6 +96,93 @@ public class BookmarkedController {
         }
 
         return items;
+    }
+
+    private void bindFilterListeners() {
+        sortByTimeCombo.valueProperty().addListener((obs, oldValue, newValue) -> applyFilters());
+        sortByCategoryCombo.valueProperty().addListener((obs, oldValue, newValue) -> applyFilters());
+        searchField.textProperty().addListener((obs, oldValue, newValue) -> applyFilters());
+    }
+
+    private void applyFilters() {
+        if (allBookmarked == null) {
+            return;
+        }
+
+        String searchText = searchField != null && searchField.getText() != null ? searchField.getText().trim().toLowerCase() : "";
+        String timeFilter = sortByTimeCombo.getValue() == null ? "Default" : sortByTimeCombo.getValue();
+        String categoryFilter = sortByCategoryCombo.getValue() == null ? "Default" : sortByCategoryCombo.getValue();
+        LocalDate today = LocalDate.now();
+
+        List<ProtestItem> filtered = new ArrayList<ProtestItem>();
+        for (ProtestItem item : allBookmarked) {
+            if (!matchesSearch(item, searchText)) {
+                continue;
+            }
+            if (!"Default".equals(categoryFilter) && !categoryFilter.equals(item.getCategory())) {
+                continue;
+            }
+            if (!matchesTimeFilter(item, timeFilter, today)) {
+                continue;
+            }
+            filtered.add(item);
+        }
+
+        if (!"Default".equals(timeFilter)) {
+            filtered.sort(Comparator.comparing(p -> dateParse(p.getEventDate())));
+        }
+
+        renderBookmarkList(filtered);
+    }
+
+    private boolean matchesSearch(ProtestItem item, String searchText) {
+        if (searchText == null || searchText.isEmpty()) {
+            return true;
+        }
+        return toLower(item.getTitle()).contains(searchText) || toLower(item.getSummary()).contains(searchText) || toLower(item.getDescription()).contains(searchText) || toLower(item.getAuthor()).contains(searchText) || toLower(item.getCategory()).contains(searchText);
+    }
+
+    private boolean matchesTimeFilter(ProtestItem item, String timeFilter, LocalDate today) {
+        if ("Default".equals(timeFilter)) {
+            return true;
+        }
+        LocalDate eventDate = dateParse(item.getEventDate());
+        if (eventDate == null) {
+            return false;
+        }
+        if ("Upcoming".equals(timeFilter)) {
+            return eventDate.isAfter(today);
+        }
+        if ("Ongoing".equals(timeFilter)) {
+            return eventDate.isEqual(today);
+        }
+        if ("Previous".equals(timeFilter)) {
+            return eventDate.isBefore(today);
+        }
+
+        return true;
+    }
+
+    private LocalDate dateParse(String date) {
+        if (date == null || date.isBlank()) {
+            return null;
+        }
+        try {
+            return LocalDate.parse(date.trim());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String toLower(String value) {
+        return value == null ? "" : value.toLowerCase();
+    }
+
+    private void renderBookmarkList(List<ProtestItem> items) {
+        bookmarkList.getChildren().clear();
+        for (ProtestItem item : items) {
+            bookmarkList.getChildren().add(buildCard(item));
+        }
     }
 
 
