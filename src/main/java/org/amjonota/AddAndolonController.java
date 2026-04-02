@@ -91,15 +91,11 @@ public class AddAndolonController {
         andolonCategory.getItems().add("Hunger Strike");
         andolonMapView.initialize();
 
-
-
-
         if(isEditingAndolon) {
             loadAndolonData();
         }else{
             andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
         }
-
 
         selectedLocationMarker = Marker.createProvided(Marker.Provided.RED).setVisible(false);
         selectCenterPointRadio.setSelected(true);
@@ -254,7 +250,6 @@ public class AddAndolonController {
 
             if (!Utils.isNonEmpty(title)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Title is required."); return; }
             if (!Utils.isNonEmpty(description)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Description is required."); return; }
-
 
             String eventDate;
             if(andolonDate.getValue() == null){
