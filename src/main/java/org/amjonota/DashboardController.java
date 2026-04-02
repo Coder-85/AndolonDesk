@@ -273,7 +273,7 @@ public class DashboardController {
     private void setProtestStatistics(){
         attendingLabel.setText(String.valueOf(statData.getAttended()));
         totalLabel.setText(String.valueOf(statData.getProtestNum()));
-        missedLabel.setText(String.valueOf(statData.getProtestNum() - statData.getAttended()));
+        missedLabel.setText(String.valueOf(statData.getMissed()));
     }
 
 

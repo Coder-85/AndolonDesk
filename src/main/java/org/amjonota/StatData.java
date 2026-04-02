@@ -14,27 +14,27 @@ public class StatData {
 
     public StatData() throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
+        int userId = Session.getCurrentUser().getId();
 
-        String sqlTotal = "SELECT COUNT(*) as total FROM protests";
+        String currentDate = java.time.LocalDate.now().toString();
         int protestNum = 0;
-        try (PreparedStatement stmt = conn.prepareStatement(sqlTotal)) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    protestNum = rs.getInt("total");
-                }
+
+        String sqlTotal = "SELECT COUNT(*) AS total FROM protests";
+        try (PreparedStatement stmt = conn.prepareStatement(sqlTotal);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                protestNum = rs.getInt("total");
             }
         }
 
-        String currentDate = java.time.LocalDate.now().toString();
-
-        String sqlAttending = "SELECT p.event_date FROM protests p " + "INNER JOIN attending_protests ap ON p.id = ap.protest_id " + "WHERE ap.user_id = ?";
+        String sqlAttending = "SELECT p.event_date FROM protests p INNER JOIN attending_protests ap ON p.id = ap.protest_id WHERE ap.user_id = ?";
 
         int attended = 0;
         int upcoming = 0;
         int ongoing = 0;
 
         try (PreparedStatement stmt = conn.prepareStatement(sqlAttending)) {
-            stmt.setInt(1, Session.getCurrentUser().getId());
+            stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     String eventDate = rs.getString("event_date");
@@ -50,7 +50,17 @@ public class StatData {
             }
         }
 
-        int missed = protestNum - ongoing - upcoming - attended;
+        int missed = 0;
+        String sqlMissed = "SELECT COUNT(*) AS missed_count FROM protests p WHERE p.event_date < ? AND NOT EXISTS (SELECT 1 FROM attending_protests ap WHERE ap.protest_id = p.id AND ap.user_id = ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sqlMissed)) {
+            stmt.setString(1, currentDate);
+            stmt.setInt(2, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    missed = rs.getInt("missed_count");
+                }
+            }
+        }
 
         this.protestNum = protestNum;
         this.attended = attended;

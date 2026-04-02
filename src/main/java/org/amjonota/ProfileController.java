@@ -85,47 +85,47 @@ public class ProfileController {
         attendingLabel.setText(String.valueOf(statData.getAttended()));
         upcomingLabel.setText(String.valueOf(statData.getUpcoming()));
         missedLabel.setText(String.valueOf(statData.getMissed()));
-        activerateLabel.setText(String.valueOf((int)((double)statData.getAttended()/ (double)statData.getProtestNum()* 100) ) + "%");
+        int total = statData.getProtestNum();
+        int rate = total == 0 ? 0 : (int) (((double) statData.getAttended() / (double) total) * 100);
+        activerateLabel.setText(rate + "%");
     }
 
     private void setAttendingData() throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT ap.*, p.event_date FROM attending_protests ap INNER JOIN protests p ON ap.protest_id = p.id WHERE ap.user_id = ? ORDER BY p.event_date DESC LIMIT 1";
+        String sql = "SELECT p.id AS protest_id, p.title, p.event_date FROM attending_protests ap "
+                + "INNER JOIN protests p ON ap.protest_id = p.id "
+                + "WHERE ap.user_id = ? ORDER BY p.event_date DESC LIMIT 1";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    int protestId = rs.getInt("protest_id");
-                    setLatestData(protestId);
+                    setLatestData(rs.getString("title"), rs.getString("event_date"));
+                } else {
+                    setNoRecentAttendingData();
                 }
             }
         }
     }
 
-    private void setLatestData(int protestId) throws SQLException {
-        Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT * FROM protests WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, protestId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String title = rs.getString("title");
-                    String eventDateStr = rs.getString("event_date");
-                    LocalDate eventDate = LocalDate.parse(eventDateStr);
-                    LocalDate today = LocalDate.now();
-                    lastAttendingTitle.setText(title);
+    private void setLatestData(String title, String eventDateStr) {
+        lastAttendingTitle.setText(title);
+        LocalDate eventDate = LocalDate.parse(eventDateStr);
+        LocalDate today = LocalDate.now();
 
-                    if (eventDate.isBefore(today) || eventDate.isEqual(today)) {
-                        lastAttendingDate.setText("Attended • " + eventDateStr);
-                    } else{
-                        lastAttendingDate.setStyle("-fx-text-fill: #6358DC;");
-                        lastAttendingDate.setText("Attending • " + eventDateStr);
-                    }
-                }
-            }
+        if (eventDate.isAfter(today)) {
+            lastAttendingDate.setStyle("-fx-text-fill: #6358DC;");
+            lastAttendingDate.setText("Attending • " + eventDateStr);
+        } else {
+            lastAttendingDate.setStyle("-fx-text-fill: #28C76F;");
+            lastAttendingDate.setText("Attended • " + eventDateStr);
         }
     }
 
+    private void setNoRecentAttendingData() {
+        lastAttendingTitle.setText("No attending/attended protest yet");
+        lastAttendingDate.setStyle("-fx-text-fill: #6b7280;");
+        lastAttendingDate.setText("Join a protest to see activity");
+    }
 
 
     private List<ProtestItem> loadAllProtests() throws SQLException {
