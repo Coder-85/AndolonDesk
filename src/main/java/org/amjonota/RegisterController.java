@@ -21,6 +21,8 @@ public class RegisterController {
     @FXML private DatePicker dobPicker;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
+    @FXML private TextField securityQuestionField;
+    @FXML private TextField securityAnswerField;
     @FXML private Button registerButton;
     @FXML private Hyperlink login;
 
@@ -38,11 +40,15 @@ public class RegisterController {
         String password = passwordField.getText();
         String confirm = confirmPasswordField.getText();
         String dob = dobPicker.getValue() != null ? dobPicker.getValue().toString() : null;
+        String securityQuestion = securityQuestionField.getText();
+        String securityAnswer = securityAnswerField.getText();
 
         if (!Utils.isNonEmpty(name)) { showAlert("Validation Error", "Name is required."); return; }
         if (!Utils.isNonEmpty(email)) { showAlert("Validation Error", "Email is required."); return; }
         if (!Utils.isValidPassword(password)) { showAlert("Validation Error", "Password must be at least 8 characters."); return; }
         if (!password.equals(confirm)) { showAlert("Validation Error", "Passwords do not match."); return; }
+        if (!Utils.isNonEmpty(securityQuestion)) { showAlert("Validation Error", "Security question is required."); return; }
+        if (!Utils.isNonEmpty(securityAnswer)) { showAlert("Validation Error", "Security answer is required."); return; }
 
         registerButton.setDisable(true);
         login.setDisable(true);
@@ -50,7 +56,7 @@ public class RegisterController {
             @Override
             public void run() {
                 try {
-                    authService.register(name, email, password, dob);
+                    authService.register(name, email, password, dob, securityQuestion, securityAnswer);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {

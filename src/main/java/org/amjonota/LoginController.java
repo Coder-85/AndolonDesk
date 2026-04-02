@@ -3,9 +3,13 @@ package org.amjonota;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -17,6 +21,7 @@ import org.amjonota.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class LoginController {
     @FXML private ImageView loginImg;
@@ -176,8 +181,81 @@ public class LoginController {
     }
 
     @FXML
+    public void forgotPasswordAction() {
+        TextInputDialog emailDialog = new TextInputDialog(emailField.getText());
+        emailDialog.setTitle("Forgot Password");
+        emailDialog.setHeaderText("Recover your account");
+        emailDialog.setContentText("Enter your account email:");
+        Optional<String> emailResult = emailDialog.showAndWait();
+        if (!emailResult.isPresent()) return;
+        String email = emailResult.get().trim();
+        if (!Utils.isNonEmpty(email)) {
+            showAlert("Validation Error", "Email is required.");
+            return;
+        }
+
+        try {
+            String question = authService.getSecurityQuestion(email);
+
+            TextInputDialog answerDialog = new TextInputDialog();
+            answerDialog.setTitle("Security Question");
+            answerDialog.setHeaderText(question);
+            answerDialog.setContentText("Your answer:");
+            Optional<String> answerResult = answerDialog.showAndWait();
+            if (!answerResult.isPresent()) return;
+            String answer = answerResult.get().trim();
+            if (!Utils.isNonEmpty(answer)) {
+                showAlert("Validation Error", "Security answer is required.");
+                return;
+            }
+            authService.validateSecurityAnswer(email, answer);
+
+            Optional<String> passResult = showPasswordDialog("Reset Password", "Set a new password", "New password:");
+            if (!passResult.isPresent() || !Utils.isValidPassword(passResult.get()))
+                throw new AuthService.AuthException("Password length must be at least 8 character");
+
+            String newPassword = passResult.get();
+
+            Optional<String> confirmResult = showPasswordDialog("Reset Password", "Confirm new password", "Confirm password:");
+            if (!confirmResult.isPresent()) return;
+            String confirmPassword = confirmResult.get();
+
+            if (!newPassword.equals(confirmPassword)) {
+                showAlert("Validation Error", "Passwords do not match.");
+                return;
+            }
+
+            authService.resetPassword(email, answer, newPassword);
+            Alert success = new Alert(Alert.AlertType.INFORMATION);
+            success.setTitle("Password Reset");
+            success.setHeaderText(null);
+            success.setContentText("Password updated successfully. You can now log in.");
+            success.showAndWait();
+        } catch (AuthService.AuthException | SQLException e) {
+            showAlert("Reset Failed", e.getMessage());
+        }
+    }
+
+    @FXML
     public void setSceneRegister() throws IOException {
         App.setRoot("register");
+    }
+
+    private Optional<String> showPasswordDialog(String title, String header, String prompt) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
+
+        PasswordField field = new PasswordField();
+        field.setPromptText(prompt);
+        dialog.getDialogPane().setContent(field);
+        Platform.runLater(field::requestFocus);
+
+        dialog.setResultConverter(buttonType -> buttonType == okButtonType ? field.getText() : null);
+        return dialog.showAndWait();
     }
 
     private void showAlert(String title, String message) {

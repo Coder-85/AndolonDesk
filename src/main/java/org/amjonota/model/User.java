@@ -8,6 +8,8 @@ public class User {
     private String provider;
     private String providerId;
     private String dateOfBirth;
+    private String securityQuestion;
+    private String securityAnswerHash;
     private String createdAt;
 
     public User(int id, String name, String email, String passwordHash, String provider, String providerId, String dateOfBirth) {
@@ -38,6 +40,12 @@ public class User {
 
     public String getDateOfBirth() { return dateOfBirth; }
     public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+
+    public String getSecurityQuestion() { return securityQuestion; }
+    public void setSecurityQuestion(String securityQuestion) { this.securityQuestion = securityQuestion; }
+
+    public String getSecurityAnswerHash() { return securityAnswerHash; }
+    public void setSecurityAnswerHash(String securityAnswerHash) { this.securityAnswerHash = securityAnswerHash; }
 
     public String getCreatedAt() { return createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }

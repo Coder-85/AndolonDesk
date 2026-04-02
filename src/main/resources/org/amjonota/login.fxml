@@ -170,10 +170,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label text="Forgot Password?" textFill="#6358dc">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor></Label>
+                                                      <Hyperlink onAction="#forgotPasswordAction" style="-fx-underline: false;" text="Forgot Password?" textFill="#6358dc" />
                                                    </children>
                                                 </HBox>
                                              </children>

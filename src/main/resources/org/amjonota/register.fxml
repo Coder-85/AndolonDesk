@@ -185,9 +185,9 @@
                                           </HBox>
                                        </children>
                                     </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                        <children>
+                                           <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                              <children>
                                                 <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="100.0" style="-fx-background-radius: 5;">
                                                    <children>
@@ -256,12 +256,86 @@
                                                    </children>
                                                 </VBox>
                                              </children>
-                                          </HBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <HBox maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                           </HBox>
+                                        </children>
+                                     </HBox>
+                                     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                        <children>
+                                           <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                              <children>
+                                                 <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                    <children>
+                                                       <Group>
+                                                          <children>
+                                                             <SVGPath content="M288 64C252.7 64 224 92.7 224 128L224 160L96 160C78.3 160 64 174.3 64 192L64 512C64 529.7 78.3 544 96 544L544 544C561.7 544 576 529.7 576 512L576 192C576 174.3 561.7 160 544 160L416 160L416 128C416 92.7 387.3 64 352 64L288 64zM288 160L288 128L352 128L352 160L288 160zM352 320C352 337.7 337.7 352 320 352C302.3 352 288 337.7 288 320C288 302.3 302.3 288 320 288C337.7 288 352 302.3 352 320z" fill="#404040" scaleX="0.05" scaleY="0.05" />
+                                                          </children>
+                                                       </Group>
+                                                    </children>
+                                                 </VBox>
+                                                 <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                       <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                          <children>
+                                                             <Label text="Security Question" />
+                                                          </children>
+                                                          <padding>
+                                                             <Insets left="10.0" />
+                                                          </padding>
+                                                       </HBox>
+                                                       <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox">
+                                                          <padding>
+                                                             <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                          </padding>
+                                                          <children>
+                                                             <TextField fx:id="securityQuestionField" promptText="Type your security question" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                          </children>
+                                                       </HBox>
+                                                    </children>
+                                                 </VBox>
+                                              </children>
+                                           </HBox>
+                                        </children>
+                                     </HBox>
+                                     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                        <children>
+                                           <HBox maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
+                                              <children>
+                                                 <VBox alignment="CENTER" maxWidth="45.0" minHeight="-Infinity" minWidth="45.0" prefHeight="60.0" prefWidth="51.0" style="-fx-background-radius: 5;">
+                                                    <children>
+                                                       <Group>
+                                                          <children>
+                                                             <SVGPath content="M288 64C252.7 64 224 92.7 224 128L224 160L96 160C78.3 160 64 174.3 64 192L64 512C64 529.7 78.3 544 96 544L544 544C561.7 544 576 529.7 576 512L576 192C576 174.3 561.7 160 544 160L416 160L416 128C416 92.7 387.3 64 352 64L288 64zM288 160L288 128L352 128L352 160L288 160zM320 288C337.7 288 352 302.3 352 320C352 330.3 347.1 339.4 339.5 345.3L339.5 400C339.5 410.2 331.2 418.5 321 418.5C310.8 418.5 302.5 410.2 302.5 400L302.5 345.3C294.9 339.4 290 330.3 290 320C290 302.3 304.3 288 322 288z" fill="#404040" scaleX="0.05" scaleY="0.05" />
+                                                          </children>
+                                                       </Group>
+                                                    </children>
+                                                 </VBox>
+                                                 <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                       <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 5;" styleClass="input-title">
+                                                          <children>
+                                                             <Label text="Security Answer" />
+                                                          </children>
+                                                          <padding>
+                                                             <Insets left="10.0" />
+                                                          </padding>
+                                                       </HBox>
+                                                       <HBox alignment="CENTER_LEFT" maxHeight="30.0" minHeight="30.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-text-hbox">
+                                                          <padding>
+                                                             <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                          </padding>
+                                                          <children>
+                                                             <TextField fx:id="securityAnswerField" promptText="Type your security question answer" styleClass="input-field-text" HBox.hgrow="ALWAYS" />
+                                                          </children>
+                                                       </HBox>
+                                                    </children>
+                                                 </VBox>
+                                              </children>
+                                           </HBox>
+                                        </children>
+                                     </HBox>
+                                     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                        <children>
+                                           <HBox maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" styleClass="input-row" HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Button fx:id="registerButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="26.0" prefWidth="434.0" text="Register" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                    <font>
