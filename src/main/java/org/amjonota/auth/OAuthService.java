@@ -221,6 +221,8 @@ public class OAuthService {
                 if (rs.next()) {
                     int id = rs.getInt("id");
                     String createdAt = rs.getString("created_at");
+                    name = rs.getString("name");
+                    dob = rs.getString("date_of_birth");
                     User user = new User(id, name, email, null, providerName, providerId, dob);
                     user.setCreatedAt(createdAt);
                     return user;
