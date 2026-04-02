@@ -3,6 +3,7 @@ package org.amjonota;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import com.sothawo.mapjfx.Coordinate;
@@ -12,6 +13,7 @@ import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.event.MapViewEvent;
 import com.sothawo.mapjfx.event.MarkerEvent;
 
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.FileChooser;
@@ -39,6 +41,11 @@ import java.util.List;
 
 public class AddAndolonController {
 
+    private boolean isEditingAndolon = false;
+    private int editingAndolonID = -1;
+    private Coordinate loadedCenterCoord;
+    private String oldPicName;
+
     @FXML
     private MapView andolonMapView;
 
@@ -65,7 +72,14 @@ public class AddAndolonController {
     private static final double COORD_TOGGLE_DELTA = 0.0000001d;
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public void initialize() {
+    public AddAndolonController(int editingAndolonID){
+        this.editingAndolonID = editingAndolonID;
+        this.isEditingAndolon = true;
+    }
+
+    public AddAndolonController(){}
+
+    public void initialize() throws SQLException {
         andolonCategory.getItems().add("Human Chain");
         andolonCategory.getItems().add("General Strike");
         andolonCategory.getItems().add("Blockade");
@@ -76,7 +90,16 @@ public class AddAndolonController {
         andolonCategory.getItems().add("Peaceful Protest");
         andolonCategory.getItems().add("Hunger Strike");
         andolonMapView.initialize();
-        andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
+
+
+
+
+        if(isEditingAndolon) {
+            loadAndolonData();
+        }else{
+            andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
+        }
+
 
         selectedLocationMarker = Marker.createProvided(Marker.Provided.RED).setVisible(false);
         selectCenterPointRadio.setSelected(true);
@@ -107,12 +130,12 @@ public class AddAndolonController {
             @Override
             public void handle(MarkerEvent event) {
                 event.consume();
-                
+
                 Marker markerToRemove = event.getMarker();
 
                 if (markerToRemove == selectedLocationMarker)
                     return;
-                
+
                 andolonMapView.removeMarker(markerToRemove);
                 areaCoordinates.remove(indexOfMarker(markerToRemove));
 
@@ -128,35 +151,132 @@ public class AddAndolonController {
         });
     }
 
+    private void loadAndolonData() throws SQLException {
+
+        andolonSubmitBtn.getStyleClass().remove("btn-primary");
+        andolonSubmitBtn.getStyleClass().add("btn-warning");
+        andolonSubmitBtn.setText("Edit");
+
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        String sql = "SELECT * FROM protests WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, editingAndolonID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (!rs.next()) {
+                    try {
+                        App.setRoot("dashboard");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    return;
+                }
+                andolonTitle.setText(rs.getString("title"));
+                andolonCategory.setValue(rs.getString("category"));
+                andolonDescription.setText(rs.getString("description"));
+                addressInShort.setText(rs.getString("address"));
+                andolonDate.setValue(LocalDate.parse(rs.getString("event_date")));
+                oldPicName = rs.getString("img_name");
+                fileNameLabel.setText("Choose file only if you want to change existing one");
+
+                String coords = rs.getString("map_coordinates");
+                mapCoordinates = coords;
+                if (coords != null && !coords.trim().isEmpty()) {
+                    String[] parts = coords.split(",");
+                    if (parts.length == 2) {
+                        try {
+                            double lat = Double.parseDouble(parts[0].trim());
+                            double lng = Double.parseDouble(parts[1].trim());
+                            loadedCenterCoord = new Coordinate(lat, lng);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                andolonMapView.setCenter(loadedCenterCoord != null ? loadedCenterCoord : new Coordinate(23.7351, 90.4000));
+
+                String sql2 = "SELECT coordinates FROM protest_polygons WHERE protest_id = ?";
+                try (PreparedStatement stmt2 = conn.prepareStatement(sql2)) {
+                    stmt2.setInt(1, editingAndolonID);
+                    List<Coordinate> loadedCoords = new ArrayList<>();
+
+                    try (ResultSet rs2 = stmt2.executeQuery()) {
+                        while (rs2.next()) {
+                            String raw = rs2.getString("coordinates");
+                            if (raw == null || raw.trim().isEmpty()) continue;
+                            String[] parts = raw.split(",");
+                            if (parts.length != 2) continue;
+                            try {
+                                double lat = Double.parseDouble(parts[0].trim());
+                                double lng = Double.parseDouble(parts[1].trim());
+                                loadedCoords.add(new Coordinate(lat, lng));
+                            } catch (NumberFormatException e) { }
+                        }
+                    }
+
+                    andolonMapView.initializedProperty().addListener((obs, wasInit, isNowInit) -> {
+                        if (isNowInit) {
+                            Platform.runLater(() -> {
+                                for (Coordinate coord : loadedCoords) {
+                                    toggleAreaPoint(coord);
+                                }
+                                if (loadedCenterCoord != null) {
+                                    selectedLocationMarker.setPosition(loadedCenterCoord).setVisible(true);
+                                    andolonMapView.addMarker(selectedLocationMarker);
+                                }
+                            });
+                        }
+                    });
+
+                    if (andolonMapView.getInitialized()) {
+                        Platform.runLater(() -> {
+                            for (Coordinate coord : loadedCoords) {
+                                toggleAreaPoint(coord);
+                            }
+                            if (loadedCenterCoord != null) {
+                                selectedLocationMarker.setPosition(loadedCenterCoord).setVisible(true);
+                                andolonMapView.addMarker(selectedLocationMarker);
+                            }
+                        });
+                    }
+                }
+
+            }
+
+
+        }
+    }
 
     @FXML
-    public void andolonSubmit() {
-        String title = andolonTitle.getText();
-        String description = andolonDescription.getText();
+    public void andolonSubmit() throws IOException {
 
-        if (!Utils.isNonEmpty(title)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Title is required."); return; }
-        if (!Utils.isNonEmpty(description)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Description is required."); return; }
+            String title = andolonTitle.getText();
+            String description = andolonDescription.getText();
+
+            if (!Utils.isNonEmpty(title)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Title is required."); return; }
+            if (!Utils.isNonEmpty(description)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Description is required."); return; }
 
 
-        String eventDate;
-        if(andolonDate.getValue() == null){
-            showAlert(Alert.AlertType.ERROR,  "Submission Error", "Event date is required.");
-            return;
-        }else{
-            eventDate = andolonDate.getValue() != null ? andolonDate.getValue().toString() : null;
-        }
-        String category;
-        if(andolonCategory.getValue() != null){
-            category = andolonCategory.getValue().toString();
-        }else{
-            showAlert(Alert.AlertType.ERROR,  "Submission Error", "Category is required.");
-            return;
-        }
+            String eventDate;
+            if(andolonDate.getValue() == null){
+                showAlert(Alert.AlertType.ERROR,  "Submission Error", "Event date is required.");
+                return;
+            }else{
+                eventDate = andolonDate.getValue() != null ? andolonDate.getValue().toString() : null;
+            }
+            String category;
+            if(andolonCategory.getValue() != null){
+                category = andolonCategory.getValue().toString();
+            }else{
+                showAlert(Alert.AlertType.ERROR,  "Submission Error", "Category is required.");
+                return;
+            }
 
-        if(selectedFile == null){
-            showAlert(Alert.AlertType.ERROR, "Submission Error", "Image is required.");
-            return;
-        }
+            if(!isEditingAndolon){
+                if(selectedFile == null){
+                    showAlert(Alert.AlertType.ERROR, "Submission Error", "Image is required.");
+                    return;
+                }
+            }
 
         String address = addressInShort.getText();
         if (!Utils.isNonEmpty(address)) { showAlert(Alert.AlertType.ERROR,  "Submission Error", "Address is required."); return; }
@@ -169,68 +289,133 @@ public class AddAndolonController {
             return;
         }
 
-        andolonSubmitBtn.setDisable(true);
-        picNewName = selectedFile.getName();
-
-        try {
-
-            String extension = "";
-            String name = selectedFile.getName();
-            int dotIndex = name.lastIndexOf(".");
-            if (dotIndex > 0) {
-                extension = name.substring(dotIndex);
+            andolonSubmitBtn.setDisable(true);
+            if(selectedFile != null){
+                picNewName = selectedFile.getName();
+            }else{
+                picNewName = oldPicName;
             }
 
-            picNewName = System.currentTimeMillis() + extension;
+            try {
+                if(selectedFile != null){
+                    String extension = "";
+                    String name = selectedFile.getName();
+                    int dotIndex = name.lastIndexOf(".");
+                    if (dotIndex > 0) {
+                        extension = name.substring(dotIndex);
+                    }
 
-            Path uploadDir = Paths.get("uploads");
-            Files.createDirectories(uploadDir);
+                    picNewName = System.currentTimeMillis() + extension;
 
-            Path destination = uploadDir.resolve(picNewName);
+                    Path uploadDir = Paths.get("uploads");
+                    Files.createDirectories(uploadDir);
 
-            Files.copy(selectedFile.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
+                    Path destination = uploadDir.resolve(picNewName);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    addAndolon(title, description, eventDate, category, picNewName, address);
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            andolonSubmitBtn.setDisable(false);
-                            showAlert(Alert.AlertType.INFORMATION, "Success", "Great News! Your Andolon post has been shared.");
-                            try {
-                                App.setRoot("dashboard"); // it will actually redirect to andolon_details page with the andolon id;
-                            }
-                            catch (IOException e) {
-                                showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
-                            }
-                        }
-                    });
+                    Files.copy(selectedFile.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
+                    if(isEditingAndolon){
+                        Path oldFile = uploadDir.resolve(oldPicName);
+                        Files.deleteIfExists(oldFile);
+                    }
                 }
-                catch (SQLException e) {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            andolonSubmitBtn.setDisable(false);
-                            showAlert(Alert.AlertType.ERROR, "Andolon Submission Failed", e.getMessage());
-                        }
-                    });
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        addAndolon(title, description, eventDate, category, picNewName, address);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                andolonSubmitBtn.setDisable(false);
+                                if(!isEditingAndolon){
+                                    showAlert(Alert.AlertType.INFORMATION, "Success", "Great News! Your Andolon post has been shared.");
+                                }else{
+                                    showAlert(Alert.AlertType.INFORMATION, "Success", "Hurrah! Your Andolon has been edited.");
+                                    sendEditNotification();
+                                }
+                                try {
+                                    App.setRoot("dashboard");
+                                }
+                                catch (IOException e) {
+                                    showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+                                }
+                            }
+                        });
+                    }
+                    catch (SQLException e) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                andolonSubmitBtn.setDisable(false);
+                                showAlert(Alert.AlertType.ERROR, "Andolon Submission Failed", e.getMessage());
+                            }
+                        });
+                    }
                 }
+            }).start();
+
+    }
+
+    private void sendEditNotification() {
+        new Thread(() -> {
+            try {
+                Connection conn = DatabaseManager.getInstance().getConnection();
+
+                String sql = "SELECT DISTINCT user_id FROM (" +
+                        "SELECT user_id FROM user_bookmarks WHERE protest_id = ? " +
+                        "UNION " +
+                        "SELECT user_id FROM attending_protests WHERE protest_id = ?" +
+                        ") AS interested_users WHERE user_id != ?";
+
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    stmt.setInt(1, editingAndolonID);
+                    stmt.setInt(2, editingAndolonID);
+                    stmt.setInt(3, Session.getCurrentUser().getId());
+
+                    List<Integer> userIds = new ArrayList<>();
+                    try (ResultSet rs = stmt.executeQuery()) {
+                        while (rs.next()) {
+                            userIds.add(rs.getInt("user_id"));
+                        }
+                    }
+
+                    if (!userIds.isEmpty()) {
+                        String insertSql = "INSERT INTO notifications (from_id, to_id, main_txt, type, status, protest_id) VALUES (?, ?, ?, ?, ?, ?)";
+                        try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+                            for (int userId : userIds) {
+                                insertStmt.setInt(1, Session.getCurrentUser().getId());
+                                insertStmt.setInt(2, userId);
+                                insertStmt.setString(3, "An andolon you are following has been updated. Click to see the updates.");
+                                insertStmt.setString(4, "protest_edit");
+                                insertStmt.setString(5, "unread");
+                                insertStmt.setInt(6, editingAndolonID);
+                                insertStmt.addBatch();
+                            }
+                            insertStmt.executeBatch();
+                        }
+                    }
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }).start();
-
     }
 
     private void addAndolon(String title, String description, String eventDate, String category, String imgName, String address) throws SQLException {
         Connection conn = DatabaseManager.getInstance().getConnection();
 
-        String sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql;
+        if(!isEditingAndolon){
+            sql = "INSERT INTO protests (author_id, posted_date, title, event_date, summary, description, category, img_name, map_coordinates, address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        }else{
+            sql = "UPDATE protests SET author_id = ?, posted_date = ?, title = ?, event_date = ?, summary = ?, description = ?, category = ?, img_name = ?, map_coordinates = ?, address = ?, created_at = ? WHERE id = ?";
+        }
 
         try (PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, Session.getCurrentUser().getId());
@@ -244,12 +429,27 @@ public class AddAndolonController {
             stmt.setString(9, mapCoordinates);
             stmt.setString(10, address);
             stmt.setString(11, LocalDateTime.now().format(DATETIME_FORMAT));
+            if(isEditingAndolon){
+                stmt.setInt(12, editingAndolonID);
+            }
             stmt.executeUpdate();
 
             int protestId = -1;
-            try (ResultSet keys = stmt.getGeneratedKeys()) {
-                if (keys.next()) {
-                    protestId = keys.getInt(1);
+            if(!isEditingAndolon){
+                try (ResultSet keys = stmt.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        protestId = keys.getInt(1);
+                    }
+                }
+            }else{
+                protestId = editingAndolonID;
+            }
+
+            if(isEditingAndolon){
+                String query = "DELETE FROM protest_polygons WHERE protest_id = ?";
+                try (PreparedStatement stmt2 = conn.prepareStatement(query)) {
+                    stmt2.setInt(1, editingAndolonID);
+                    stmt2.executeUpdate();
                 }
             }
 
@@ -308,7 +508,7 @@ public class AddAndolonController {
 
     private int indexOfMarker(Marker marker) {
         Coordinate target = marker.getPosition();
-        
+
         for (int i = 0; i < areaCoordinates.size(); i++) {
             Coordinate c = areaCoordinates.get(i);
             if (Math.abs(c.getLatitude() - target.getLatitude()) < COORD_TOGGLE_DELTA && Math.abs(c.getLongitude() - target.getLongitude()) < COORD_TOGGLE_DELTA) {

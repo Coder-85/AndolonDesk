@@ -196,9 +196,10 @@
 }
 
 .btn-warning{
-    -fx-background-color: #ffc107;
+    -fx-background-color: #ffc107 !important;
     -fx-border-color:  #ffc107;
     -fx-font-size: 12px;
+    -fx-text-fill: white;
 }
 
 .btn-warning:hover{

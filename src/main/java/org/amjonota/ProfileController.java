@@ -31,22 +31,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileController {
-    @FXML private Label profileName;
-    @FXML private Label profileEmail;
-    @FXML private Label profileDob;
-    @FXML private Label profileJoined;
-    @FXML private VBox postList;
+    @FXML
+    private Label profileName;
+    @FXML
+    private Label profileEmail;
+    @FXML
+    private Label profileDob;
+    @FXML
+    private Label profileJoined;
+    @FXML
+    private VBox postList;
 
-    @FXML private Label lastAttendingTitle;
-    @FXML private Label lastAttendingDate;
+    @FXML
+    private Label lastAttendingTitle;
+    @FXML
+    private Label lastAttendingDate;
 
-    @FXML private SVGPath dmIcon;
+    @FXML
+    private SVGPath dmIcon;
 
 
-    @FXML private Label attendingLabel;
-    @FXML private Label upcomingLabel;
-    @FXML private Label missedLabel;
-    @FXML private Label activerateLabel;
+    @FXML
+    private Label attendingLabel;
+    @FXML
+    private Label upcomingLabel;
+    @FXML
+    private Label missedLabel;
+    @FXML
+    private Label activerateLabel;
     private StatData statData;
 
     @FXML
@@ -68,20 +80,19 @@ public class ProfileController {
             for (ProtestItem item : loadAllProtests()) {
                 postList.getChildren().add(buildCard(item));
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Failed to load protests: " + e.getMessage());
         }
 
         Platform.runLater(() -> {
-            if(hasUnreadMessages()){
+            if (hasUnreadMessages()) {
                 dmIcon.setContent("M568.4 37.7C578.2 34.2 589 36.7 596.4 44C603.8 51.3 606.2 62.2 602.7 72L424.7 568.9C419.7 582.8 406.6 592 391.9 592C377.7 592 364.9 583.4 359.6 570.3L295.4 412.3C290.9 401.3 292.9 388.7 300.6 379.7L395.1 267.3C400.2 261.2 399.8 252.3 394.2 246.7C388.6 241.1 379.6 240.7 373.6 245.8L261.2 340.1C252.1 347.7 239.6 349.7 228.6 345.3L70.1 280.8C57 275.5 48.4 262.7 48.4 248.5C48.4 233.8 57.6 220.7 71.5 215.7L568.4 37.7z");
                 dmIcon.setStyle("-fx-fill: red;");
             }
         });
     }
 
-    private void setStatDataTxt(){
+    private void setStatDataTxt() {
         attendingLabel.setText(String.valueOf(statData.getAttended()));
         upcomingLabel.setText(String.valueOf(statData.getUpcoming()));
         missedLabel.setText(String.valueOf(statData.getMissed()));
@@ -138,7 +149,7 @@ public class ProfileController {
             stmt.setInt(1, Session.getCurrentUser().getId());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"),rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"));
+                ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"), rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"));
                 item.setId(rs.getInt("id"));
                 items.add(item);
             }
@@ -183,7 +194,16 @@ public class ProfileController {
 
         editBtn.setOnAction(e -> {
             try {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("add_andolon.fxml"));
 
+                loader.setControllerFactory(param -> {
+                    return new AddAndolonController(item.getId());
+                });
+
+                Parent rootMain = loader.load();
+
+                Stage stage = (Stage) editBtn.getScene().getWindow();
+                stage.getScene().setRoot(rootMain);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -253,8 +273,7 @@ public class ProfileController {
     public void seeAllAttending() {
         try {
             App.setRoot("attending_protest");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -286,12 +305,12 @@ public class ProfileController {
         }
         return false;
     }
+
     @FXML
     public void navHome(MouseEvent e) {
         try {
             App.setRoot("dashboard");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -300,8 +319,7 @@ public class ProfileController {
     public void navAddAndolon(MouseEvent e) {
         try {
             App.setRoot("add_andolon");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -310,8 +328,7 @@ public class ProfileController {
     public void navBookmarked(MouseEvent e) {
         try {
             App.setRoot("bookmarked");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -320,8 +337,7 @@ public class ProfileController {
     public void navDMList(MouseEvent e) {
         try {
             App.setRoot("chat_list");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -339,15 +355,13 @@ public class ProfileController {
                 new AuthService().deleteRememberToken(token);
                 Session.clearToken();
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("Could not clear remember token: " + ex.getMessage());
         }
         Session.clear();
         try {
             App.setRoot("login");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
