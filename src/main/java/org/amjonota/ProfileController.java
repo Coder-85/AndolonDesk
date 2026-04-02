@@ -259,6 +259,15 @@ public class ProfileController {
         }
     }
 
+    @FXML
+    public void openEditProfilePage() {
+        try {
+            App.setRoot("edit_profile");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean hasUnreadMessages() {
         try {
             Connection conn = DatabaseManager.getInstance().getConnection();

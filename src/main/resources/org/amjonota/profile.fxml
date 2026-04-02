@@ -162,7 +162,7 @@
                         </VBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="70.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button mnemonicParsing="false" text="Edit Profile">
+                              <Button mnemonicParsing="false" onAction="#openEditProfilePage" text="Edit Profile">
                                  <styleClass>
                                     <String fx:value="btn" />
                                     <String fx:value="btn-primary" />
