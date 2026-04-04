@@ -80,6 +80,7 @@ public class AddAndolonController {
     public AddAndolonController(){}
 
     public void initialize() throws SQLException {
+        andolonDescription.setWrapText(true);
         andolonCategory.getItems().add("Human Chain");
         andolonCategory.getItems().add("General Strike");
         andolonCategory.getItems().add("Blockade");
