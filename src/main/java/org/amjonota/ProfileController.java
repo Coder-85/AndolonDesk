@@ -7,7 +7,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -17,6 +19,9 @@ import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import org.amjonota.auth.AuthService;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +34,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProfileController {
     @FXML
@@ -149,7 +155,7 @@ public class ProfileController {
             stmt.setInt(1, Session.getCurrentUser().getId());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"), rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"));
+                ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"), rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("bookmarked_count"), rs.getString("img_name"));
                 item.setId(rs.getInt("id"));
                 items.add(item);
             }
@@ -192,6 +198,9 @@ public class ProfileController {
         Button editBtn = new Button("Edit");
         editBtn.getStyleClass().addAll("btn", "btn-warning");
 
+        Button dltBtn = new Button("Delete");
+        dltBtn.getStyleClass().addAll("btn", "btn-danger");
+
         editBtn.setOnAction(e -> {
             try {
                 FXMLLoader loader = new FXMLLoader(App.class.getResource("add_andolon.fxml"));
@@ -210,7 +219,8 @@ public class ProfileController {
             }
         });
 
-        VBox right = new VBox(editBtn);
+        HBox right = new HBox(dltBtn, editBtn);
+        right.setSpacing(10);
         right.setAlignment(Pos.TOP_RIGHT);
         HBox.setHgrow(right, Priority.ALWAYS);
 
@@ -265,7 +275,71 @@ public class ProfileController {
         wrapper.setPrefWidth(200);
         wrapper.setPadding(new Insets(0, 0, 0, 5));
 
+        dltBtn.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm");
+            alert.setHeaderText("Do you really want to delete the andolon post titled '" + item.getTitle() + "'");
+            alert.setContentText("Are you sure?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    deleteAndolon(item.getId(), wrapper, item.getImgName());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         return wrapper;
+    }
+
+    private void deleteAndolon(int deletingId, HBox postCard, String oldPicName) throws SQLException {
+        String[] queries = {
+                "DELETE FROM attending_protests WHERE protest_id = ?",
+                "DELETE FROM notifications WHERE protest_id = ?",
+                "DELETE FROM protest_polygons WHERE protest_id = ?",
+                "DELETE FROM protests WHERE id = ?",
+                "DELETE FROM user_bookmarks WHERE protest_id = ?"
+        };
+        Connection conn = DatabaseManager.getInstance().getConnection();
+        try {
+            conn.setAutoCommit(false);
+
+            for (String sql : queries) {
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    stmt.setInt(1, deletingId);
+                    stmt.executeUpdate();
+                }
+            }
+
+            conn.commit();
+            postList.getChildren().remove(postCard);
+
+            Path uploadDir = Paths.get("uploads");
+            Path oldFile = uploadDir.resolve(oldPicName);
+            Files.deleteIfExists(oldFile);
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Your post was deleted successfully");
+
+
+        } catch (SQLException e) {
+            conn.rollback();
+            showAlert(Alert.AlertType.ERROR, "Error", "Error occured while trying to delete your post. Please Try again later.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            conn.setAutoCommit(true);
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 

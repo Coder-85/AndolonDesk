@@ -66,7 +66,7 @@ public class AttendingProtestController {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"), rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("attending_count"));
+                    ProtestItem item = new ProtestItem(rs.getString("author_name"), rs.getInt("author_id"), rs.getString("posted_date"), rs.getString("title"), rs.getString("event_date"), rs.getString("summary"), rs.getString("description"), rs.getString("category"), rs.getInt("member_count"), rs.getInt("attending_count"), rs.getString("img_name"));
                     item.setId(rs.getInt("id"));
                     items.add(item);
                 }

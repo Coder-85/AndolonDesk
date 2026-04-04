@@ -13,8 +13,9 @@ public class ProtestItem {
     private String category;
     private int memberCount;
     private int bookmarkedCount;
+    private String imgName;
 
-    public ProtestItem(String author, int authorID, String postedDate, String title, String eventDate, String summary, String description, String category, int memberCount, int bookmarkedCount) {
+    public ProtestItem(String author, int authorID, String postedDate, String title, String eventDate, String summary, String description, String category, int memberCount, int bookmarkedCount, String imgName) {
         this.author = author;
         this.authorID = authorID;
         this.postedDate = postedDate;
@@ -25,6 +26,7 @@ public class ProtestItem {
         this.category = category;
         this.memberCount = memberCount;
         this.bookmarkedCount = bookmarkedCount;
+        this.imgName = imgName;
     }
 
     public int getId() { return id; }
@@ -40,4 +42,5 @@ public class ProtestItem {
     public String getCategory() { return category; }
     public int getMemberCount() { return memberCount; }
     public int getBookmarkedCount() {return bookmarkedCount;}
+    public String getImgName() { return imgName;}
 }

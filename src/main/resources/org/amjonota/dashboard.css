@@ -190,6 +190,19 @@
     -fx-text-fill: white;
 }
 
+.btn-danger{
+    -fx-background-color: #dc3545 !important;
+    -fx-border-color:  #dc3545;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+
+.btn-danger:hover{
+    -fx-background-color: #bb2d3b !important;
+    -fx-border-color:  #b02a37 !important;
+    -fx-text-fill: white;
+}
+
 .btn-primary:hover{
     -fx-background-color: #584ec3;
     -fx-border-color: #584ec3;
