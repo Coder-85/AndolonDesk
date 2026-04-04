@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.SVGPath;
@@ -559,6 +560,7 @@ public class DashboardController {
         VBox.setMargin(eventDate, new Insets(0, 0, 10, 0));
         Label summary = new Label(item.getSummary());
         summary.setWrapText(true);
+        summary.setTextOverrun(OverrunStyle.CENTER_WORD_ELLIPSIS);
         VBox.setMargin(summary, new Insets(0, 0, 15, 0));
         Button viewBtn = new Button("View Details");
         viewBtn.getStyleClass().addAll("btn", "btn-primary");
