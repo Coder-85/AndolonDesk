@@ -15,6 +15,8 @@ import com.sothawo.mapjfx.event.MarkerEvent;
 
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -59,6 +61,11 @@ public class AddAndolonController {
     @FXML private Label fileNameLabel;
     @FXML private RadioButton selectCenterPointRadio;
     @FXML private RadioButton defineAreaRadio;
+    @FXML private HBox addAndolonNavItem;
+    @FXML private Group addAndolonNavGroup;
+    @FXML private SVGPath addAndolonNavIcon;
+    @FXML private Label addAndolonNavLabel;
+    @FXML private Label pageTitleLabel;
 
     @FXML private SVGPath dmIcon;
 
@@ -94,6 +101,7 @@ public class AddAndolonController {
 
         if(isEditingAndolon) {
             loadAndolonData();
+            changeUI();
         }else{
             andolonMapView.setCenter(new Coordinate(23.7351, 90.4000));
         }
@@ -146,6 +154,27 @@ public class AddAndolonController {
                 dmIcon.setStyle("-fx-fill: red;");
             }
         });
+    }
+
+    private void changeUI() {
+        removeStyle(addAndolonNavItem, "menu-item-active");
+        removeStyle(addAndolonNavGroup, "menu-item-active");
+        removeStyle(addAndolonNavIcon, "menu-item-active");
+        removeStyle(addAndolonNavLabel, "menu-item-active");
+        if (pageTitleLabel != null) {
+            String t = andolonTitle != null && andolonTitle.getText() != null ? andolonTitle.getText().trim() : "";
+            if (t.isEmpty()) {
+                pageTitleLabel.setText("Editing Andolon");
+            } else {
+                pageTitleLabel.setText("Editing Andolon '" + t + "'");
+            }
+        }
+    }
+
+    private void removeStyle(Node node, String styleClass) {
+        if (node != null) {
+            node.getStyleClass().remove(styleClass);
+        }
     }
 
     private void loadAndolonData() throws SQLException {
@@ -559,6 +588,17 @@ public class AddAndolonController {
         }
         catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void navAddAndolon(MouseEvent e) {
+        if (isEditingAndolon) {
+            try {
+                App.setRoot("add_andolon");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
