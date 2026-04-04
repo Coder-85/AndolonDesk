@@ -418,7 +418,7 @@ public class AddAndolonController {
             stmt.setString(2, LocalDate.now().toString());
             stmt.setString(3, title);
             stmt.setString(4, eventDate);
-            stmt.setString(5, description);
+            stmt.setString(5, Utils.summarize(description));
             stmt.setString(6, description);
             stmt.setString(7, category);
             stmt.setString(8, imgName);
