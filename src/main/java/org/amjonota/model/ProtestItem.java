@@ -31,6 +31,7 @@ public class ProtestItem {
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
+    public void setSummary(String summary) { this.summary = summary; }
 
     public String getAuthor() { return author; }
     public int getAuthorID() {return authorID;}

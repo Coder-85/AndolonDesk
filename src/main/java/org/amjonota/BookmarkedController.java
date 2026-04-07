@@ -10,6 +10,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.scene.Node;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
@@ -140,7 +142,8 @@ public class BookmarkedController {
         if (searchText == null || searchText.isEmpty()) {
             return true;
         }
-        return toLower(item.getTitle()).contains(searchText) || toLower(item.getSummary()).contains(searchText) || toLower(item.getDescription()).contains(searchText) || toLower(item.getAuthor()).contains(searchText) || toLower(item.getCategory()).contains(searchText);
+
+        return toLower(item.getTitle()).contains(searchText) || toLower(item.getSummary()).contains(searchText) || toLower(item.getAuthor()).contains(searchText);
     }
 
     private boolean matchesTimeFilter(ProtestItem item, String timeFilter, LocalDate today) {
@@ -203,6 +206,12 @@ public class BookmarkedController {
         Label summary = new Label(item.getSummary());
         summary.setWrapText(true);
         summary.setTextOverrun(OverrunStyle.CENTER_WORD_ELLIPSIS);
+        summary.boundsInParentProperty().addListener((obs, oldVal, newVal) -> {
+            Node txtNode = summary.lookup(".text");
+            if (txtNode != null && txtNode instanceof Text) {
+                item.setSummary(((Text)txtNode).getText());
+            }
+        });
         VBox.setMargin(summary, new Insets(0, 0, 15, 0));
         Button viewBtn = new Button("View Details");
         viewBtn.getStyleClass().addAll("btn", "btn-primary");
