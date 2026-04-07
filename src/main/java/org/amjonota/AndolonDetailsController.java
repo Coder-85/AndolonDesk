@@ -80,6 +80,8 @@ public class AndolonDetailsController {
     private Label savedPplCount;
     @FXML
     private Label totalViewCount;
+    @FXML
+    private Label attendingInfoLabel;
 
     @FXML
     private Button attendBtn;
@@ -142,7 +144,9 @@ public class AndolonDetailsController {
                 }
 
                 hostName.setText(authorName);
-                joiningPplCount.setText(String.valueOf(rs.getInt("member_count")));
+                int attendingCount = rs.getInt("member_count");
+                joiningPplCount.setText(String.valueOf(attendingCount));
+                updateAttendingInfoLabel(attendingCount);
                 savedPplCount.setText(String.valueOf(rs.getInt("bookmarked_count")));
                 totalViewCount.setText(String.valueOf(rs.getInt("views")));
                 loadPolygonCoordinates();
@@ -371,8 +375,27 @@ public class AndolonDetailsController {
             stmt.executeUpdate();
 
             countTxtField.setText(String.valueOf(lastValue));
+            if (type == 1) {
+                updateAttendingInfoLabel(lastValue);
+            }
         }
 
+    }
+
+    private void updateAttendingInfoLabel(int attendingCount) {
+        if (attendingInfoLabel != null) {
+            if (attendingCount == 0) {
+                attendingInfoLabel.setText("Be the first person to attend the event.");
+            }
+
+            else if (isAttending) {
+                attendingInfoLabel.setText("You are attending this event with " + (attendingCount-1) + " others.");
+            }
+
+            else {
+                attendingInfoLabel.setText("Join " + attendingCount + " others already attending this event.");
+            }
+        }
     }
 
     public void saveBtnAction() throws SQLException {

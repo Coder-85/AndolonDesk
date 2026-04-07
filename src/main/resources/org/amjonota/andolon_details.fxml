@@ -451,7 +451,7 @@
                                              </HBox>
                                              <HBox layoutX="30.0" layoutY="10.0" style="-fx-border-color: #33302f; -fx-border-width: 1 0 0 0;">
                                                 <children>
-                                                   <Label style="-fx-text-fill: #a6a09b; -fx-font-size: 12;" text="Join 1,240 others already attending this event." wrapText="true" />
+                                                   <Label fx:id="attendingInfoLabel" style="-fx-text-fill: #a6a09b; -fx-font-size: 12;" text="Join 0 others already attending this event." wrapText="true" />
                                                 </children>
                                                 <padding>
                                                    <Insets top="10.0" />
