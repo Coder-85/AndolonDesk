@@ -82,7 +82,7 @@ public class UserProfileController {
         List<ProtestItem> items = new ArrayList<ProtestItem>();
 
         Connection conn = DatabaseManager.getInstance().getConnection();
-        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM user_bookmarks ub WHERE ub.protest_id = p.id) AS bookmarked_count FROM protests p INNER JOIN users u ON u.id = p.author_id WHERE p.author_id = ? ORDER BY p.posted_date DESC";
+        String sql = "SELECT p.*, u.name AS author_name, (SELECT COUNT(*) FROM user_bookmarks ub WHERE ub.protest_id = p.id) AS bookmarked_count FROM protests p INNER JOIN users u ON u.id = p.author_id WHERE p.author_id = ? ORDER BY p.created_at DESC";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userID);
