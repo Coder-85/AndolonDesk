@@ -73,6 +73,15 @@ mvn -version
    mvn install
    ```
 
+3. **Configuring Secret Variables:**
+   To use Google and Faceboook OAuth service, add a `.env` at the root directory of the project.
+   This file should contain [Google](https://developers.google.com/identity/protocols/oauth2) and [Facebook](https://developers.facebook.com/documentation/facebook-login) OAuth api key and secret.
+   ```
+   GOOGLE_CLIENT_ID=xxxxxxxxxxx
+   GOOGLE_CLIENT_SECRET=xxxxxx
+   FACEBOOK_CLIENT_ID=xxxxx
+   FACEBOOK_CLIENT_SECRET=xxxxx
+   ```
 ---
 
 ## ▶️ Running the Application
@@ -124,12 +133,6 @@ Contributions are welcome! Please follow these steps:
 3. Commit your changes: `git commit -m 'Add some feature'`
 4. Push to the branch: `git push origin feature/your-feature-name`
 5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is open source. Please add a `LICENSE` file to the repository to specify terms of use.
 
 ---
 
